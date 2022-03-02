@@ -18,7 +18,7 @@ class InstancesController < ApplicationController
     @instance = CreateInstanceService.create(data, data_model)
 
     if @instance.persisted?
-      redirect_to office_instance_path(@instance.id, office_slug: current_office.slug),
+      redirect_to [current_office, @instance],
                   notice: "#{data_model.name} was successfully created"
     else
       render :new, status: :unprocessable_entity

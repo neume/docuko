@@ -67,3 +67,10 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 end
+
+# Merge and office slug for params use in controller specs
+# Usage:
+# get :index, params: slug({ id: user.id })
+def slug(params = {})
+  params.merge(office_slug: office.slug)
+end

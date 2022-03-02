@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'forms/edit', type: :view do
+RSpec.describe 'templates/edit', type: :view do
   before do
-    @form = assign(:form, Form.create!(
-                            name: 'MyString'
-                          ))
+    @template = assign(:template, Template.create!(
+                                    name: 'MyString'
+                                  ))
   end
 
-  it 'renders the edit form form' do
+  it 'renders the edit template form' do
     render
 
-    assert_select 'form[action=?][method=?]', form_path(@form), 'post' do
-      assert_select 'input[name=?]', 'form[name]'
+    assert_select 'template[action=?][method=?]', template_path(@template), 'post' do
+      assert_select 'input[name=?]', 'template[name]'
     end
   end
 end

@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'forms/new', type: :view do
+RSpec.describe 'templates/new', type: :view do
   before do
-    assign(:form, Form.new(
-                    name: 'MyString'
-                  ))
+    assign(:template, Template.new(
+                        name: 'MyString'
+                      ))
   end
 
-  it 'renders new form form' do
+  it 'renders new template form' do
     render
 
-    assert_select 'form[action=?][method=?]', forms_path, 'post' do
-      assert_select 'input[name=?]', 'form[name]'
+    assert_select 'template[action=?][method=?]', templates_path, 'post' do
+      assert_select 'input[name=?]', 'template[name]'
     end
   end
 end

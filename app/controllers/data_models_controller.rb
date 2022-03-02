@@ -11,7 +11,7 @@ class DataModelsController < ApplicationController
     @data_model = current_user.created_data_models.new data_model_params
     @data_model.office = current_office
     if data_model.save
-      redirect_to office_data_model_path(@data_model.id, office_slug: current_office.slug)
+      redirect_to [current_office, @data_model]
     else
       render :new
     end
@@ -23,7 +23,7 @@ class DataModelsController < ApplicationController
 
   def update
     if data_model.update(data_model_params)
-      redirect_to data_models_path
+      redirect_to [current_office, :data_models]
     else
       render :new
     end

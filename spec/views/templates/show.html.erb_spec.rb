@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'forms/show', type: :view do
+RSpec.describe 'templates/show', type: :view do
   before do
-    @form = assign(:form, Form.create!(
-                            name: 'Name'
-                          ))
+    @template = assign(:template, Template.create!(
+                                    name: 'Name'
+                                  ))
   end
 
   it 'renders attributes in <p>' do

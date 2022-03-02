@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe 'forms/index', type: :view do
+RSpec.describe 'templates/index', type: :view do
   before do
-    assign(:forms, [
-             Form.create!(
+    assign(:templates, [
+             Template.create!(
                name: 'Name'
              ),
-             Form.create!(
+             Template.create!(
                name: 'Name'
              )
            ])
   end
 
-  it 'renders a list of forms' do
+  it 'renders a list of templates' do
     render
     assert_select 'tr>td', text: 'Name'.to_s, count: 2
   end

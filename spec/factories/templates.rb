@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :form do
+  factory :template do
     name { 'MyString' }
   end
 end

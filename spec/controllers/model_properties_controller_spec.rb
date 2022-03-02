@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe ModelPropertiesController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
-
-  let(:model_property) { FactoryBot.create(:model_property) }
-  let(:data_model) { model_property.data_model }
+  let(:office) { create(:office, created_by: user) }
+  let(:data_model) { create(:data_model, office: office) }
+  let(:model_property) { create(:model_property, data_model: data_model) }
 
   before { user }
 
   describe '#new' do
-    before { get :new, params: { data_model_id: data_model.id } }
+    before { get :new, params: slug({ data_model_id: data_model.id }) }
 
     it { expect(response).to render_template(:new) }
   end
@@ -24,7 +24,7 @@ RSpec.describe ModelPropertiesController, type: :controller do
       }
     end
 
-    before { post :create, params: params }
+    before { post :create, params: slug(params) }
 
     context 'with passing params' do
       it { expect(response).to redirect_to(data_model) }

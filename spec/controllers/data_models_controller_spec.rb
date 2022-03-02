@@ -2,18 +2,19 @@ require 'rails_helper'
 
 RSpec.describe DataModelsController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
-  let(:data_model) { FactoryBot.create(:data_model) }
+  let(:office) { FactoryBot.create(:office, created_by: user) }
+  let(:data_model) { FactoryBot.create(:data_model, office: office) }
 
   before { user }
 
   describe '#index' do
-    before { get :index }
+    before { get :index, params: slug }
 
     it { expect(response).to render_template(:index) }
   end
 
   describe '#index' do
-    before { get :new }
+    before { get :new, params: slug }
 
     it { expect(response).to render_template(:new) }
   end
@@ -21,6 +22,7 @@ RSpec.describe DataModelsController, type: :controller do
   describe '#create' do
     let(:params) do
       {
+        office_slug: office.slug,
         data_model: {
           name: 'Person'
         }
@@ -29,11 +31,11 @@ RSpec.describe DataModelsController, type: :controller do
 
     before { post :create, params: params }
 
-    it { expect(response).to redirect_to(data_models_path) }
+    it { expect(response).to redirect_to(office_data_model_path(assigns(:data_model).id, office_slug: office.slug)) }
   end
 
   describe '#edit' do
-    before { get :edit, params: { id: data_model.id } }
+    before { get :edit, params: slug({ id: data_model.id }) }
 
     it { expect(response).to render_template(:edit) }
   end
@@ -48,10 +50,10 @@ RSpec.describe DataModelsController, type: :controller do
       }
     end
 
-    before { patch :update, params: params }
+    before { patch :update, params: slug(params) }
 
     it 'updates DataModel' do
-      expect(response).to redirect_to(data_models_path)
+      expect(response).to redirect_to([office, :data_models])
       expect(data_model.reload.name).to eq('Cat')
     end
   end

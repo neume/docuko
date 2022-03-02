@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :office do
     name { 'clinic' }
-    slug { 'cliniko' }
+    sequence(:slug) { |x| "cliniko-#{x}" }
     created_by { association(:user) }
   end
 end

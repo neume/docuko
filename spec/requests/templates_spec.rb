@@ -12,8 +12,8 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/forms', type: :request do
-  # Form. As you add validations to Form, be sure to
+RSpec.describe '/templates', type: :request do
+  # Template. As you add validations to Template, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     skip('Add a hash of attributes valid for your model')
@@ -25,58 +25,58 @@ RSpec.describe '/forms', type: :request do
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Form.create! valid_attributes
-      get forms_url
+      Template.create! valid_attributes
+      get templates_url
       expect(response).to be_successful
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      form = Form.create! valid_attributes
-      get form_url(form)
+      template = Template.create! valid_attributes
+      get template_url(template)
       expect(response).to be_successful
     end
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      get new_form_url
+      get new_template_url
       expect(response).to be_successful
     end
   end
 
   describe 'GET /edit' do
     it 'render a successful response' do
-      form = Form.create! valid_attributes
-      get edit_form_url(form)
+      template = Template.create! valid_attributes
+      get edit_template_url(template)
       expect(response).to be_successful
     end
   end
 
   describe 'POST /create' do
     context 'with valid parameters' do
-      it 'creates a new Form' do
+      it 'creates a new Template' do
         expect do
-          post forms_url, params: { form: valid_attributes }
-        end.to change(Form, :count).by(1)
+          post templates_url, params: { template: valid_attributes }
+        end.to change(Template, :count).by(1)
       end
 
-      it 'redirects to the created form' do
-        post forms_url, params: { form: valid_attributes }
-        expect(response).to redirect_to(form_url(Form.last))
+      it 'redirects to the created template' do
+        post templates_url, params: { template: valid_attributes }
+        expect(response).to redirect_to(template_url(Template.last))
       end
     end
 
     context 'with invalid parameters' do
-      it 'does not create a new Form' do
+      it 'does not create a new Template' do
         expect do
-          post forms_url, params: { form: invalid_attributes }
-        end.to change(Form, :count).by(0)
+          post templates_url, params: { template: invalid_attributes }
+        end.to change(Template, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post forms_url, params: { form: invalid_attributes }
+        post templates_url, params: { template: invalid_attributes }
         expect(response).to be_successful
       end
     end
@@ -88,42 +88,42 @@ RSpec.describe '/forms', type: :request do
         skip('Add a hash of attributes valid for your model')
       end
 
-      it 'updates the requested form' do
-        form = Form.create! valid_attributes
-        patch form_url(form), params: { form: new_attributes }
-        form.reload
+      it 'updates the requested template' do
+        template = Template.create! valid_attributes
+        patch template_url(template), params: { template: new_attributes }
+        template.reload
         skip('Add assertions for updated state')
       end
 
-      it 'redirects to the form' do
-        form = Form.create! valid_attributes
-        patch form_url(form), params: { form: new_attributes }
-        form.reload
-        expect(response).to redirect_to(form_url(form))
+      it 'redirects to the template' do
+        template = Template.create! valid_attributes
+        patch template_url(template), params: { template: new_attributes }
+        template.reload
+        expect(response).to redirect_to(template_url(template))
       end
     end
 
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        form = Form.create! valid_attributes
-        patch form_url(form), params: { form: invalid_attributes }
+        template = Template.create! valid_attributes
+        patch template_url(template), params: { template: invalid_attributes }
         expect(response).to be_successful
       end
     end
   end
 
   describe 'DELETE /destroy' do
-    it 'destroys the requested form' do
-      form = Form.create! valid_attributes
+    it 'destroys the requested template' do
+      template = Template.create! valid_attributes
       expect do
-        delete form_url(form)
-      end.to change(Form, :count).by(-1)
+        delete template_url(template)
+      end.to change(Template, :count).by(-1)
     end
 
-    it 'redirects to the forms list' do
-      form = Form.create! valid_attributes
-      delete form_url(form)
-      expect(response).to redirect_to(forms_url)
+    it 'redirects to the templates list' do
+      template = Template.create! valid_attributes
+      delete template_url(template)
+      expect(response).to redirect_to(templates_url)
     end
   end
 end

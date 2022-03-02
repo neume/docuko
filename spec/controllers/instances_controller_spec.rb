@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe InstancesController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-
-  let(:model_property) { FactoryBot.create(:model_property) }
-  let(:data_model) { model_property.data_model }
+  let(:user) { create(:user) }
+  let(:office) { create(:office, created_by: user) }
+  let(:data_model) { create(:data_model, office: office) }
+  let(:model_property) { create(:model_property, data_model: data_model) }
 
   before { user }
 
   describe '#index' do
-    before { get :index, params: { data_model_id: data_model.id } }
+    before { get :index, params: slug({ data_model_id: data_model.id }) }
 
     it { expect(response).to render_template(:index) }
   end
@@ -18,7 +18,7 @@ RSpec.describe InstancesController, type: :controller do
   end
 
   describe '#new' do
-    before { get :new, params: { data_model_id: data_model.id } }
+    before { get :new, params: slug({ data_model_id: data_model.id }) }
 
     it { expect(response).to render_template(:new) }
   end
@@ -33,15 +33,17 @@ RSpec.describe InstancesController, type: :controller do
       }
     end
 
-    before { post :create, params: params }
+    before { post :create, params: slug(params) }
 
     context 'with passing params' do
-      it { expect(response).to redirect_to([data_model, :instances]) }
+      it { expect(response).to redirect_to([office, assigns(:instance)]) }
     end
   end
 
   describe '#edit' do
-    before { get :edit, params: { id: model_property.id } }
+    let(:instance) { create(:instance, data_model: data_model) }
+
+    before { get :edit, params: slug({ id: instance.id }) }
 
     it { expect(response).to render_template(:edit) }
   end
