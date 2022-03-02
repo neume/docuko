@@ -1,24 +1,16 @@
-# README
+# Docuko
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A document template management app that lets users upload their own docx file with **merge fields** as a template and later filled with user-defined/inputed data.
+It allows multiple templates to share and reuse data model properties
 
-Things you may want to cover:
 
-* Ruby version
+## Development
+Currently in development. Not fully functional yet
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Todos
+[ ] Generate documents from templates
+[ ] User management
+[ ] User permissions
+[x] Model management
+[ ] Dockerize
+[ ] Demo App
