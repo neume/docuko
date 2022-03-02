@@ -1,0 +1,6 @@
+<% breadcrumb :edit_office, @office %>
+<h1>Editing Office</h1>
+
+<%= render 'form', office: @office, url: office_url(@office.slug) %>
+
+<%= link_to 'Show', @office %>

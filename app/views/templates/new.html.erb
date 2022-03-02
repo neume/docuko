@@ -1,0 +1,5 @@
+<% breadcrumb :new_template, @data_model %>
+<h5>New Template</h5>
+
+<%= render 'form', template: @template, url: [current_office, @data_model, :templates] %>
+

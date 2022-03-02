@@ -1,0 +1,48 @@
+<% breadcrumb :office, @office %>
+
+<div class="row mb-2">
+  <div class="col-6">
+    <%= @office.name %>
+  </div>
+  <div class="col-6">
+    <%= link_to  admin_office_path(@office.slug), class: 'float-end btn btn-sm btn-success' do %>
+      <i class="fa fa-cog mr-1"></i> Settings
+    <% end %>
+  </div>
+</div>
+<h5>
+</h5>
+<div class="row">
+<% DataModel.all.each do |model| %>
+  <div class='col-md-6 mb-2'>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= link_to model.name, office_data_model_instances_path(data_model_id: model.id, office_slug: @office.slug), class: 'text-primary stretched-link' %>
+        </h5>
+
+        <div>
+          <small class='text-secondary'><%= model.description %></small>
+        </div>
+
+        <div class='row mt-3'>
+          <div class='col-12'>
+            <span class='mr-1 pr-2 text-muted'>
+              <span> <i class="fa fa-box mr-2"></i><b><%= model.instances.count %></b></span> Instances
+            </span>
+
+            <% new_instances_count = model.instances.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count %>
+            <% if new_instances_count > 0 %>
+              <span class='ml-1'>
+                <span class='text-success'>
+                  <i class="fa fa-keyboard mr-2"></i>
+                  <b>+<%= new_instances_count %></b>
+                </span>
+              </span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

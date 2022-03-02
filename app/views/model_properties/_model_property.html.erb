@@ -1,0 +1,26 @@
+<tr>
+  <td>
+    <%= model_property.name %>
+  </td>
+  <td>
+    <%= model_property.code %>
+  </td>
+  <td>
+    <% if model_property.required?  %>
+      <i class="fa fa-check text-success"></i>
+    <% end %>
+  </td>
+  <td>
+    <% if model_property.header_visibility? %>
+      <i class="fa fa-check text-success"></i>
+    <% end %>
+  </td>
+  <td>
+    <%= model_property.position %>
+  </td>
+  <td class='tb-actions'>
+    <%= link_to edit_office_model_property_path(model_property.id, office_slug: current_office.slug), class: 'text-muted' do %>
+      <i class="fa fa-pen-to-square"></i>
+    <% end %>
+  </td>
+</tr>

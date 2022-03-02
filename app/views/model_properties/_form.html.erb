@@ -1,0 +1,50 @@
+<div class='card'>
+  <div class='card-body'>
+    <%= form_for model_property, url: url do |f| %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class='mb-3'>
+            <%= f.label :name, class: 'form-label' %>
+            <%= f.text_field :name, class: 'form-control', placeholder: 'Enter property name.' %>
+          </div>
+
+          <div class='mb-3'>
+            <%= f.label :code, class: 'form-label' %>
+            <%= f.text_field :code, class: 'form-control', placeholder: 'Enter unique code for property' %>
+          </div>
+
+          <div class='mb-3'>
+            <%= f.label :description, class: 'form-label' %>
+            <%= f.text_area :description, class: 'form-control', rows: 5 %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class='mb-3'>
+            <%= f.label :default_value, class: 'form-label' %>
+            <%= f.text_field :default_value, class: 'form-control', placeholder: 'Enter default value' %>
+          </div>
+          <div class='mb-3'>
+            <%= f.label :position, class: 'form-label' %>
+            <%= f.number_field :position, class: 'form-control', placeholder: 'Enter default value' %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :required, class: 'form-check-label' %>
+            <div class="form-check form-switch float-end">
+              <%= f.check_box :required, class: 'form-check-input text-success' %>
+            </div>
+          </div>
+          <div class="mb-3">
+            <%= f.label :header_visiblity, class: 'form-check-label' %>
+            <div class="form-check form-switch float-end">
+              <%= f.check_box :header_visibility, class: 'form-check-input text-success' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <%= f.submit class: 'btn btn-success mb-3 float-end' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,5 @@
+<% breadcrumb :new_instance, @data_model %>
+
+<h5>New <%= @data_model.name %> </h5>
+
+<%= render 'form', instance: @instance, data_model: @data_model, url: [@data_model.office, @data_model, :instances] %>

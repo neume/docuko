@@ -1,0 +1,6 @@
+<% breadcrumb :edit_data_model, @data_model, current_office %>
+<h1> Edit Data Model </h1>
+
+<div>
+  <%= render "form", data_model: @data_model, url: edit_office_data_model_path(current_office.slug) %>
+</div>

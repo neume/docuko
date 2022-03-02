@@ -1,0 +1,18 @@
+<%= form_for data_model, url: url do |f| %>
+  <div>
+    <p>
+      <%= f.label :name %>
+    </p>
+    <div>
+      <%= f.text_field :name %>
+    </div>
+    <div class='mb-3'>
+      <%= f.label :description, class: 'form-label' %>
+      <%= f.text_area :description, class: 'form-control', rows: 5 %>
+    </div>
+
+    <div>
+      <%= f.submit %>
+    </div>
+  <div>
+<% end %>

@@ -1,0 +1,37 @@
+<div class="card mt-2">
+  <div class="card-body">
+    <div class="row mb-2">
+      <div class="col-sm-5">
+        <%= link_to new_office_data_model_path(office.slug), class: 'btn btn-info  btn-sm' do %>
+          <i class="fa fa-circle-plus mr-1"></i> New Data Model
+        <% end %>
+      </div>
+    </div>
+    <table class='table table-striped table-borderless table-hover'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Properties</th>
+          <th class='tb-actions'>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% office.data_models.each do |data_model| %>
+          <tr>
+            <td>
+              <%= link_to data_model.name, office_data_model_path(data_model.id, office_slug: office.slug) %>
+            </td>
+            <td class='text-dark'>
+              <%= data_model.properties.pluck(:name).join(', ') %>
+            </td>
+            <td class='tb-actions'>
+              <%= link_to edit_office_data_model_path(data_model, office_slug: office.slug), class: 'text-muted' do %>
+                <i class="fa fa-pen-to-square"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

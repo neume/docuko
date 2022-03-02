@@ -1,0 +1,5 @@
+<% breadcrumb :edit_template, @template %>
+<h5>Editing Template</h5>
+
+<%= render 'form', template: @template, url: office_template_path(@template.id, office_slug: current_office.slug) %>
+

@@ -1,0 +1,36 @@
+<div class='card'>
+  <div class='card-body'>
+    <%= form_for instance, url: url do |f| %>
+      <div class="row">
+      <% if instance.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(instance.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+          <ul>
+            <% instance.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= fields_for :properties do |fprop| %>
+        <% data_model.properties.each do |prop| %>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <%= fprop.label prop.code, class: 'form-label' %>
+              <%= fprop.text_field prop.code, class: 'form-control' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <div class="col-12">
+        <div class="mb-2">
+          <%= f.submit class: 'btn btn-success float-end' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

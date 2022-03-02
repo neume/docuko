@@ -1,0 +1,19 @@
+<% breadcrumbs(display_single_fragment: true).tap do |links| %>
+  <% if links.any? %>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <% links.each do |link| %>
+          <% if link.current? %>
+            <li class="breadcrumb-item active" aria-current='page'>
+              <%= link.text %>
+            </li>
+          <% else %>
+            <li class="breadcrumb-item">
+              <%= link_to link.text, link.url %>
+            </li>
+          <% end %>
+        <% end %>
+      </ol>
+    </nav>
+  <% end %>
+<% end %>

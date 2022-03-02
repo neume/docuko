@@ -1,0 +1,7 @@
+<% breadcrumb :data_models, @current_office %>
+<h5> Data Models </h5>
+<%= render @data_models %>
+<div>
+  <%= link_to 'Create', new_office_data_model_path(@current_office.slug) %>
+</div>
+

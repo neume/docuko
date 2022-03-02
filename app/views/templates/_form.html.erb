@@ -1,0 +1,45 @@
+<div class='card'>
+  <div class='card-body'>
+    <%= form_with model: template, url: url do |f| %>
+      <% if template.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(template.errors.count, "error") %> prohibited this template from being saved:</h2>
+
+          <ul>
+            <% template.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="mb-3">
+            <%= f.label :name, class: 'form-label' %>
+            <%= f.text_field :name, class:'form-control' %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :description, class: 'form-label' %>
+            <%= f.text_area :description, class:'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="mb-3">
+            <div class="field">
+              <%= f.label :file, class:'form-label' %>
+              <%= f.file_field :file, class:'form-control' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="mb-2">
+            <%= f.submit class: 'btn btn-success float-end' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

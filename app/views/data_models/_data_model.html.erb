@@ -1,0 +1,15 @@
+<% office = data_model.office %>
+<td>
+  <div class='row'>
+    <div class='col-4'>
+      <%= link_to data_model.name, office_data_model_path(data_model.id, office_slug: office.slug) %>
+    </div>
+    <div class='col-4'>
+      <%= data_model.properties.pluck(:name).join(', ') %>
+    </div>
+    <div class='col-4'>
+      <%= link_to 'Edit', edit_office_data_model_path(data_model, office_slug: office.slug) %>
+    </div>
+  </div>
+</div>
+<hr/>

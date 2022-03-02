@@ -1,0 +1,28 @@
+
+<div class="card mt-2">
+  <div class="card-body">
+    <div class="row mb-2">
+      <div class="col-sm-5">
+        <%= link_to new_office_data_model_model_property_path(data_model.id, office_slug: current_office.slug), class: 'btn btn-info btn-sm' do %>
+          <i class="fa fa-circle-plus mr-1"></i> New Property
+        <% end %>
+      </div>
+    </div>
+    <table class='table table-striped table-light table-borderless table-hover'>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Code</th>
+          <th>Required</th>
+          <th>Header</th>
+          <th>Position</th>
+          <th class='tb-actions'></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render model_properties %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

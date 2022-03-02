@@ -1,0 +1,28 @@
+<% breadcrumb :root %>
+<div class="row">
+  <div class="col-md-6">
+    <% @offices.each do |office| %>
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to office.name, office_path(office.slug), class: 'text-primary' %>
+          </h5>
+          <div>
+            <small class='text-secondary'><%= office.description %></small>
+          </div>
+          <div class='row mt-3'>
+            <div class='col-12 text-muted'>
+              <span class='mr-1 pr-2'>
+                <span> <i class="fa fa-file mr-2"></i><b><%= office.templates.count %></b></span> Templates
+              </span>
+
+              <span class='ml-1'>
+                <span> <i class="fa fa-file-word mr-2"></i><b>29</b></span> Documents
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
