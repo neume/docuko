@@ -19,7 +19,7 @@ class InstancesController < ApplicationController
 
     if @instance.persisted?
       redirect_to office_instance_path(@instance.id, office_slug: current_office.slug),
-                                                     notice: "#{data_model.name} was successfully created"
+                  notice: "#{data_model.name} was successfully created"
     else
       render :new, status: :unprocessable_entity
     end

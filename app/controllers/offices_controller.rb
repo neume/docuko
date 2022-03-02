@@ -8,10 +8,10 @@ class OfficesController < ApplicationController
   end
 
   def create
-    @office =current_user.created_offices.new office_params
+    @office = current_user.created_offices.new office_params
 
     if @office.save
-      format.html { redirect_to @office, notice: "Office was successfully created." }
+      format.html { redirect_to @office, notice: 'Office was successfully created.' }
       format.json { render :show, status: :created, location: @office }
     else
       format.html { render :new, status: :unprocessable_entity }
@@ -32,7 +32,7 @@ class OfficesController < ApplicationController
 
     respond_to do |format|
       if @office.update(office_params)
-        format.html { redirect_to admin_office_path(@office.slug), notice: "Office was successfully updated." }
+        format.html { redirect_to admin_office_path(@office.slug), notice: 'Office was successfully updated.' }
         format.json { render :show, status: :ok, location: @office }
       else
         format.html { render :edit, status: :unprocessable_entity }

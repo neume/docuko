@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe DataModelsController, type: :controller do
-  let(:user)  { FactoryBot.create(:user) }
-  let(:data_model)  { FactoryBot.create(:data_model) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:data_model) { FactoryBot.create(:data_model) }
+
   before { user }
+
   describe '#index' do
     before { get :index }
 
@@ -20,10 +22,11 @@ RSpec.describe DataModelsController, type: :controller do
     let(:params) do
       {
         data_model: {
-          name: 'Person',
+          name: 'Person'
         }
       }
     end
+
     before { post :create, params: params }
 
     it { expect(response).to redirect_to(data_models_path) }
@@ -40,7 +43,7 @@ RSpec.describe DataModelsController, type: :controller do
       {
         id: data_model.id,
         data_model: {
-          name: 'Cat',
+          name: 'Cat'
         }
       }
     end

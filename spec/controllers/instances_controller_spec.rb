@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe InstancesController, type: :controller do
-  let(:user)  { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
-  let(:model_property)  { FactoryBot.create(:model_property) }
+  let(:model_property) { FactoryBot.create(:model_property) }
   let(:data_model) { model_property.data_model }
 
   before { user }
@@ -15,7 +15,6 @@ RSpec.describe InstancesController, type: :controller do
   end
 
   describe '#index' do
-
   end
 
   describe '#new' do
@@ -29,10 +28,11 @@ RSpec.describe InstancesController, type: :controller do
       {
         data_model_id: data_model.id,
         properties: {
-          name: 'Person',
+          name: 'Person'
         }
       }
     end
+
     before { post :create, params: params }
 
     context 'with passing params' do

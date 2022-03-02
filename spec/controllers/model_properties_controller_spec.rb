@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ModelPropertiesController, type: :controller do
-  let(:user)  { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
-  let(:model_property)  { FactoryBot.create(:model_property) }
+  let(:model_property) { FactoryBot.create(:model_property) }
   let(:data_model) { model_property.data_model }
 
   before { user }
@@ -19,10 +19,11 @@ RSpec.describe ModelPropertiesController, type: :controller do
       {
         data_model_id: data_model.id,
         model_property: {
-          name: 'Person',
+          name: 'Person'
         }
       }
     end
+
     before { post :create, params: params }
 
     context 'with passing params' do
@@ -41,7 +42,7 @@ RSpec.describe ModelPropertiesController, type: :controller do
       {
         id: model_property.id,
         model_property: {
-          name: 'Full Name',
+          name: 'Full Name'
         }
       }
     end

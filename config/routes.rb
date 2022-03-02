@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'pages#dashboard'
   get 'dashboard', to: 'pages#dashboard'
   resources :offices, param: :slug do
-    SHALLOW_ACTIONS= [:edit, :update, :show]
+    SHALLOW_ACTIONS = %i[edit update show].freeze
 
     member do
       get :admin

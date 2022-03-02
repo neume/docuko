@@ -28,10 +28,9 @@ crumb :new_instance do |data_model|
 end
 
 crumb :instance do |instance, office|
-  link "Instance", office_instance_path(instance.id, office_slug: office.slug)
+  link 'Instance', office_instance_path(instance.id, office_slug: office.slug)
   parent :instances, instance.data_model
 end
-
 
 # Admin
 

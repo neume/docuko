@@ -4,3 +4,27 @@ require:
   - rubocop-rails
   - rubocop-rspec
 
+Rails:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+AllCops:
+  NewCops: disable
+  Exclude:
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'bin/*'
+    - 'lib/activestorage_docx_previewer.rb'
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_first_argument
+
+Layout/LineLength:
+  Max: 120
+
+Style/ClassAndModuleChildren:
+  Enabled: false
