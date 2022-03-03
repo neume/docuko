@@ -1,0 +1,15 @@
+  <div class="col-md-3 mb-2">
+    <div class='list-group'>
+      <% current_office.data_models.each do |data_model| %>
+        <% if @data_model &&  @data_model.id == data_model.id %>
+          <% active_class = 'active' %>
+        <% end %>
+        <%= link_to [current_office, data_model], class: "list-group-item no-decoration #{active_class}" do %>
+          <%= data_model.name %>
+        <% end %>
+      <% end %>
+      <%= link_to new_office_data_model_path(current_office.slug), class: 'text-center list-group-item' do %>
+        <i class="fa fa-circle-plus mr-1"></i> New Data Model
+      <% end %>
+    </div>
+  </div>

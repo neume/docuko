@@ -1,14 +1,24 @@
 <tr>
   <td>
-    <%= model_property.name %>
+    <div>
+      <div>
+        <%= model_property.name %>
+      </div>
+      <div>
+        <% if model_property.required? %>
+          <small class='text-danger'>
+            Required
+          </small>
+        <% else  %>
+          <small class='text-success'>
+            Optional
+          </small>
+        <% end %>
+      </div>
+    </div>
   </td>
   <td>
     <%= model_property.code %>
-  </td>
-  <td>
-    <% if model_property.required?  %>
-      <i class="fa fa-check text-success"></i>
-    <% end %>
   </td>
   <td>
     <% if model_property.header_visibility? %>

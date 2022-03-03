@@ -1,17 +1,4 @@
 <% breadcrumb :office_admin, @office %>
-<div class="row mb-2">
-  <div class="col-6">
-    <h5><%= @office.name %></h5>
-  </div>
-  <div class="col-6">
-    <%= link_to edit_office_path(@office.slug), class: 'float-end btn btn-sm btn-success' do %>
-      <i class="fa fa-pencil mr-1"></i> Edit
-    <% end %>
-  </div>
+<div class="row">
+  <%= render 'sidebar'%>
 </div>
-
-<h5 class="">
-  Models
-</h5>
-<%= render "models", office: @office %>
-

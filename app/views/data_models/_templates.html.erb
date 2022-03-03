@@ -1,36 +1,18 @@
 <div class="card">
   <div class="card-body">
     <div class="row mb-2">
-      <div class="col-sm-5">
-        <%= link_to [:new, office, data_model, :template], class: 'btn btn-info  btn-sm' do %>
+      <div class="col-sm-8">
+        <%= link_to [:new, office, data_model, :template], class: 'btn btn-info btn-sm' do %>
           <i class="fa fa-circle-plus me-1"></i> New Template
         <% end %>
       </div>
     </div>
     <table class='table table-striped table-borderless table-hover'>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th class='tb-actions'>Actions</th>
-        </tr>
-      </thead>
-
       <tbody>
         <% templates.each do |template| %>
           <tr>
             <td>
               <div class="row">
-                <span class='ml-3'>
-                  <% if template.file.signed_id %>
-                    <% if template.file.representable? %>
-                      <%= link_to url_for(template.file) do %>
-                        <%= image_tag template.file.representation(resize_to_limit: [128, 128]) %>
-                      <% end %>
-                    <% else %>
-                      <%= link_to 'View File', url_for(template.file) %>
-                    <% end %>
-                  <% end %>
-                </span>
                 <span class='ml-3 text-wrap'>
                   <b>
                     <%= link_to template.name, office_template_path(template.id, office_slug: office.slug), class: 'text-primary' %>
