@@ -27,12 +27,12 @@ RSpec.describe ModelPropertiesController, type: :controller do
     before { post :create, params: slug(params) }
 
     context 'with passing params' do
-      it { expect(response).to redirect_to(data_model) }
+      it { expect(response).to redirect_to([office, data_model]) }
     end
   end
 
   describe '#edit' do
-    before { get :edit, params: { id: model_property.id } }
+    before { get :edit, params: slug({ id: model_property.id }) }
 
     it { expect(response).to render_template(:edit) }
   end
@@ -47,10 +47,10 @@ RSpec.describe ModelPropertiesController, type: :controller do
       }
     end
 
-    before { patch :update, params: params }
+    before { patch :update, params: slug(params) }
 
     it 'updates DataModel' do
-      expect(response).to redirect_to(data_model)
+      expect(response).to redirect_to([office, data_model])
       expect(model_property.reload.name).to eq('Full Name')
     end
   end

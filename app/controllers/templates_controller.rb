@@ -35,6 +35,7 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1 or /templates/1.json
   def update
     respond_to do |format|
+      @data_model = @template.data_model
       if @template.update(template_params)
         format.html { redirect_to [current_office, data_model], notice: 'Template was successfully updated.' }
         format.json { render :show, status: :ok, location: @template }
@@ -68,6 +69,6 @@ class TemplatesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def template_params
-    params.require(:template).permit(:name, :file)
+    params.require(:template).permit(:name, :file, :description)
   end
 end

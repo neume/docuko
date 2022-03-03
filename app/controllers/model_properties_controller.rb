@@ -6,7 +6,7 @@ class ModelPropertiesController < ApplicationController
   def create
     @model_property = data_model.properties.new property_params
     if model_property.save
-      redirect_to data_model
+      redirect_to [current_office, data_model]
     else
       render :new
     end
