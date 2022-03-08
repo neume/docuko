@@ -11,11 +11,9 @@ class OfficesController < ApplicationController
     @office = current_user.created_offices.new office_params
 
     if @office.save
-      format.html { redirect_to @office, notice: 'Office was successfully created.' }
-      format.json { render :show, status: :created, location: @office }
+      redirect_to @office, notice: 'Office was successfully created.'
     else
-      format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: @office.errors, status: :unprocessable_entity }
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -42,10 +40,7 @@ class OfficesController < ApplicationController
   end
 
   def admin
-    office
-    if office.data_models.count > 1
-      redirect_to [office, office.data_models.first]
-    end
+    redirect_to [office, office.data_models.first] if office.data_models.count > 0
   end
 
   private

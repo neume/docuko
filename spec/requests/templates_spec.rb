@@ -1,7 +1,5 @@
 require 'rails_helper'
 RSpec.describe '/offices/:office_slug/templates', type: :request do
-  # Template. As you add validations to Template, be sure to
-  # adjust the attributes here as well.
   let(:office) { create(:office) }
   let(:data_model) { create(:data_model, office: office) }
   let(:valid_attributes) do
@@ -44,7 +42,8 @@ RSpec.describe '/offices/:office_slug/templates', type: :request do
         end.to change(Template, :count).by(1)
 
         expect(response).to redirect_to(
-          office_data_model_url(data_model.id, slug))
+          office_data_model_url(data_model.id, slug)
+        )
       end
     end
   end

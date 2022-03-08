@@ -13,7 +13,7 @@ RSpec.describe DataModelsController, type: :controller do
     it { expect(response).to render_template(:index) }
   end
 
-  describe '#index' do
+  describe '#new' do
     before { get :new, params: slug }
 
     it { expect(response).to render_template(:new) }
