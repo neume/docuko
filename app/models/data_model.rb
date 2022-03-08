@@ -5,8 +5,4 @@ class DataModel < ApplicationRecord
   has_many :properties, class_name: 'ModelProperty'
   has_many :instances
   has_many :templates
-
-  def hashed_properties_fields
-    properties.map { |prop| [prop.code, nil] }.to_h
-  end
 end

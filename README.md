@@ -8,9 +8,9 @@ It allows multiple templates to share and reuse data model properties
 Currently in development. Not fully functional yet
 
 ## Todos
-[ ] Generate documents from templates
-[ ] User management
-[ ] User permissions
-[x] Model management
-[ ] Dockerize
-[ ] Demo App
+- [ ] Generate documents from templates
+- [ ] User management
+- [ ] User permissions
+- [x] Model management
+- [ ] Dockerize
+- [ ] Demo App
