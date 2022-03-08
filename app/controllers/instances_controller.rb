@@ -37,10 +37,6 @@ class InstancesController < ApplicationController
     @data_model = @instance.data_model
   end
 
-  # TODO
-  # def update
-  # end
-
   private
 
   def data_model

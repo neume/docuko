@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :templates, only: SHALLOW_ACTIONS
     resources :model_properties, only: SHALLOW_ACTIONS
     resources :instances, only: SHALLOW_ACTIONS
+    resources :instance_properties, only: SHALLOW_ACTIONS
     resources :data_models do
       resources :model_properties, except: SHALLOW_ACTIONS
       resources :instances, except: SHALLOW_ACTIONS

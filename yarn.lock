@@ -931,6 +931,11 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@popperjs/core@^2.11.2":
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz#830beaec4b4091a9e9398ac50f865ddea52186b9"
+  integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
+
 "@rails/activestorage@^7.0.2-2":
   version "7.0.2-2"
   resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-7.0.2-2.tgz#3b9cb1f0508e5d72d96e9f9fce8ebb74b77c7bd8"

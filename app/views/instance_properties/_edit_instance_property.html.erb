@@ -1,0 +1,11 @@
+<%= form_for [office, property], remote: true do |f| %>
+  <span class="card-subtitle text-dark">
+    <span class='me-1'><%= property.field_name%></span>
+  </span>
+  <div class='mb-2'>
+    <div class='mb-2'>
+      <%= f.text_field :value, class: 'form-control' %>
+    </div>
+    <%= f.submit 'Save', class: 'btn btn-success btn-sm' %>
+  </div>
+<% end %>

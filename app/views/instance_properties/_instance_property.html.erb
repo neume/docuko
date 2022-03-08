@@ -1,0 +1,9 @@
+<span class="card-subtitle text-dark">
+  <span class='me-1'><%= property.field_name%></span>
+  <%= link_to [:edit, office, property], remote: :true do %>
+    <i class='fa fa-pencil'></i>
+  <% end %>
+</span>
+<div class='mb-2'>
+  <%= property.value %>
+</div>

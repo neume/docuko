@@ -5,9 +5,8 @@
     <div class="card">
       <div class="card-body">
         <% @properties.each do |property| %>
-          <span class="card-subtitle text-dark"><%= property.field_name%></span>
-          <div class='mb-2'>
-            <%= property.value %>
+          <div id='property-<%= property.id %>'>
+            <%= render 'instance_properties/instance_property', property: property, office: current_office %>
           </div>
         <% end %>
       </div>
