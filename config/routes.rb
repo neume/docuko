@@ -9,9 +9,15 @@ Rails.application.routes.draw do
     member do
       get :admin
     end
+
     resources :templates, only: SHALLOW_ACTIONS
+
     resources :model_properties, only: SHALLOW_ACTIONS
-    resources :instances, only: SHALLOW_ACTIONS
+
+    resources :instances, only: SHALLOW_ACTIONS do
+      resources :documents
+    end
+
     resources :instance_properties, only: SHALLOW_ACTIONS
     resources :data_models do
       resources :model_properties, except: SHALLOW_ACTIONS

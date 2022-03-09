@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="row mb-2">
       <div class="col-sm-5">
-        <%= link_to '', class: 'btn btn-info  btn-sm' do %>
+        <%= link_to [:new, current_office, instance, :document], class: 'btn btn-info  btn-sm', remote: true do %>
           <i class="fa fa-circle-plus me-1"></i> Generate
         <% end %>
       </div>
