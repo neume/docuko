@@ -3,9 +3,7 @@ require 'rails_helper'
 RSpec.describe DocumentsController, type: :controller do
   let(:user) { create(:user) }
   let(:office) { create(:office, created_by: user) }
-  let(:data_model) { create(:data_model, office: office) }
-  let(:instance) { create(:instance, data_model: data_model ) }
-  let(:template) { create(:template, data_model: data_model ) }
+  let(:instance) { InstanceCreator.create(office: office) }
 
   describe '#new' do
     it 'renders new template' do
@@ -17,6 +15,7 @@ RSpec.describe DocumentsController, type: :controller do
   end
 
   describe '#create' do
+    let(:template) { create(:template, data_model: instance.data_model) }
     let(:valid_params) do
       {
         instance_id: instance.id,
@@ -28,7 +27,6 @@ RSpec.describe DocumentsController, type: :controller do
     end
 
     it 'creates new document' do
-
       expect do
         post :create, params: slug(valid_params), xhr: true, format: :js
       end.to change(instance.documents, :count).by(1)

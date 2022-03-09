@@ -13,9 +13,7 @@ class DocumentsController < ApplicationController
 
     @document.name = @template.name if @document.name.empty?
 
-    if @document.save
-      redirect_to [current_office, @instance]
-    end
+    redirect_to [current_office, @instance] if @document.save
   end
 
   private

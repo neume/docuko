@@ -40,7 +40,7 @@ class OfficesController < ApplicationController
   end
 
   def admin
-    redirect_to [office, office.data_models.first] if office.data_models.count > 0
+    redirect_to [office, office.data_models.first] if office.data_models.count.positive?
   end
 
   private

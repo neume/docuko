@@ -18,7 +18,7 @@ RSpec.describe OfficesController, type: :controller do
     }
   end
 
-  before  { user }
+  before { user }
 
   describe '#index' do
     before { get :index }
@@ -38,14 +38,14 @@ RSpec.describe OfficesController, type: :controller do
     context 'with valid params' do
       it 'creates new office' do
         expect do
-          post :create, params: {  office: valid_attributes }
-        end .to change(Office, :count).by(1)
+          post :create, params: { office: valid_attributes }
+        end.to change(Office, :count).by(1)
       end
     end
 
     context 'with invalid params' do
       it 'creates new office' do
-        post :create, params: {  office: invalid_attributes }
+        post :create, params: { office: invalid_attributes }
         expect(response).to render_template(:new)
       end
     end
@@ -67,7 +67,7 @@ RSpec.describe OfficesController, type: :controller do
     end
   end
 
-  describe '#create' do
+  describe '#update' do
     context 'with valid params' do
       let(:new_attributes) do
         {
@@ -92,7 +92,6 @@ RSpec.describe OfficesController, type: :controller do
   end
 
   describe '#admin' do
-
     context 'with no Data Model' do
       it 'shows office setup view' do
         get :admin, params: { slug: office.slug }

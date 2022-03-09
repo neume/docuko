@@ -1,5 +1,5 @@
 class TemplatesController < ApplicationController
-  before_action :set_template, only: %i[show edit update destroy]
+  before_action :set_template, only: %i[show edit update]
 
   # GET /templates/1 or /templates/1.json
   def show; end
