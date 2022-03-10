@@ -29,7 +29,8 @@
               <%= document.created_at.strftime('%-d/%m/%Y %r') %>
             </td>
             <td class='tb-actions'>
-              <%= link_to do%>
+
+              <%= link_to rails_blob_path(document.file, disposition: "attachment") do %>
                 Download
               <% end %>
             </td>

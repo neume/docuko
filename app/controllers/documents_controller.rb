@@ -8,12 +8,15 @@ class DocumentsController < ApplicationController
 
   def create
     @instance = current_office.instances.find(params[:instance_id])
-    @template = current_office.templates.find(document_params[:template_id])
-    @document = @instance.documents.new document_params.merge(created_by: current_user)
+    options = {
+      params: document_params,
+      instance: @instance,
+      office: current_office,
+      user: current_user
+    }
 
-    @document.name = @template.name if @document.name.empty?
-
-    redirect_to [current_office, @instance] if @document.save
+    @document = CreateDocumentService.create(**options)
+    redirect_to [current_office, @instance]
   end
 
   private
