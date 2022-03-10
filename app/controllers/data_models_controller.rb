@@ -23,7 +23,7 @@ class DataModelsController < ApplicationController
 
   def update
     if data_model.update(data_model_params)
-      redirect_to [current_office, :data_models]
+      redirect_to [current_office, data_model]
     else
       render :new
     end

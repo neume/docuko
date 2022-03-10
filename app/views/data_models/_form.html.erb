@@ -1,18 +1,21 @@
-<%= form_for data_model, url: url do |f| %>
-  <div>
-    <p>
-      <%= f.label :name %>
-    </p>
-    <div>
-      <%= f.text_field :name %>
-    </div>
-    <div class='mb-3'>
-      <%= f.label :description, class: 'form-label' %>
-      <%= f.text_area :description, class: 'form-control', rows: 5 %>
-    </div>
+<div class='card'>
+  <div class='card-body'>
+    <%= form_for data_model, url: url do |f| %>
+      <div class='row'>
+        <div class="form-group mb-3">
+          <%= f.label :name, class: 'form-label' %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
 
-    <div>
-      <%= f.submit %>
-    </div>
-  <div>
-<% end %>
+        <div class='form-group mb-3'>
+          <%= f.label :description, class: 'form-label' %>
+          <%= f.text_area :description, class: 'form-control', rows: 5 %>
+        </div>
+
+        <div class='form-group'>
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      <div>
+    <% end %>
+  </div>
+</div>

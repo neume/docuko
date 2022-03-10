@@ -35,7 +35,7 @@ end
 # Admin
 
 crumb :office_admin do |office|
-  link 'Admin', admin_office_path(office.slug)
+  link 'Settings', admin_office_path(office.slug)
   parent :office, office
 end
 
