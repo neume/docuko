@@ -5,41 +5,90 @@
     <%= @office.name %>
   </div>
   <div class="col-6">
-    <%= link_to  admin_office_path(@office.slug), class: 'float-end btn btn-sm btn-success' do %>
-      <i class="fa fa-cog mr-1"></i> Settings
+    <%= link_to  new_office_data_model_path(office_slug: @office.slug), class: 'float-end btn btn-sm btn-success' do %>
+      <i class="fa fa-cog me-1"></i> New Data Model
     <% end %>
   </div>
 </div>
 <h5>
 </h5>
 <div class="row">
-<% DataModel.all.each do |model| %>
-  <div class='col-md-6 mb-2'>
+<% @data_models.all.each do |model| %>
+  <div class='col-12 mb-4'>
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">
-          <%= link_to model.name, office_data_model_instances_path(data_model_id: model.id, office_slug: @office.slug), class: 'text-primary stretched-link' %>
-        </h5>
+        <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: @office.slug), class: 'stretched-link' do %>
+        <% end %>
+        <div class="row mb-2">
+          <div class="col-9">
+            <a href="#" class="badge fs-sm text-nav bg-info text-decoration-none">Example Tag</a>
+            <span class='text-dark ps-3 ms-3 border-start'>
+              <%= model.created_at.strftime('%b %-d, %Y') %>
+            </span>
+          </div>
+          <div class='col-3 text-end'>
+            <div class="dropdowm z-1">
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="dropdown" aria-expanded="" id='data_model-<%= model.id %>'>
+                Config
+              </button>
 
-        <div>
-          <small class='text-secondary'><%= model.description %></small>
+              <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end" aria-labelledby='data_model-<%= model.id %>' style="">
+                <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: @office.slug), class: 'dropdown-item' do %>
+                  Show List
+                <% end %>
+                <%= link_to [current_office, model], class: 'dropdown-item' do%>
+                  Settings
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h4 class="card-title">
+            <%= model.name %>
+          </h4>
+
+          <% if model.description.present? %>
+            <p class='text-dark'><%= model.description %></p>
+          <% end %>
         </div>
 
-        <div class='row mt-3'>
+        <div class='row mb-3'>
           <div class='col-12'>
-            <span class='mr-1 pr-2 text-muted'>
-              <span> <i class="fa fa-box mr-2"></i><b><%= model.instances.count %></b></span> Instances
+            <span class='text-dark me-2'>
+                <i class="fa fa-box pe-1"></i>
+                <%= model.instances.count %> Instances
+                <b>
+                  <% new_instances_count = model.instances.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count %>
+                  <% if new_instances_count > 0 %>
+                    <span class='badge bg-success rounded-pill'><%= new_instances_count %> New</span>
+                  <% end %>
+                </b>
             </span>
-
-            <% new_instances_count = model.instances.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count %>
-            <% if new_instances_count > 0 %>
-              <span class='ml-1'>
-                <span class='text-success'>
-                  <i class="fa fa-keyboard mr-2"></i>
-                  <b>+<%= new_instances_count %></b>
-                </span>
-              </span>
-            <% end %>
+            <span class='text-dark'>
+              <i class="fa fa-file-word pe-1"></i>
+              <%= model.documents.count %> Documents
+              <b>
+                <% new_instances_count = model.documents.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count %>
+                <% if new_instances_count > 0 %>
+                  <span class='badge bg-success rounded-pill'><%= new_instances_count %> New</span>
+                <% end %>
+              </b>
+            </span>
+          </div>
+        </div>
+        <hr/>
+        <div class="row z-1">
+          <div class="col-12">
+            <div class="d-flex">
+              <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: @office.slug), class: 'btn btn-outline-success px-4 me-3 z-1' do %>
+                <i class="fa fa-list me-1"></i>
+                <span class="d-none d-xl-inline">List</span>
+              <% end %>
+              <%= link_to new_office_data_model_instance_path(model.id, office_slug: current_office.slug), class: 'btn btn-outline-info px-4 me-3 z-1' do %>
+                <i class="fa fa-circle-plus me-1"></i> Add
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

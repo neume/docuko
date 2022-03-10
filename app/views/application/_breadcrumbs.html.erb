@@ -1,7 +1,7 @@
 <% breadcrumbs(display_single_fragment: true).tap do |links| %>
   <% if links.any? %>
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
+      <ol class="breadcrumb ps-0">
         <% links.each do |link| %>
           <% if link.current? %>
             <li class="breadcrumb-item active" aria-current='page'>

@@ -4,7 +4,7 @@ FactoryBot.define do
     data_model
 
     after(:build) do |template|
-      file_path = File.open(Rails.root.join('spec', 'fixtures', 'files', 'project.docx'))
+      file_path = File.open(Rails.root.join('spec/fixtures/files/project.docx'))
 
       template.file.attach(
         io: file_path,

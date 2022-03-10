@@ -34,7 +34,7 @@ RSpec.describe CreateDocumentService do
       }
     end
     let(:template) do
-      File.join(Rails.root, 'spec', 'fixtures', 'files', 'project.docx')
+      File.open(Rails.root.join('spec/fixtures/files/project.docx'))
     end
 
     it 'creates document' do

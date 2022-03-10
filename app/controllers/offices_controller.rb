@@ -19,6 +19,7 @@ class OfficesController < ApplicationController
 
   def show
     office
+    @data_models = office.data_models
   end
 
   def edit
