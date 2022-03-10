@@ -13,6 +13,7 @@
           <th>Name</th>
           <th>Template</th>
           <th>Created at</th>
+          <th>Created by</th>
           <th class='tb-actions'>Actions</th>
         </tr>
       </thead>
@@ -28,10 +29,15 @@
             <td>
               <%= document.created_at.strftime('%-d/%m/%Y %r') %>
             </td>
+            <td>
+              <%= document.created_by.username %>
+            </td>
             <td class='tb-actions'>
 
-              <%= link_to rails_blob_path(document.file, disposition: "attachment") do %>
-                Download
+              <% if document.file.present? %>
+                <%= link_to rails_blob_path(document.file, disposition: "attachment") do %>
+                  Download
+                <% end %>
               <% end %>
             </td>
           </tr>
