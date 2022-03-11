@@ -1,14 +1,15 @@
 class OfficesController < ApplicationController
   def index
-    @offices = current_user.created_offices
+    @offices = current_user.offices
   end
 
   def new
-    @office = current_user.created_offices.new
+    @office = current_user.offices.new
   end
 
   def create
-    @office = current_user.created_offices.new office_params
+    @office = current_user.offices.new office_params.merge(created_by: current_user)
+    @office.members.build(user: current_user, member_role: :admin)
 
     if @office.save
       redirect_to @office, notice: 'Office was successfully created.'

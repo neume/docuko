@@ -10,6 +10,8 @@ user = User.create(username: 'admin', password: 'password')
 
 office = Office.create(name: 'My Clinic', slug: 'my-clinic', created_by: user)
 
+member = office.members.create(user: user, member_role: :admin)
+
 data_model = user.created_data_models.create(name: 'Person', created_by: user, office: office)
 
 properties = [

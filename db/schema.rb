@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_093532) do
+ActiveRecord::Schema.define(version: 2022_03_11_093558) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -85,6 +85,18 @@ ActiveRecord::Schema.define(version: 2022_03_02_093532) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_instances_on_created_by_id"
     t.index ["data_model_id"], name: "index_instances_on_data_model_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.bigint "office_id"
+    t.bigint "user_id"
+    t.datetime "invited_at"
+    t.integer "member_status", default: 1
+    t.integer "member_role", default: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["office_id"], name: "index_members_on_office_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
   end
 
   create_table "model_properties", force: :cascade do |t|

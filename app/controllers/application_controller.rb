@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_office
-    @current_office ||= Office.find_by(slug: (params[:office_slug] || params[:slug]))
+    @current_office ||= current_user.offices.find_by(slug: (params[:office_slug] || params[:slug]))
   end
 end

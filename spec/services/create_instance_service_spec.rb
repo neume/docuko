@@ -20,7 +20,6 @@ RSpec.describe CreateInstanceService do
     )
 
     instance = described_class.create(instance_params, data_model)
-    puts instance.properties.first.errors.full_messages
 
     expect(instance).to be_persisted
     expect(instance.properties.pluck(:value)).to eq(['Juan', 'Dela Cruz'])

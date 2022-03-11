@@ -5,7 +5,9 @@ RSpec.describe DataModelsController, type: :controller do
   let(:office) { FactoryBot.create(:office, created_by: user) }
   let(:data_model) { FactoryBot.create(:data_model, office: office) }
 
-  before { user }
+  before do
+    allow(controller).to receive(:current_office).and_return(office)
+  end
 
   describe '#index' do
     before { get :index, params: slug }
@@ -53,7 +55,7 @@ RSpec.describe DataModelsController, type: :controller do
     before { patch :update, params: slug(params) }
 
     it 'updates DataModel' do
-      expect(response).to redirect_to([office, :data_models])
+      expect(response).to redirect_to([office, assigns(:data_model)])
       expect(data_model.reload.name).to eq('Cat')
     end
   end

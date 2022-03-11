@@ -6,7 +6,9 @@ RSpec.describe InstancesController, type: :controller do
   let(:data_model) { create(:data_model, office: office) }
   let(:model_property) { create(:model_property, data_model: data_model) }
 
-  before { user }
+  before do
+    allow(controller).to receive(:current_office).and_return(office)
+  end
 
   describe '#index' do
     before { get :index, params: slug({ data_model_id: data_model.id }) }

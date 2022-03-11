@@ -9,6 +9,10 @@ RSpec.describe InstancePropertiesController, type: :controller do
     create(:instance_property, instance: instance, value: 'First value')
   end
 
+  before do
+    allow(controller).to receive(:current_office).and_return(office)
+  end
+
   describe '#edit' do
     before do
       get :edit, params: slug(id: instance_property.id), xhr: true, format: :js

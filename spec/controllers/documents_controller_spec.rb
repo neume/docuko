@@ -5,6 +5,10 @@ RSpec.describe DocumentsController, type: :controller do
   let(:office) { create(:office, created_by: user) }
   let(:instance) { InstanceCreator.create(office: office) }
 
+  before do
+    allow(controller).to receive(:current_office).and_return(office)
+  end
+
   describe '#new' do
     it 'renders new template' do
       get :new, params: slug(instance_id: instance.id), xhr: true, format: :js
