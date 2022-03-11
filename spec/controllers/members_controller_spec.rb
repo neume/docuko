@@ -1,0 +1,39 @@
+require 'rails_helper'
+
+RSpec.describe MembersController, type: :controller do
+  let(:user) { create(:user) }
+  let(:office) { create(:office, created_by: user) }
+
+  before do
+    allow(controller).to receive(:current_office).and_return(office)
+  end
+
+  describe '#index' do
+    before { get :index, params: slug }
+
+    it { expect(response).to render_template(:index) }
+  end
+
+  describe '#new' do
+    before { get :new, params: slug }
+
+    it { expect(response).to render_template(:new) }
+  end
+
+  describe '#create' do
+    let(:other_user) { create(:user) }
+    let(:valid_params) do
+      {
+        member: {
+          user_id: other_user.id,
+          member_role: :admin
+        }
+      }
+    end
+
+    it 'adds new member' do
+      post :create, params: slug(valid_params)
+      expect(office.members.count).to eq(1) # the original user was not a member
+    end
+  end
+end

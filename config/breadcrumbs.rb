@@ -6,6 +6,16 @@ crumb :home do
   link 'Home', root_path
 end
 
+crumb :offices do
+  link 'Offices', [:offices]
+  parent :root
+end
+
+crumb :new_office do
+  link 'New', [:new, :office]
+  parent :offices
+end
+
 crumb :office do |office|
   link office.name, office_path(office.slug)
   parent :root
@@ -90,4 +100,14 @@ crumb :template do |template|
 
   link template.name.first(20), [office, template]
   parent :data_model, data_model, office
+end
+
+crumb :members do |office|
+  link 'Members', [office, :members]
+  parent :office_admin, office
+end
+
+crumb :new_member do |office|
+  link 'New', [:new, office, :member]
+  parent :members, office
 end

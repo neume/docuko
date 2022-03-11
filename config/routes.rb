@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       get :admin
     end
 
+    resources :members, only: %i[index new create]
+
     resources :templates, only: SHALLOW_ACTIONS
 
     resources :model_properties, only: SHALLOW_ACTIONS

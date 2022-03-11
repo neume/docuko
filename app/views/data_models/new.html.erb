@@ -1,7 +1,8 @@
 <% breadcrumb :new_data_model, current_office %>
-<h5> Create new Data Model </h5>
-
-<div>
-  <%= render "form", data_model: @data_model, url: office_data_models_path(current_office.slug) %>
+<div class='row'>
+  <%= render 'sidebar'%>
+  <div class="col-9">
+    <%= render "form", data_model: @data_model, url: office_data_models_path(current_office.slug) %>
+  </div>
 </div>
 

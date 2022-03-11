@@ -1,29 +1,33 @@
-<p id="notice"><%= notice %></p>
+<% breadcrumb :offices %>
+<div class="row">
+  <div class="col-md-6">
 
-<h1>Offices</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>slug</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @offices.each do |office| %>
-      <tr>
-        <td><%= office.name %></td>
-        <td><%= office.slug %></td>
-        <td><%= link_to 'Show', office %></td>
-        <td><%= link_to 'Edit', edit_office_path(office.slug) %></td>
-        <td><%= link_to 'Destroy', office, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <%= link_to [:new, :office], class: 'btn btn-info btn-sm' do %>
+      <i class="fa fa-circle-plus me-1"></i> New Office
     <% end %>
-  </tbody>
-</table>
+    <% @offices.each do |office| %>
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to office.name, office_path(office.slug), class: 'text-primary' %>
+          </h5>
+          <div>
+            <small class='text-secondary'><%= office.description %></small>
+          </div>
+          <div class='row mt-3'>
+            <div class='col-12 text-muted'>
+              <span class='me-1 pr-2'>
+                <span> <i class="fa fa-file me-2"></i><b><%= office.templates.count %></b></span> Templates
+              </span>
 
-<br>
+              <span class='ml-1'>
+                <span> <i class="fa fa-file-word me-2"></i><b>29</b></span> Documents
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<%= link_to 'New Office', new_office_path %>

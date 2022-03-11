@@ -1,6 +1,13 @@
-<% breadcrumb :edit_office, @office %>
-<h1>Editing Office</h1>
+<% breadcrumb :edit_office, current_office %>
 
-<%= render 'form', office: @office, url: office_url(@office.slug) %>
+<div class="row">
+  <%= render 'sidebar'%>
+  <div class="col-9">
+    <div class="card">
+      <div class="card-body">
+        <%= render 'form', office: @office, url: office_url(@office.slug) %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Show', @office %>

@@ -1,0 +1,44 @@
+<% breadcrumb :members, current_office %>
+<div class="row">
+  <%= render 'sidebar'%>
+  <div class="col-9">
+    <div class="card">
+      <div class="card-body">
+        <%= link_to [:new, current_office, :member], class: 'btn btn-info btn-sm' do %>
+          <i class="fa fa-circle-plus me-1"></i> Add
+        <% end %>
+        <table class='table table-striped'>
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Joined at</th>
+              <th>Status</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @members.each do |member| %>
+              <tr>
+                <td>
+                  <%= member.user.username %>
+                </td>
+                <td>
+                  <%= member.member_role.capitalize %>
+                </td>
+                <td>
+                  <%= member.created_at.strftime('%b %D, %Y')%>
+                </td>
+                <td>
+                  <%= member.member_status.capitalize %>
+                </td>
+                <td></td>
+
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

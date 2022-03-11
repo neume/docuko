@@ -12,7 +12,7 @@ class OfficesController < ApplicationController
     @office.members.build(user: current_user, member_role: :admin)
 
     if @office.save
-      redirect_to @office, notice: 'Office was successfully created.'
+      redirect_to [:edit, @office], notice: 'Office was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -30,14 +30,10 @@ class OfficesController < ApplicationController
   def update
     office
 
-    respond_to do |format|
-      if @office.update(office_params)
-        format.html { redirect_to admin_office_path(@office.slug), notice: 'Office was successfully updated.' }
-        format.json { render :show, status: :ok, location: @office }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @office.errors, status: :unprocessable_entity }
-      end
+    if office.update(office_params)
+      redirect_to [:edit, office], notice: 'Office was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

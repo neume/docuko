@@ -1,4 +1,8 @@
   <div class="col-md-3 mb-2">
+    <div class='list-group mb-3'>
+      <%= link_to 'Members', [current_office, :members], class: "list-group-item no-decoration #{ params[:controller] == 'members' ? 'active' : '' }"  %>
+      <%= link_to 'Config', [:edit, current_office], class: "list-group-item no-decoration #{ params[:controller] == 'offices' ? 'active' : '' }"  %>
+    </div>
     <div class='list-group'>
       <% current_office.data_models.each do |data_model| %>
         <% if @data_model &&  @data_model.id == data_model.id %>
