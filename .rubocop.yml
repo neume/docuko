@@ -28,3 +28,10 @@ Layout/LineLength:
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+# I dont think it is more readable due to the 120 Max LineLength.
+# Let's leave the decision to the developer rather than enforcing it
+Style/GuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false

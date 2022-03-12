@@ -1,0 +1,41 @@
+image: ruby:2.7.1
+
+.rails_setup: &rails_setup
+  - gem install bundler --no-document
+  - bundle install --jobs $(nproc)
+
+stages:
+  - test
+
+variables:
+  POSTGRES_USER: 'docuko_pg'
+  POSTGRES_PASSWORD: 'document_ko_pg'
+  DB_USERNAME: 'docuko_pg'
+  DB_PASSWORD: 'document_ko_pg'
+  DB_HOST: postgres
+  RAILS_ENV: 'test'
+
+rspec:
+  tags:
+    - docker-runner
+  stage: test
+  services:
+    - postgres:12.9
+  script:
+    - *rails_setup
+    - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+    - ". ~/.nvm/nvm.sh"
+    - nvm install 16.13.2
+    - npm install --global yarn
+    - yarn install
+    - cp config/database.gitlab-ci.yml config/database.yml
+    - bundle exec rails db:create db:schema:load
+    - bundle exec rspec
+
+rubocop:
+  tags:
+    - docker-runner
+  stage: test
+  script:
+    - *rails_setup
+    - bundle exec rubocop

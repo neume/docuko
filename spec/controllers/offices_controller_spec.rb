@@ -56,7 +56,6 @@ RSpec.describe OfficesController, type: :controller do
   end
 
   describe '#show' do
-
     context 'without data models' do
       it 'shows office' do
         get :show, params: { slug: office.slug }

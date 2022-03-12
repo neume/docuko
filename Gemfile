@@ -37,6 +37,9 @@ gem 'gretel', '~> 4.4.0'
 
 gem 'image_processing', '~> 1.2'
 
+# Lock rubyzip due to warnings in 2.3.1
+gem 'rubyzip', '2.3.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
