@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe OfficesController, type: :controller do
   let(:user) { create(:user) }
-  let(:office) { create(:office, created_by: user) }
+  let(:office) do
+    create(:office, created_by: user).tap do |office|
+      create(:member, office: office, user: user)
+    end
+  end
 
   let(:valid_attributes) do
     {
@@ -52,10 +56,24 @@ RSpec.describe OfficesController, type: :controller do
   end
 
   describe '#show' do
-    before { get :show, params: { slug: office.slug } }
 
-    it 'shows office' do
-      expect(response).to render_template(:show)
+    context 'without data models' do
+      it 'shows office' do
+        get :show, params: { slug: office.slug }
+
+        expect(response).to redirect_to([:new, office, :data_model])
+      end
+    end
+
+    context 'with at least 1 data model' do
+      it 'redirects to new data model form' do
+        create(:data_model, office: office)
+
+        get :show, params: { slug: office.slug }
+
+        expect(office.data_models.count).to eq(1)
+        expect(response).to render_template(:show)
+      end
     end
   end
 

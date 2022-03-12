@@ -12,6 +12,6 @@ class CreateDocuments < ActiveRecord::Migration[6.1]
     end
     add_index :documents, :created_by_id
     add_index :documents, :template_id
-    add_index :documents, :data_model_id
+    add_index :documents, :instance_id
   end
 end

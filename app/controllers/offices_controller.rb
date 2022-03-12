@@ -21,6 +21,9 @@ class OfficesController < ApplicationController
   def show
     office
     @data_models = office.data_models
+    if @data_models.count.zero?
+      redirect_to [:new, office, :data_model], notice: 'Create your first Data Model here'
+    end
   end
 
   def edit

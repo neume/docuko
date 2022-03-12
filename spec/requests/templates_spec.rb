@@ -27,8 +27,8 @@ RSpec.describe '/offices/:office_slug/templates', type: :request do
 
   describe 'GET /edit' do
     it 'render a successful response' do
-      data_model.templates.create! valid_attributes
-      get edit_office_template_path(data_model.id, slug)
+      template = data_model.templates.create! valid_attributes
+      get edit_office_template_path(template.id, slug)
       expect(response).to be_successful
     end
   end

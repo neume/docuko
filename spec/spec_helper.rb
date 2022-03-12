@@ -13,6 +13,14 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+# Supress ruby deprecation warnings
+# This is for these warnings:
+# - warning: Using the last argument as keyword parameters is deprecated; maybe ** should be added to the call
+# - warning: The called method `<method>' is defined here
+Warning[:deprecated] = false
+# TODO: remove this when all of the gems have caught up with the warnings
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
