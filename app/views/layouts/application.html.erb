@@ -15,7 +15,9 @@
     <div class="container mt-2">
 
       <%= render 'breadcrumbs' %>
-      <%= render 'flash' %>
+      <div id='flash_wrapper'>
+        <%= render 'flash' %>
+      </div>
       <%= yield %>
       <div id="app-modal" class='modal fade' tabindex="-1">
       </div>

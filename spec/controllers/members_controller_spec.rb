@@ -36,4 +36,29 @@ RSpec.describe MembersController, type: :controller do
       expect(office.members.count).to eq(1) # the original user was not a member
     end
   end
+
+  describe '#change_role' do
+    before do
+      patch :change_role, params: slug(id: member.id, member_role: 'regular'), xhr: true, format: :js
+    end
+
+    context 'with other members' do
+      let(:member) { create(:member, office: office, member_role: 'admin') }
+
+      it 'changes member role' do
+        member.reload
+        expect(member).to be_regular
+        expect(response).to render_template(:change_role)
+      end
+    end
+
+    context 'with own membership' do
+      let(:member) { create(:member, office: office, member_role: 'admin', user: user) }
+
+      it 'does not allow changing of membership' do
+        member.reload
+        expect(member).to be_admin
+      end
+    end
+  end
 end

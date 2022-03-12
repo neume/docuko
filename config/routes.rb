@@ -10,7 +10,11 @@ Rails.application.routes.draw do
       get :admin
     end
 
-    resources :members, only: %i[index new create]
+    resources :members, only: %i[index new create] do
+      member do
+        patch :change_role
+      end
+    end
 
     resources :templates, only: SHALLOW_ACTIONS
 

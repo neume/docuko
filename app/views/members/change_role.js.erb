@@ -1,0 +1,3 @@
+document.getElementById('member-role-<%= @member.id %>').innerHTML = "<%= j render 'member_role', member: @member, office: current_office%>"
+document.getElementById('flash_wrapper').innerHTML = "<%= j render 'flash'%>"
+

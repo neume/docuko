@@ -20,6 +20,13 @@ class MembersController < ApplicationController
     end
   end
 
+  def change_role
+    @member = current_office.members.find(params[:id])
+    return flash[:alert] = 'You can not change your own role' if @member.user_id == current_user.id
+
+    flash[:notice] = 'Role updated' if @member.update member_role: params[:member_role]
+  end
+
   private
 
   def member_params

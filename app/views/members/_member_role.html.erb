@@ -1,0 +1,19 @@
+<% if current_user.id == member.user_id %>
+  <span class='badge bg-secondary rounded-pill'>
+    <%= member.member_role.capitalize %>
+  </span>
+<% else %>
+  <div class="btn-group">
+    <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle='dropdown'>
+        <%= member.member_role.capitalize %>
+    </button>
+    <ul class="dropdown-menu">
+      <% Member.member_roles.each do |role, id| %>
+        <li>
+          <% path = change_role_office_member_path(office_slug: office.slug, id: member.id, member_role: role) %>
+          <%= link_to role.capitalize, path, remote: true, class: 'dropdown-item', method: :patch %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

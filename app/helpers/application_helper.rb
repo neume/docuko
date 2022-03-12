@@ -3,7 +3,7 @@ module ApplicationHelper
     case key
     when 'notice'
       'bg-success'
-    when :alert
+    when 'alert'
       'bg-danger'
     end
   end

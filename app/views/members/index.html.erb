@@ -23,8 +23,8 @@
                 <td>
                   <%= member.user.username %>
                 </td>
-                <td>
-                  <%= member.member_role.capitalize %>
+                <td id='member-role-<%= member.id %>'>
+                  <%= render 'member_role', member: member, office: current_office %>
                 </td>
                 <td>
                   <%= member.created_at.strftime('%b %D, %Y')%>
@@ -33,7 +33,6 @@
                   <%= member.member_status.capitalize %>
                 </td>
                 <td></td>
-
               </tr>
             <% end %>
           </tbody>
