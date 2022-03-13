@@ -4,7 +4,7 @@ RSpec.describe OfficesController, type: :controller do
   let(:user) { create(:user) }
   let(:office) do
     create(:office, created_by: user).tap do |office|
-      create(:member, office: office, user: user)
+      create(:member, office: office, user: user, member_role: :admin)
     end
   end
 

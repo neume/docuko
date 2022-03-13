@@ -1,14 +1,16 @@
-<% breadcrumb :office, @office %>
+<% breadcrumb :office, current_office %>
 
 <div class="row mb-2">
   <div class="col-6">
-    <%= @office.name %>
+    <%= current_office.name %>
   </div>
-  <div class="col-6">
-    <%= link_to  new_office_data_model_path(office_slug: @office.slug), class: 'float-end btn btn-sm btn-success' do %>
-      <i class="fa fa-cog me-1"></i> New Data Model
-    <% end %>
-  </div>
+  <% if current_membership.admin? %>
+    <div class="col-6">
+      <%= link_to [:edit, current_office], class: 'float-end btn btn-sm btn-success' do %>
+        <i class="fa fa-cog me-1"></i> Office Settings
+      <% end %>
+    </div>
+  <% end %>
 </div>
 <h5>
 </h5>
@@ -17,7 +19,7 @@
   <div class='col-12 mb-4'>
     <div class="card">
       <div class="card-body">
-        <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: @office.slug), class: 'stretched-link' do %>
+        <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: current_office.slug), class: 'stretched-link' do %>
         <% end %>
         <div class="row mb-2">
           <div class="col-9">
@@ -29,15 +31,17 @@
           <div class='col-3 text-end'>
             <div class="dropdowm z-1">
               <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="dropdown" aria-expanded="" id='data_model-<%= model.id %>'>
-                Config
+                Actions
               </button>
 
               <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end" aria-labelledby='data_model-<%= model.id %>' style="">
-                <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: @office.slug), class: 'dropdown-item' do %>
+                <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: current_office.slug), class: 'dropdown-item' do %>
                   Show List
                 <% end %>
-                <%= link_to [current_office, model], class: 'dropdown-item' do%>
-                  Settings
+                <% if current_membership.admin? %>
+                  <%= link_to [current_office, model], class: 'dropdown-item' do%>
+                    Settings
+                  <% end %>
                 <% end %>
               </div>
             </div>
@@ -81,7 +85,7 @@
         <div class="row z-1">
           <div class="col-12">
             <div class="d-flex">
-              <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: @office.slug), class: 'btn btn-outline-success px-4 me-3 z-1' do %>
+              <%= link_to office_data_model_instances_path(data_model_id: model.id, office_slug: current_office.slug), class: 'btn btn-outline-success px-4 me-3 z-1' do %>
                 <i class="fa fa-list me-1"></i>
                 <span class="d-none d-xl-inline">List</span>
               <% end %>

@@ -19,29 +19,35 @@ class OfficesController < ApplicationController
   end
 
   def show
-    office
-    @data_models = office.data_models
+    @current_office = office
+    @data_models = current_office.data_models
     if @data_models.count.zero?
-      redirect_to [:new, office, :data_model], notice: 'Create your first Data Model here'
+      redirect_to [:new, current_office, :data_model], notice: 'Create your first Data Model here'
     end
   end
 
   def edit
+    @current_office = office
+    authorize_admin!
     office
   end
 
   def update
-    office
+    @current_office = office
+    authorize_admin!
 
-    if office.update(office_params)
-      redirect_to [:edit, office], notice: 'Office was successfully updated.'
+    if current_office.update(office_params)
+      redirect_to [:edit, current_office], notice: 'Office was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def admin
-    redirect_to [office, office.data_models.first] if office.data_models.count.positive?
+    @current_office = office
+    @data_models = current_office.data_models
+    authorize_admin!
+    redirect_to [current_office, current_office.data_models.first] if current_office.data_models.count.positive?
   end
 
   private

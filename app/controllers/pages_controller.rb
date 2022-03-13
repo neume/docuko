@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def dashboard
-    @offices = current_user.created_offices
+    @offices = current_user.offices
   end
 end

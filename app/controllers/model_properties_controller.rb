@@ -1,4 +1,6 @@
 class ModelPropertiesController < ApplicationController
+  before_action :authorize_admin!
+
   def index
     redirect_back fallback_location: [current_office, data_model]
   end

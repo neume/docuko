@@ -1,4 +1,6 @@
 class DataModelsController < ApplicationController
+  before_action :authorize_admin!
+
   def index
     @data_models = current_office.data_models.all
   end

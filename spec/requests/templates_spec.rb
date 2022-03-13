@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe '/offices/:office_slug/templates', type: :request do
-  let(:office) { create(:office, with_user: true) }
+  let(:office) { create(:office, with_user: true, member_role: :admin) }
   let(:data_model) { create(:data_model, office: office) }
   let(:valid_attributes) do
     {

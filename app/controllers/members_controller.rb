@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  before_action :authorize_admin!
+
   def index
     @members = current_office.members
   end

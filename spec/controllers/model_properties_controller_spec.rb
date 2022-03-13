@@ -8,6 +8,7 @@ RSpec.describe ModelPropertiesController, type: :controller do
 
   before do
     sign_in user
+    allow(controller).to receive(:authorize_admin!).and_return(true)
     allow(controller).to receive(:current_office).and_return(office)
   end
 

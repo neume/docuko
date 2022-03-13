@@ -1,4 +1,5 @@
 class TemplatesController < ApplicationController
+  before_action :authorize_admin!
   before_action :set_template, only: %i[show edit update]
 
   # GET /templates/1 or /templates/1.json
