@@ -22,7 +22,8 @@ RSpec.describe ModelPropertiesController, type: :controller do
       {
         data_model_id: data_model.id,
         model_property: {
-          name: 'Person'
+          name: 'Person',
+          code: 'person'
         }
       }
     end

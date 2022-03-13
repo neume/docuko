@@ -1,16 +1,17 @@
 <div class='card'>
   <div class='card-body'>
+    <%= render 'errors', object: model_property %>
     <%= form_for model_property, url: url do |f| %>
       <div class="row">
         <div class="col-md-6">
           <div class='mb-3'>
             <%= f.label :name, class: 'form-label' %>
-            <%= f.text_field :name, class: 'form-control', placeholder: 'Enter property name.' %>
+            <%= f.text_field :name, class: 'form-control', placeholder: 'Enter property name.', required: true %>
           </div>
 
           <div class='mb-3'>
             <%= f.label :code, class: 'form-label' %>
-            <%= f.text_field :code, class: 'form-control', placeholder: 'Enter unique code for property' %>
+            <%= f.text_field :code, class: 'form-control', placeholder: 'Enter unique code for property', required: true %>
           </div>
 
           <div class='mb-3'>

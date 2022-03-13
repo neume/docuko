@@ -1,4 +1,8 @@
 class ModelPropertiesController < ApplicationController
+  def index
+    redirect_back fallback_location: [current_office, data_model]
+  end
+
   def new
     @model_property = data_model.properties.new
   end
@@ -6,7 +10,7 @@ class ModelPropertiesController < ApplicationController
   def create
     @model_property = data_model.properties.new property_params
     if model_property.save
-      redirect_to [current_office, data_model]
+      redirect_to [current_office, data_model], notice: 'Property created'
     else
       render :new
     end
@@ -20,7 +24,7 @@ class ModelPropertiesController < ApplicationController
     if model_property.update(property_params)
       data_model = model_property.data_model
 
-      redirect_to [current_office, data_model]
+      redirect_to [current_office, data_model], notice: 'Property updated'
     else
       render :new
     end
