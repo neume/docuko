@@ -17,9 +17,6 @@ RSpec.describe InstancesController, type: :controller do
     it { expect(response).to render_template(:index) }
   end
 
-  describe '#index' do
-  end
-
   describe '#new' do
     before { get :new, params: slug({ data_model_id: data_model.id }) }
 

@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   root 'pages#dashboard'
   get 'dashboard', to: 'pages#dashboard'
+
+  # routes will start with /offices/<office.slug>/
   resources :offices, param: :slug do
-    SHALLOW_ACTIONS = %i[edit update show].freeze
+    shallow_actions = %i[edit update show]
 
     member do
       get :admin
@@ -17,19 +19,19 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :templates, only: SHALLOW_ACTIONS
+    resources :templates, only: shallow_actions
 
-    resources :model_properties, only: SHALLOW_ACTIONS
+    resources :model_properties, only: shallow_actions
 
-    resources :instances, only: SHALLOW_ACTIONS do
+    resources :instances, only: shallow_actions do
       resources :documents
     end
 
-    resources :instance_properties, only: SHALLOW_ACTIONS
+    resources :instance_properties, only: shallow_actions
     resources :data_models do
-      resources :model_properties, except: SHALLOW_ACTIONS
-      resources :instances, except: SHALLOW_ACTIONS
-      resources :templates, except: SHALLOW_ACTIONS
+      resources :model_properties, except: shallow_actions
+      resources :instances, except: shallow_actions
+      resources :templates, except: shallow_actions
     end
   end
 end

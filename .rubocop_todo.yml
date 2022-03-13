@@ -6,13 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 1
-# Configuration parameters: AllowedMethods.
-# AllowedMethods: enums
-Lint/ConstantDefinitionInBlock:
-  Exclude:
-    - 'config/routes.rb'
-
 # Offense count: 2
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
@@ -29,67 +22,16 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 15
 
-# Offense count: 2
-RSpec/EmptyExampleGroup:
-  Exclude:
-    - 'spec/controllers/instances_controller_spec.rb'
-    - 'spec/factories/documents.rb'
-
 # Offense count: 9
 # Configuration parameters: CountAsOne.
 RSpec/ExampleLength:
   Max: 7
 
-# Offense count: 1
-RSpec/MissingExampleGroupArgument:
-  Exclude:
-    - 'spec/factories/documents.rb'
-
-# Offense count: 9
-RSpec/MultipleExpectations:
-  Max: 2
 
 # Offense count: 1
 # Configuration parameters: AllowSubject.
 RSpec/MultipleMemoizedHelpers:
   Max: 6
-
-# Offense count: 2
-RSpec/RepeatedExampleGroupDescription:
-  Exclude:
-    - 'spec/controllers/instances_controller_spec.rb'
-
-# Offense count: 1
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: slashes, arguments
-Rails/FilePath:
-  Exclude:
-    - 'config/environments/development.rb'
-
-# Offense count: 11
-# Configuration parameters: Include.
-# Include: app/models/**/*.rb
-Rails/HasManyOrHasOneDependent:
-  Exclude:
-    - 'app/models/data_model.rb'
-    - 'app/models/instance.rb'
-    - 'app/models/model_property.rb'
-    - 'app/models/office.rb'
-    - 'app/models/user.rb'
-
-# Offense count: 1
-# Configuration parameters: IgnoreScopes, Include.
-# Include: app/models/**/*.rb
-Rails/InverseOf:
-  Exclude:
-    - 'app/models/user.rb'
-
-# Offense count: 1
-# Configuration parameters: Include.
-# Include: app/models/**/*.rb
-Rails/UniqueValidationWithoutIndex:
-  Exclude:
-    - 'app/models/office.rb'
 
 # Offense count: 17
 # Configuration parameters: AllowedConstants.
@@ -102,10 +44,3 @@ Style/GlobalStdStream:
   Exclude:
     - 'config/environments/production.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: .
-# SupportedStyles: percent, brackets
-Style/SymbolArray:
-  EnforcedStyle: percent
-  MinSize: 3
