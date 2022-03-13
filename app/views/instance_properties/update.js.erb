@@ -1,3 +1,7 @@
-document.getElementById('property-<%= @instance_property.id %>').innerHTML = "<%= j render @instance_property, property: @instance_property, office: current_office %>"
+<% if  @instance_property.errors.empty? %>
+  document.getElementById('property-<%= @instance_property.id %>').innerHTML = "<%= j render @instance_property, property: @instance_property, office: current_office %>"
+<% else %>
+  document.getElementById('property-<%= @instance_property.id %>').innerHTML = "<%= j render 'edit_instance_property', property: @instance_property, office: current_office %>"
+<% end %>
 
 

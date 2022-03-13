@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_094531) do
+ActiveRecord::Schema.define(version: 2022_03_13_120616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,13 +69,16 @@ ActiveRecord::Schema.define(version: 2022_03_13_094531) do
   end
 
   create_table "instance_properties", force: :cascade do |t|
-    t.string "field_name"
+    t.string "name"
     t.string "code"
     t.string "value"
     t.bigint "instance_id", null: false
     t.bigint "model_property_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "required", default: false
+    t.integer "position", default: 0
+    t.text "default_value"
     t.index ["instance_id"], name: "index_instance_properties_on_instance_id"
     t.index ["model_property_id"], name: "index_instance_properties_on_model_property_id"
   end

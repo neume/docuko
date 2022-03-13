@@ -1,9 +1,10 @@
-<span class="card-subtitle text-dark">
-  <span class='me-1'><%= property.field_name%></span>
-  <%= link_to [:edit, office, property], remote: :true do %>
+<span class="card-subtitle text-dark mb-1">
+  <%= link_to [:edit, office, property], remote: :true, class: 'float-end' do %>
     <i class='fa fa-pencil'></i>
   <% end %>
+  <span class='me-1'><%= property.name%></span>
+  <span class='badge bg-light rounded-pill'><%= property.code %></span>
 </span>
-<div class='mb-2'>
+<div class='mb-2 mt-1'>
   <%= property.value %>
 </div>

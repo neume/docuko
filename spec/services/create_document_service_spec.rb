@@ -15,8 +15,8 @@ RSpec.describe CreateDocumentService do
     end
 
     before do
-      create(:instance_property, value: 'Docuko Project', field_name: 'project', instance: instance)
-      create(:instance_property, value: 'January 1, 2022', field_name: 'date', instance: instance)
+      create(:instance_property, value: 'Docuko Project', name: 'project', instance: instance)
+      create(:instance_property, value: 'January 1, 2022', name: 'date', instance: instance)
     end
 
     it 'creates document' do

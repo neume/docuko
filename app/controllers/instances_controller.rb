@@ -5,9 +5,10 @@ class InstancesController < ApplicationController
   end
 
   def new
-    props = data_model.properties.collect { |prop| { field_name: prop.code } }
-    @instance = Instance.new data_model_name: data_model.name
-    @instance.properties.build props
+    # props = data_model.properties.collect { |prop| { name: prop.code } }
+    @instance = data_model.instances.new data_model_name: data_model.name
+    CreateInstanceService.build_instance_properties_from_data_model @instance
+    # @instance.properties.build
   end
 
   def create
@@ -21,6 +22,7 @@ class InstancesController < ApplicationController
       redirect_to [current_office, @instance],
                   notice: "#{data_model.name} was successfully created"
     else
+      @validated = true
       render :new, status: :unprocessable_entity
     end
   end

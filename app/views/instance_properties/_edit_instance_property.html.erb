@@ -1,11 +1,23 @@
 <%= form_for [office, property], remote: true do |f| %>
   <span class="card-subtitle text-dark">
-    <span class='me-1'><%= property.field_name%></span>
+    <span class='me-1'><%= property.name%></span>
+    <span class='badge bg-light rounded-pill'><%= property.code %></span>
   </span>
-  <div class='mb-2'>
-    <div class='mb-2'>
-      <%= f.text_field :value, class: 'form-control' %>
+  <div class='mb-2 mt-2'>
+    <div class='mb-2 form-group'>
+      <% if property.errors.count > 0  %>
+        <% prop_class = property.valid? ? 'is-valid' : 'is-invalid' %>
+        <%= f.text_field :value, class: 'form-control is-invalid', aria: { describedby: "validation-#{property.code}" } %>
+        <div id="validation-<%= property.code %>" class="invalid-feedback">
+          <% property.errors.each do |error| %>
+            <%= error.full_message %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= f.text_field :value, class: 'form-control' %>
+      <% end %>
     </div>
     <%= f.submit 'Save', class: 'btn btn-success btn-sm' %>
+    <%= link_to 'Cancel' ,'', class: 'no-decoration text-primary ms-2' %>
   </div>
 <% end %>
