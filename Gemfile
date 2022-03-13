@@ -37,6 +37,8 @@ gem 'gretel', '~> 4.4.0'
 
 gem 'image_processing', '~> 1.2'
 
+gem 'devise', '~> 4.8', '>= 4.8.1'
+
 # Lock rubyzip due to warnings in 2.3.1
 gem 'rubyzip', '2.3.0'
 
@@ -59,6 +61,8 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'letter_opener', '~> 1.8'
 end
 
 group :test do

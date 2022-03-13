@@ -10,6 +10,7 @@ RSpec.describe InstancePropertiesController, type: :controller do
   end
 
   before do
+    sign_in user
     allow(controller).to receive(:current_office).and_return(office)
   end
 

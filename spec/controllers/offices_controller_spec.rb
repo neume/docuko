@@ -22,7 +22,7 @@ RSpec.describe OfficesController, type: :controller do
     }
   end
 
-  before { user }
+  before { sign_in user }
 
   describe '#index' do
     before { get :index }

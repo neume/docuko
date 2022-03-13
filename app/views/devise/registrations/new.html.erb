@@ -1,0 +1,40 @@
+<div class='row justify-content-center'>
+  <div class='col-md-4 mt-md-5 pt-md-5'>
+    <div class="card">
+      <div class="card-header text-center bg-primary text-white pt-4 pb-4">
+        <h4 class='mb-0'> Docuko </h4>
+      </div>
+      <div class="card-body p-4">
+        <h5 class='text-center'>Sign up</h5>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="form-group mb-2">
+            <%= f.label :email, class: 'form-label' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          </div>
+
+          <div class="form-group mb-2">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+          </div>
+
+          <div class="form-group mb-2">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit "Sign up", class: 'btn btn-primary' %>
+            <span class='ms-3 ps-3 border-start'>
+            <%= render "devise/shared/links" %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

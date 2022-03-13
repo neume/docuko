@@ -10,7 +10,7 @@
         <table class='table table-striped'>
           <thead>
             <tr>
-              <th>Username</th>
+              <th>Name</th>
               <th>Role</th>
               <th>Joined at</th>
               <th>Status</th>
@@ -21,7 +21,7 @@
             <% @members.each do |member| %>
               <tr>
                 <td>
-                  <%= member.user.username %>
+                  <%= member.user.email %>
                 </td>
                 <td id='member-role-<%= member.id %>'>
                   <%= render 'member_role', member: member, office: current_office %>

@@ -1,0 +1,38 @@
+<div class='row justify-content-center'>
+  <div class='col-md-4 mt-md-5 pt-md-5'>
+    <div class="card">
+      <div class="card-header text-center bg-primary text-white pt-4 pb-4">
+        <h4 class='mb-0'> Docuko </h4>
+      </div>
+      <div class="card-body p-4">
+        <div class='text-center'>
+        <h5>Log in</h5>
+        </div>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group mb-2">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          </div>
+
+          <div class="form-group mb-2">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="form-group mb-2">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+
+          <div class="form-group mb-2">
+            <%= f.submit "Log in", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

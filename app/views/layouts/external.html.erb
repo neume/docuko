@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Docuko</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class='min-vh-100'>
+    <div class="container mt-2">
+      <div id='flash_wrapper'>
+        <%= render 'flash' %>
+      </div>
+      <%= yield %>
+      <div id="app-modal" class='modal fade' tabindex="-1">
+      </div>
+    </div>
+  </body>
+</html>

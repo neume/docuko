@@ -9,6 +9,8 @@ RSpec.describe '/offices/:office_slug/templates', type: :request do
     }
   end
 
+  before { sign_in office.users.first }
+
   describe 'GET /show' do
     it 'renders a successful response' do
       template = data_model.templates.create! valid_attributes

@@ -6,7 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.create(username: 'admin', password: 'password')
+user = User.create(email: 'admin@test', password: 'password')
+User.create(email: 'user1@test', password: 'password')
 
 office = Office.create(name: 'My Clinic', slug: 'my-clinic', created_by: user)
 

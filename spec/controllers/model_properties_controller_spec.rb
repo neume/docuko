@@ -7,6 +7,7 @@ RSpec.describe ModelPropertiesController, type: :controller do
   let(:model_property) { create(:model_property, data_model: data_model) }
 
   before do
+    sign_in user
     allow(controller).to receive(:current_office).and_return(office)
   end
 

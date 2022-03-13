@@ -6,6 +6,7 @@ RSpec.describe DocumentsController, type: :controller do
   let(:instance) { InstanceCreator.create(office: office) }
 
   before do
+    sign_in user
     allow(controller).to receive(:current_office).and_return(office)
   end
 

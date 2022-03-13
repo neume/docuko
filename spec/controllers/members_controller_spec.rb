@@ -5,6 +5,7 @@ RSpec.describe MembersController, type: :controller do
   let(:office) { create(:office, created_by: user) }
 
   before do
+    sign_in user
     allow(controller).to receive(:current_office).and_return(office)
   end
 

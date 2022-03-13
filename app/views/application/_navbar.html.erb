@@ -13,6 +13,24 @@
           <%= link_to 'Offices', offices_path, class: 'nav-link' %>
         </li>
       </ul>
+      <form class="d-flex">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.email %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <%# <li> %>
+              <%#   <%= link_to "Profile", edit_user_registration_path, class: 'dropdown-item'  %1> %>
+              <%# </li> %>
+              <li>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'dropdown-item'  %>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </form>
     </div>
   </div>
 </nav>

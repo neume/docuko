@@ -7,7 +7,7 @@
         <%= form_for [current_office, @member] do |f| %>
           <div class="form-group mb-2">
             <%= f.label :user_id, class: 'form-field' %>
-            <%= f.select :user_id, @users.collect { |user| [user.username, user.id]}, { include_blank: true }, class: 'form-control', prompt: 'Search user' %>
+            <%= f.select :user_id, @users.collect { |user| [user.email, user.id]}, { include_blank: true }, class: 'form-control', prompt: 'Search user' %>
           </div>
           <div class="form-group mb-2">
             <%= f.label :member_role, class: 'form-field' %>

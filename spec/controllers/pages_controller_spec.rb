@@ -4,6 +4,8 @@ RSpec.describe PagesController, type: :controller do
   let(:user) { create(:user) }
   let(:office) { create(:office, created_by: user) }
 
+  before { sign_in user }
+
   describe '#dashboard' do
     it 'renders dashboard view' do
       office
