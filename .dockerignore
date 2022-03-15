@@ -1,0 +1,29 @@
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+
+# Ignore uploaded files in development.
+/storage/*
+/public/assets
+.byebug_history
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+coverage
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+.gitlab-ci.yml
+
+# ignore git
+.git
+

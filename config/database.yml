@@ -16,4 +16,7 @@ test:
 
 production:
   <<: *default
+  username: <%= ENV.fetch('DATABASE_USERNAME', '') %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD', '') %>
+  host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
   database: docuko_production

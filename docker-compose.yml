@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:12.9
+    environment:
+      POSTGRES_PASSWORD: changeme
+
+  web:
+    build: .
+    command: rails server
+    environment:
+      SECRET_KEY_BASE: supersecret
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: changeme
+      RAILS_SERVE_STATIC_FILES: 'true'
+      DATABASE_HOST: db
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+
+  migration:
+    build: .
+    command: rails db:prepare
+    environment:
+      SECRET_KEY_BASE: supersecret
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: changeme
+      DATABASE_HOST: db
+    depends_on:
+      - db
+
+
+
+
