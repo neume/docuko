@@ -18,7 +18,6 @@ end
 
 crumb :office do |office|
   link office.name, office_path(office.slug)
-  parent :root
 end
 
 crumb :instances do |data_model|
