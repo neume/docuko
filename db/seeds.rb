@@ -35,7 +35,7 @@ data_model.properties.create(properties)
   CreateInstanceService.create(instance_props, data_model)
 end
 
-30.times do
+10.times do
   user.created_data_models.create(
     name: Faker::IndustrySegments.sector,
     description: Faker::Lorem.paragraph,
