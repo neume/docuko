@@ -6,4 +6,5 @@ class DataModel < ApplicationRecord
   has_many :instances, dependent: :destroy
   has_many :documents, through: :instances
   has_many :templates, dependent: :destroy
+  has_many :instance_properties, through: :instances, source: :properties
 end

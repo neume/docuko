@@ -12,6 +12,11 @@
             <%= link_to office.name, office_path(office.slug), class: 'text-primary' %>
           </h5>
           <div>
+            <%= link_to [:edit, office], class: 'float-end' do %>
+              <i class="fa fa-cog me-1"></i> Config
+            <% end %>
+          </div>
+          <div>
             <small class='text-secondary'><%= office.description %></small>
           </div>
           <div class='row mt-3'>

@@ -1,7 +1,14 @@
 class InstancesController < ApplicationController
   def index
-    @instances = data_model.instances.page(params[:page])
+    if params[:search].present?
+      @matched_properties = data_model.instance_properties.where('lower(instance_properties.value) LIKE ?',
+                                                                 "%#{params[:search].downcase}%")
+      @instances = data_model.instances.where(id: @matched_properties.select('instance_id').distinct).page(params[:page])
+    else
+      @instances = data_model.instances.page(params[:page])
+    end
     @properties = @data_model.properties.where(header_visibility: true)
+    @params = request.query_parameters
   end
 
   def new

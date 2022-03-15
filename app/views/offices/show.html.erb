@@ -1,16 +1,19 @@
 <% breadcrumb :office, current_office %>
 
 <div class="row mb-2">
-  <div class="col-6">
-    <%= current_office.name %>
+  <div class="col-md-7">&nbsp;</div>
+  <div class="col-md-5">
+    <% search_params = @params.merge({
+        slug: current_office.slug
+       })
+    %>
+    <%= form_tag office_path(search_params), method: :get, class: 'float-end' do %>
+      <div class='input-group'>
+        <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', aria: { label: 'Search instance' } %>
+        <%= submit_tag 'Search', class: 'btn btn-sm btn-primary' %>
+      </div>
+    <% end %>
   </div>
-  <% if current_membership.admin? %>
-    <div class="col-6">
-      <%= link_to [:edit, current_office], class: 'float-end btn btn-sm btn-success' do %>
-        <i class="fa fa-cog me-1"></i> Office Settings
-      <% end %>
-    </div>
-  <% end %>
 </div>
 <h5>
 </h5>
@@ -99,3 +102,5 @@
     </div>
   </div>
 <% end %>
+<%= paginate @data_models %>
+<div>
