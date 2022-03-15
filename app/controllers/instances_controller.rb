@@ -1,6 +1,6 @@
 class InstancesController < ApplicationController
   def index
-    @instances = Instance.where(data_model_id: data_model.id)
+    @instances = data_model.instances.page(params[:page])
     @properties = @data_model.properties.where(header_visibility: true)
   end
 

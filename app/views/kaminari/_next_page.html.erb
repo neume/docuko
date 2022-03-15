@@ -1,0 +1,7 @@
+<li class="page-item">
+  <% unless current_page.last? %>
+    <%= link_to url, rel: 'prev', remote: remote, class: 'page-link text-dark' do %>
+      &rsaquo;
+    <% end %>
+  <% end %>
+</li>

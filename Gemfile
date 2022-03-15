@@ -42,6 +42,8 @@ gem 'devise', '~> 4.8', '>= 4.8.1'
 # Lock rubyzip due to warnings in 2.3.1
 gem 'rubyzip', '2.3.0'
 
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -50,6 +52,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'faker'
 end
 
 group :development do

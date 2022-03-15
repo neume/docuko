@@ -25,11 +25,12 @@ properties = [
 data_model.properties.create(properties)
 
 
-instance_props = HashWithIndifferentAccess.new(
-  first_name: 'Juan',
-  middle_name: 'Dimagiba',
-  last_name: 'Dela Cruz',
-  age: 25
-)
-
-CreateInstanceService.create(instance_props, data_model)
+400.times do
+  instance_props = HashWithIndifferentAccess.new(
+    first_name: Faker::Name.first_name,
+    middle_name: Faker::Name.middle_name,
+    last_name: Faker::Name.last_name,
+    age: rand(18..60)
+  )
+  CreateInstanceService.create(instance_props, data_model)
+end
