@@ -5,7 +5,8 @@ class InstancesController < ApplicationController
     if params[:search].present?
       @matched_properties = data_model.instance_properties.where('lower(instance_properties.value) LIKE ?',
                                                                  "%#{params[:search].downcase}%")
-      @instances = data_model.instances.where(id: @matched_properties.select('instance_id').distinct).page(params[:page])
+      @instances = data_model.instances
+                             .where(id: @matched_properties.select('instance_id').distinct).page(params[:page])
     else
       @instances = data_model.instances.page(params[:page])
     end

@@ -50,13 +50,6 @@ class OfficesController < ApplicationController
     end
   end
 
-  def admin
-    @current_office = office
-    @data_models = current_office.data_models
-    authorize_admin!
-    redirect_to [current_office, current_office.data_models.first] if current_office.data_models.count.positive?
-  end
-
   private
 
   def office_params

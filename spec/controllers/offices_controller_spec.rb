@@ -107,23 +107,4 @@ RSpec.describe OfficesController, type: :controller do
       end
     end
   end
-
-  describe '#admin' do
-    context 'with no Data Model' do
-      it 'shows office setup view' do
-        get :admin, params: { slug: office.slug }
-
-        expect(response).to render_template(:admin)
-      end
-    end
-
-    context 'with at least 1 Data Model' do
-      it 'shows office admin' do
-        data_model = create(:data_model, office: office)
-        get :admin, params: { slug: office.slug }
-
-        expect(response).to redirect_to([office, data_model])
-      end
-    end
-  end
 end
