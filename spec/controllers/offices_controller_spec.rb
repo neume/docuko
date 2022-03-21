@@ -25,7 +25,11 @@ RSpec.describe OfficesController, type: :controller do
   before { sign_in user }
 
   describe '#index' do
-    before { get :index }
+    before do
+      office
+      get :index
+    end
+
 
     it { expect(response).to render_template(:index) }
   end
@@ -56,14 +60,6 @@ RSpec.describe OfficesController, type: :controller do
   end
 
   describe '#show' do
-    context 'without data models' do
-      it 'shows office' do
-        get :show, params: { slug: office.slug }
-
-        expect(response).to redirect_to([:new, office, :data_model])
-      end
-    end
-
     context 'with at least 1 data model' do
       it 'redirects to new data model form' do
         create(:data_model, office: office)

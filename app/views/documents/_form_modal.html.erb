@@ -1,24 +1,23 @@
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <%= form_for document, url: [office, instance, :documents], remote: true do |f| %>
-        <div class="modal-header">
-          <h5 class="modal-title">Generate new document</h5>
-
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for document, url: [office, instance, :documents], remote: true do |f| %>
+      <div class="modal-header">
+        <h5 class="modal-title">Generate new document</h5>
+      </div>
+      <div class="modal-body">
+        <div class='form-group'>
+          <%= f.label :template_id, class: 'form-label' %>
+          <%= f.select :template_id, templates.collect { |t| [t.name, t.id] }, {}, class: 'form-control' %>
         </div>
-        <div class="modal-body">
-          <div class='form-group'>
-            <%= f.label :template_id, class: 'form-label' %>
-            <%= f.select :template_id, templates.collect { |t| [t.name, t.id] }, {}, class: 'form-control' %>
-          </div>
-          <div class='form-group'>
-            <%= f.label :name, class: 'form-label' %>
-            <%= f.text_field :name, class: 'form-control', placeholder: 'Optional' %>
-          </div>
+        <div class='form-group'>
+          <%= f.label :name, class: 'form-label' %>
+          <%= f.text_field :name, class: 'form-control', placeholder: 'Optional' %>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <%= f.submit 'Create', class: 'btn btn-primary' %>
-        </div>
-      <% end %>
-    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= f.submit 'Create', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
   </div>
+</div>

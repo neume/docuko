@@ -1,8 +1,18 @@
 <% breadcrumb :new_office %>
-<h5>New Office</h5>
-
-<div class="card mt-2">
-  <div class="card-body">
-    <%= render 'form', office: @office, url: offices_path %>
+<div class="row">
+  <div class="col-md-3">
+    <h4>Create new office</h4>
+  </div>
+  <div class="col-md-9 border-start">
+    <div class='row'>
+      <div class="col-12">
+        <%= render 'breadcrumbs' %>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <div class="card-body">
+        <%= render 'form', office: @office, url: offices_path %>
+      </div>
+    </div>
   </div>
 </div>

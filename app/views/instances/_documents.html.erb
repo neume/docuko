@@ -1,6 +1,16 @@
 <div class="card">
   <div class="card-body">
     <div class="row mb-2">
+    <% if @data_model.templates.count.zero? %>
+      <div class="col-12">
+        <div class='alert alert-warning' %>
+          This Data model does not have any templates.
+          <% if current_membership.admin? %>
+            <%= link_to 'Add template', [:new, current_office, instance.data_model, :template] %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
       <div class="col-sm-5">
         <%= link_to [:new, current_office, instance, :document], class: 'btn btn-info  btn-sm', remote: true do %>
           <i class="fa fa-circle-plus me-1"></i> Generate

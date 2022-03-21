@@ -2,14 +2,12 @@ class InstancesController < ApplicationController
   layout 'office'
 
   def index
-    if params[:search].present?
-      @matched_properties = data_model.instance_properties.where('lower(instance_properties.value) LIKE ?',
-                                                                 "%#{params[:search].downcase}%")
-      @instances = data_model.instances
-                             .where(id: @matched_properties.select('instance_id').distinct).page(params[:page])
-    else
-      @instances = data_model.instances.page(params[:page])
-    end
+    @instances = if params[:search].present?
+                   search_instances
+                 else
+                   data_model.instances.page(params[:page])
+                 end
+    @data_models = current_office.data_models.where.not(id: @data_model.id)
     @properties = @data_model.properties.where(header_visibility: true)
     @params = request.query_parameters
   end
@@ -57,5 +55,11 @@ class InstancesController < ApplicationController
 
   def properties_params
     params.require(:properties).permit(data_model.properties.pluck(:code))
+  end
+
+  def search_instances
+    @matched_properties = data_model.instance_properties.where('lower(instance_properties.value) LIKE ?',
+                                                               "%#{params[:search].downcase}%")
+    data_model.instances.where(id: @matched_properties.select('instance_id').distinct).page(params[:page])
   end
 end

@@ -2,25 +2,34 @@
   <ul class="nav nav-pills flex-column mb-auto">
     <li class='nav-item'>
       <%= link_to [current_office], class: "nav-link link-dark #{ params[:controller] == 'offices' && params[:action] == 'show' ? 'active' : '' }" do %>
-        <i class="fa fa-building  me-2"></i>
+        <i class="fa fa-briefcase me-2"></i>
         Dashboard
       <% end %>
     </li>
-    <li class='nav-item'>
-      <%= link_to [current_office, :data_models], class: "nav-link link-dark #{ params[:controller] == 'data_models' ? 'active' : '' }" do %>
-        <i class="fa fa-shapes me-2"></i> Data Models
-      <% end %>
-    </li>
-    <li class='nav-item'>
-      <%= link_to [current_office, :members], class: "nav-link link-dark #{ params[:controller] == 'members' ? 'active' : '' }" do %>
-        <i class="fa fa-users me-2"></i>
-        Members
-      <% end %>
-    </li>
-    <li class='nav-item'>
-      <%= link_to [:edit, current_office], class: "nav-link link-dark #{ params[:controller] == 'offices' && params[:action] != 'show' ? 'active' : '' }" do %>
-        <i class="fa fa-cog me-2"></i> Office Config
-      <% end %>
-    </li>
+    <% if current_office.data_models.count.positive? %>
+      <li class='nav-item'>
+        <%= link_to [current_office, current_office.data_models.first, :instances], class: "nav-link link-dark #{ params[:controller] == 'instances' ? 'active' : '' }" do %>
+          <i class="fa fa-shapes me-2"></i> Instances
+        <% end %>
+      </li>
+    <% end %>
+    <% if current_membership.admin? %>
+      <li class='nav-item'>
+        <%= link_to [current_office, :data_models], class: "nav-link link-dark #{ params[:controller] == 'data_models' ? 'active' : '' }" do %>
+          <i class="fa fa-shapes me-2"></i> Data Models
+        <% end %>
+      </li>
+      <li class='nav-item'>
+        <%= link_to [current_office, :members], class: "nav-link link-dark #{ params[:controller] == 'members' ? 'active' : '' }" do %>
+          <i class="fa fa-users me-2"></i>
+          Members
+        <% end %>
+      </li>
+      <li class='nav-item'>
+        <%= link_to [:edit, current_office], class: "nav-link link-dark #{ params[:controller] == 'offices' && params[:action] != 'show' ? 'active' : '' }" do %>
+          <i class="fa fa-cog me-2"></i> Office Config
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </div>

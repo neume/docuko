@@ -1,5 +1,15 @@
 <% breadcrumb :new_instance, @data_model %>
 
+<% if @data_model.properties.count.zero? %>
+  <div class="alert alert-warning" role="alert">
+    This Data Model does not have any defined properties.
+    <% if current_membership.admin? %>
+      <%= link_to [current_office, @data_model] do %>
+        Add properties here
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
 <h5>New <%= @data_model.name %> </h5>
 
 <%= render 'form', instance: @instance, data_model: @data_model, url: [@data_model.office, @data_model, :instances], validated: @validated %>

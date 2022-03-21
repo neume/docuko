@@ -1,8 +1,10 @@
+
 <div class='card'>
   <div class='card-body'>
     <%= form_for instance, url: url do |f| %>
       <div class='row'>
         <%= fields_for :properties do |fprop| %>
+          <%= fprop.hidden_field :test %>
           <% instance.properties.each do |prop| %>
             <div class="col-md-6">
               <div class="mb-3">
@@ -27,9 +29,15 @@
         <% end %>
 
         <div class="col-12">
-          <div class="mb-2">
-            <%= f.submit class: 'btn btn-success float-end' %>
+        <% if instance.data_model.properties.count.zero? %>
+          <div class='offset-md-3 col-md-6'>
+           <%= f.submit 'Create Empty Instance', class: 'btn btn-lg btn-success form-control' %>
           </div>
+        <% else %>
+            <div class="mb-2">
+              <%= f.submit class: 'btn btn-success float-end' %>
+            </div>
+        <% end %>
         </div>
       </div>
     <% end %>

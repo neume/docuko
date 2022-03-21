@@ -1,7 +1,11 @@
 class OfficesController < ApplicationController
-  layout 'office'
+  layout 'office', only: [:show, :edit]
+
   def index
     @offices = current_user.offices
+    if @offices.count.zero?
+      render :empty
+    end
   end
 
   def new
@@ -23,14 +27,6 @@ class OfficesController < ApplicationController
     @current_office = office
 
     @data_models = current_office.data_models.page(params[:page])
-    if @data_models.count.zero?
-      return redirect_to [:new, current_office, :data_model], notice: 'Create your first Data Model here'
-    end
-
-    if params[:search].present?
-      @data_models = @data_models.where('lower(name) LIKE ?', "%#{params[:search].downcase}%")
-    end
-    @params = request.query_parameters
   end
 
   def edit
