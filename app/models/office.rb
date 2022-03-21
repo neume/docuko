@@ -6,6 +6,7 @@ class Office < ApplicationRecord
   has_many :instance_properties, through: :instances, source: :properties
   has_many :members, dependent: :destroy
   has_many :users, through: :members
+  has_many :documents, through: :instances
   belongs_to :created_by, class_name: 'User'
 
   validates :slug, format: { with: /\A[a-zA-Z0-9-]+\Z/ }, uniqueness: true
