@@ -13,6 +13,33 @@
       <form class="d-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-primary pb-2" href="#" id="newDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-plus"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="newDropdown">
+              <% if current_office %>
+                <li class='ps-3'>
+                  <small><b>This Office</b></small>
+                  <li>
+                    <%= link_to "New data model", [:new, current_office, :data_model], class: 'dropdown-item'  %>
+                  </li>
+                  <% if current_office.data_models.count.positive? %>
+                    <li>
+                      <%= link_to "New instance", [current_office, current_office.data_models.first, :instances], class: 'dropdown-item'  %>
+                    </li>
+                  <% end %>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+              <% end %>
+              <li class='ps-3'>
+                <small><b>DocuKo</b></small>
+              </li>
+              <li>
+                <%= link_to "New office", [:new, :office], class: 'dropdown-item'  %>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <%= current_user.email %>
             </a>

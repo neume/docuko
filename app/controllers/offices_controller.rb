@@ -27,6 +27,9 @@ class OfficesController < ApplicationController
     @current_office = office
 
     @data_models = current_office.data_models.page(params[:page])
+    if @data_models.count.zero?
+      render :empty
+    end
     @params = request.query_parameters
   end
 

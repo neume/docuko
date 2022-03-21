@@ -22,27 +22,29 @@
       </div>
     </div>
   </div>
-  <div class='col-lg-6 col-md-6 mt-2 mb-2'>
-    <div class="card h-100">
-      <div class='card-body p-5'>
-        <div class="row h-100">
-          <div class='d-flex justify-content-start align-items-center'>
-            <div>
-              <%= link_to [current_office, current_office.data_models.first, :instances], class: 'stretched-link text-primary' do %>
-                <i class="fa-solid fa-cubes h1"></i>
-              <% end %>
-            </div>
-            <div class='ms-5'>
-              <h4>Add New Entry</h4>
-              <p>
-                Create an entry using a Data Model
-              </p>
+  <% if current_office.data_models.count.positive? %>
+    <div class='col-lg-6 col-md-6 mt-2 mb-2'>
+      <div class="card h-100">
+        <div class='card-body p-5'>
+          <div class="row h-100">
+            <div class='d-flex justify-content-start align-items-center'>
+              <div>
+                <%= link_to [current_office, current_office.data_models.first, :instances], class: 'stretched-link text-primary' do %>
+                  <i class="fa-solid fa-cubes h1"></i>
+                <% end %>
+              </div>
+              <div class='ms-5'>
+                <h4>Add New Entry</h4>
+                <p>
+                  Create an entry using a Data Model
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
   <div class='col-lg-6 col-md-6 mt-2 mb-2'>
     <div class="card h-100">
       <div class='card-body p-5'>

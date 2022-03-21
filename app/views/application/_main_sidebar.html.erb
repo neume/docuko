@@ -1,4 +1,8 @@
 <div class="col-md-12 mb-2">
+  <div class='mb-3 text-center'>
+    <h3><%= current_office.name %></h3>
+  </div>
+  <hr/>
   <ul class="nav nav-pills flex-column mb-auto">
     <li class='nav-item'>
       <%= link_to [current_office], class: "nav-link link-dark #{ params[:controller] == 'offices' && params[:action] == 'show' ? 'active' : '' }" do %>
