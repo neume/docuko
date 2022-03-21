@@ -30,7 +30,6 @@ RSpec.describe OfficesController, type: :controller do
       get :index
     end
 
-
     it { expect(response).to render_template(:index) }
   end
 

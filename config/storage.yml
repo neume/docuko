@@ -13,6 +13,21 @@ local:
 #   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
 #   region: us-east-1
 #   bucket: your_own_bucket
+# amazon:
+#   service: S3
+#   endpoint: http://minio:9000
+#   region: us-east-1
+#   bucket: docuko
+
+minio:
+  service: S3
+  access_key_id: <%= ENV.fetch('AWS_ACCESS_KEY_ID', '') %>
+  secret_access_key: <%= ENV.fetch('AWS_SECRET_ACCESS_KEY', '') %>
+  <%# bucket: <%= ENV.fetch('AWS_BUCKET') %1> %>
+  bucket: docuko
+  endpoint: <%= ENV.fetch('AWS_ENDPOINT', '') %>
+  region: us-east-1
+  force_path_style: true
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

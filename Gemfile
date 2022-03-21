@@ -44,6 +44,8 @@ gem 'rubyzip', '2.3.0'
 
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 
+gem 'aws-sdk-s3', '~> 1.113'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
