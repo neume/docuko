@@ -16,8 +16,6 @@ variables:
   RAILS_ENV: 'test'
 
 rspec:
-  tags:
-    - docker-runner
   stage: test
   services:
     - postgres:12.9
@@ -33,8 +31,6 @@ rspec:
     - bundle exec rspec
 
 rubocop:
-  tags:
-    - docker-runner
   stage: test
   script:
     - *rails_setup
