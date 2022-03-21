@@ -1,40 +1,37 @@
 <% breadcrumb :data_model, @data_model, current_office %>
 <%= render 'flash' %>
 
-<div class="row">
-  <%= render 'sidebar'%>
-  <div class="col-md-9">
-    <div class='card mb-3'>
-      <div class='card-body'>
-        <div class=''>
-          <h4 class='text-dark'>
-            <%= @data_model.name %>
-            <%= link_to edit_office_data_model_path(@data_model.id, office_slug: current_office.slug), class: 'text-dark ms-2' do %>
-              <i class="fa fa-pen-to-square"></i>
-            <% end %>
-          </h4>
-          <p class='text-dark'>Created at: <%= @data_model.created_at.strftime('%b %d, %Y') %>
-        </div>
-        <div class='mt-3'>
-          <h6>Description</h6>
-          <p>
-            <%= @data_model.description %>
-          <p>
-        </div>
+<div class="col-md-12">
+  <div class='card mb-3'>
+    <div class='card-body'>
+      <div class=''>
+        <h4 class='text-dark'>
+          <%= @data_model.name %>
+          <%= link_to edit_office_data_model_path(@data_model.id, office_slug: current_office.slug), class: 'text-dark ms-2' do %>
+            <i class="fa fa-pen-to-square"></i>
+          <% end %>
+        </h4>
+        <p class='text-dark'>Created at: <%= @data_model.created_at.strftime('%b %d, %Y') %>
+      </div>
+      <div class='mt-3'>
+        <h6>Description</h6>
+        <p>
+          <%= @data_model.description %>
+        <p>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col-lg-8 mb-2">
-        <h5> Properties </h5>
-        <%= render 'model_properties/index', data_model: @data_model, model_properties: @data_model.properties %>
-      </div>
-      <div class="col-lg-4">
-        <h5 class=''>
-          Templates
-        </h5>
-        <%= render "templates", templates: @templates, office: current_office, data_model: @data_model %>
-      </div>
+  <div class="row">
+    <div class="col-lg-8 mb-2">
+      <h5> Properties </h5>
+      <%= render 'model_properties/index', data_model: @data_model, model_properties: @data_model.properties %>
+    </div>
+    <div class="col-lg-4">
+      <h5 class=''>
+        Templates
+      </h5>
+      <%= render "templates", templates: @templates, office: current_office, data_model: @data_model %>
     </div>
   </div>
 </div>

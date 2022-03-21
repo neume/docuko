@@ -1,4 +1,6 @@
 class InstancesController < ApplicationController
+  layout 'office'
+
   def index
     if params[:search].present?
       @matched_properties = data_model.instance_properties.where('lower(instance_properties.value) LIKE ?',

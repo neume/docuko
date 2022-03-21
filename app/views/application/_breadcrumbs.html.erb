@@ -1,7 +1,7 @@
 <% breadcrumbs(display_single_fragment: true, auto_root: false).tap do |links| %>
   <% if links.any? %>
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb ps-0">
+      <ol class="breadcrumb mb-2 ps-0">
         <% links.each do |link| %>
           <% next if link.key == :root %>
           <% if link.current? %>

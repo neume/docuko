@@ -1,12 +1,9 @@
 <% breadcrumb :edit_office, current_office %>
 
-<div class="row">
-  <%= render 'sidebar'%>
-  <div class="col-9">
-    <div class="card">
-      <div class="card-body">
-        <%= render 'form', office: @office, url: office_url(@office.slug) %>
-      </div>
+<div class="col-12">
+  <div class="card">
+    <div class="card-body">
+      <%= render 'form', office: @office, url: office_url(@office.slug) %>
     </div>
   </div>
 </div>

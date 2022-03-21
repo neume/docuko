@@ -1,4 +1,5 @@
 class OfficesController < ApplicationController
+  layout 'office'
   def index
     @offices = current_user.offices
   end

@@ -1,7 +1,4 @@
 <% breadcrumb :edit_data_model, @data_model, current_office %>
-<div class='row'>
-  <%= render 'sidebar'%>
-  <div class="col-9">
-    <%= render "form", data_model: @data_model, url: office_data_model_path(current_office.slug) %>
-  </div>
+<div class="col-12">
+  <%= render "form", data_model: @data_model, url: office_data_model_path(current_office.slug) %>
 </div>

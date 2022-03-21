@@ -43,29 +43,24 @@ end
 
 # Admin
 
-crumb :office_admin do |office|
-  link 'Settings', admin_office_path(office.slug)
-  parent :office, office
-end
-
 crumb :edit_office do |office|
   link 'Edit'
-  parent :office_admin, office
+  parent :office, office
 end
 
 crumb :data_models do |office|
   link 'Data Models', office_data_models_path(office.slug)
-  parent :office_admin, office
+  parent :office, office
 end
 
 crumb :new_data_model do |office|
   link 'New'
-  parent :office_admin, office
+  parent :data_models, office
 end
 
 crumb :data_model do |data_model, office|
   link data_model.name, [office, data_model]
-  parent :office_admin, office
+  parent :data_models, office
 end
 
 crumb :edit_data_model do |data_model, office|
@@ -103,7 +98,7 @@ end
 
 crumb :members do |office|
   link 'Members', [office, :members]
-  parent :office_admin, office
+  parent :office, office
 end
 
 crumb :new_member do |office|

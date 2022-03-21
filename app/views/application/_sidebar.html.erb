@@ -1,41 +1,31 @@
 <div class="col-md-3 mb-2">
-  <div class="card mb-3">
-    <div class="card-body">
-      <div class="d-flex flex-column flex-shrink-0 pb-0" style="width: 280px;">
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class='nav-item'>
-            <%= link_to [current_office, :members], class: "nav-link link-dark #{ params[:controller] == 'members' ? 'active' : '' }" do %>
-              <i class="fa fa-users me-2"></i>
-              Members
-            <% end %>
-          </li>
-          <li class='nav-item'>
-            <%= link_to [:edit, current_office], class: "nav-link link-dark #{ params[:controller] == 'offices' ? 'active' : '' }" do %>
-              <i class="fa fa-cog me-2"></i> Office Config
-            <% end %>
-          </li>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <div class="d-flex flex-column flex-shrink-0 pb-0" style="width: 280px;">
-        <ul class="nav nav-pills flex-column mb-auto">
-          <% current_office.data_models.each do |data_model| %>
-            <li class='nav-item'>
-              <% if @data_model &&  @data_model.id == data_model.id %>
-                <% active_class = 'active' %>
-              <% end %>
-              <%= link_to [current_office, data_model], class: "nav-link link-dark #{active_class}" do %>
-                <i class="fa fa-circle me-1"></i>
-                <span> <%= data_model.name %></span>
-              <% end %>
-            </li>
-          <% end %>
-          <%= link_to new_office_data_model_path(current_office.slug), class: 'nav-link link-dark' do %>
-            <i class="fa fa-circle-plus me-1"></i> New Data Model
-          <% end %>
-      </div>
-    </div>
-  </div>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class='nav-item'>
+      <%= link_to [current_office, :members], class: "nav-link link-dark #{ params[:controller] == 'members' ? 'active' : '' }" do %>
+        <i class="fa fa-users me-2"></i>
+        Members
+      <% end %>
+    </li>
+    <li class='nav-item'>
+      <%= link_to [:edit, current_office], class: "nav-link link-dark #{ params[:controller] == 'offices' ? 'active' : '' }" do %>
+        <i class="fa fa-cog me-2"></i> Office Config
+      <% end %>
+    </li>
+  </ul>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <% current_office.data_models.each do |data_model| %>
+      <li class='nav-item'>
+        <% if @data_model &&  @data_model.id == data_model.id %>
+          <% active_class = 'active' %>
+        <% end %>
+        <%= link_to [current_office, data_model], class: "nav-link link-dark #{active_class}" do %>
+          <i class="fa fa-circle me-1"></i>
+          <span> <%= data_model.name %></span>
+        <% end %>
+      </li>
+    <% end %>
+    <%= link_to new_office_data_model_path(current_office.slug), class: 'nav-link link-dark' do %>
+      <i class="fa fa-circle-plus me-1"></i> New Data Model
+    <% end %>
+  </ul>
 </div>
