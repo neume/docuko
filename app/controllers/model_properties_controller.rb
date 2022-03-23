@@ -1,20 +1,31 @@
 class ModelPropertiesController < ApplicationController
   before_action :authorize_admin!
 
+  layout 'office'
+
   def index
     redirect_back fallback_location: [current_office, data_model]
   end
 
   def new
     @model_property = data_model.properties.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
     @model_property = data_model.properties.new property_params
-    if model_property.save
-      redirect_to [current_office, data_model], notice: 'Property created'
-    else
-      render :new
+    respond_to do |format|
+      format.html do
+        if model_property.save
+          redirect_to [current_office, data_model], notice: 'Property created'
+        else
+          render :new
+        end
+      end
+      format.js { model_property.save }
     end
   end
 
@@ -43,6 +54,7 @@ class ModelPropertiesController < ApplicationController
   end
 
   def property_params
-    params.require(:model_property).permit(:name, :required, :code, :header_visibility, :description, :position)
+    params.require(:model_property).permit(:name, :required, :code, :header_visibility, :description, :position,
+                                           :default_value)
   end
 end

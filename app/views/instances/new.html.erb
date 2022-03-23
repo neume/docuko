@@ -4,7 +4,7 @@
   <div class="alert alert-warning" role="alert">
     This Data Model does not have any defined properties.
     <% if current_membership.admin? %>
-      <%= link_to [current_office, @data_model] do %>
+      <%= link_to [:new, current_office, @data_model, :model_property], remote: true do %>
         Add properties here
       <% end %>
     <% end %>
@@ -12,4 +12,6 @@
 <% end %>
 <h5>New <%= @data_model.name %> </h5>
 
-<%= render 'form', instance: @instance, data_model: @data_model, url: [@data_model.office, @data_model, :instances], validated: @validated %>
+<div id='new-instance-form'>
+  <%= render 'form', instance: @instance, data_model: @data_model, url: [@data_model.office, @data_model, :instances], validated: @validated %>
+</div>

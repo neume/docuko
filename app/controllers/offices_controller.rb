@@ -24,6 +24,11 @@ class OfficesController < ApplicationController
   end
 
   def show
+    if current_office.data_models.count.positive?
+      redirect_to [current_office, office.data_models.first, :instances]
+    else
+      redirect_to [:new, current_office, :data_model]
+    end
   end
   # def show
   #   @current_office = office

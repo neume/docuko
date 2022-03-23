@@ -68,6 +68,11 @@ crumb :edit_data_model do |data_model, office|
   parent :data_model, data_model, office
 end
 
+crumb :new_model_property do |model_property, office|
+  link 'new', [:new, office, model_property.data_model, :model_property]
+  parent :data_model, model_property.data_model, office
+end
+
 crumb :edit_model_property do |model_property, office|
   link model_property.name, edit_office_model_property_path(model_property.id, office_slug: office.slug)
   parent :data_model, model_property.data_model, office

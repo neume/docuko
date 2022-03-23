@@ -61,12 +61,12 @@ RSpec.describe OfficesController, type: :controller do
   describe '#show' do
     context 'with at least 1 data model' do
       it 'redirects to new data model form' do
-        create(:data_model, office: office)
+        data_model = create(:data_model, office: office)
 
         get :show, params: { slug: office.slug }
 
         expect(office.data_models.count).to eq(1)
-        expect(response).to render_template(:show)
+        expect(response).to redirect_to([office, data_model, :instances])
       end
     end
   end

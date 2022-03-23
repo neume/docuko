@@ -1,6 +1,8 @@
 <% breadcrumb :edit_model_property, @model_property, current_office %>
 <h5> Edit model property </h5>
 
-<div>
-  <%= render "form", model_property: @model_property, url: office_model_property_path(@model_property.id, office_slug: current_office.slug) %>
+<div class='card'>
+  <div class='card-body'>
+  <%= render "form", model_property: @model_property, url: office_model_property_path(@model_property.id, office_slug: current_office.slug), remote: false %>
+  </div>
 </div>

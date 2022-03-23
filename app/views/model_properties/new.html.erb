@@ -1,4 +1,9 @@
+<% breadcrumb :new_model_property, @model_property, current_office %>
 <h1> Create new <%= @data_model.name %>'s Property </h1>
 
-<%= render "form", model_property: @model_property, url: [current_office, @data_model, :model_properties]%>
+<div class='card'>
+  <div class='card-body'>
+    <%= render "form", model_property: @model_property, url: [current_office, @data_model, :model_properties], remote: false%>
+  </div>
+</div>
 

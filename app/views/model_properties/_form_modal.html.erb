@@ -1,0 +1,12 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for model_property, url: url, remote: remote  do |f| %>
+      <div class="modal-header">
+        <h5 class='modal-title'> Create new <%= @data_model.name %>'s Property </h5>
+      </div>
+      <div class="modal-body">
+        <%= render "form_fields", f: f %>
+      </div>
+    <% end %>
+  </div>
+</div>
