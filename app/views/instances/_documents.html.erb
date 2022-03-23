@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-body">
     <div class="row mb-2">
+    <% disabled_class = ''%>
     <% if @data_model.templates.count.zero? %>
+      <% disabled_class = 'disabled' %>
       <div class="col-12">
         <div class='alert alert-warning' %>
           This Data model does not have any document templates.
@@ -12,7 +14,9 @@
       </div>
     <% end %>
       <div class="col-sm-5">
-        <%= link_to [:new, current_office, instance, :document], class: 'btn btn-info  btn-sm', remote: true do %>
+        <%= link_to [:new, current_office, instance, :document],
+          class: "btn btn-info btn-sm #{disabled_class}",
+          remote: true do %>
           <i class="fa fa-circle-plus me-1"></i> Generate
         <% end %>
       </div>

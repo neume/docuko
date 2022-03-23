@@ -37,7 +37,7 @@
               <li class='ps-3'>
                 <small><b>This Office</b></small>
                 <li>
-                  <%= link_to "New data model", [:new, current_office, :data_model], class: 'dropdown-item'  %>
+                  <%= link_to "New template", [:new, current_office, :data_model], class: 'dropdown-item'  %>
                 </li>
                 <% if current_office.data_models.count.positive? %>
                   <li>
