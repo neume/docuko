@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name, class: 'form-field' %>
-    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.label :name, 'Office name', class: 'form-field' %>
+    <%= f.text_field :name, class: 'form-control', 'data-slug-target': 'name', 'data-action': 'keyup->slug#updateSlug' %>
   </div>
   <div class="form-group mb-3">
-    <%= f.label :slug, class: 'form-field' %>
-    <%= f.text_field :slug, class: 'form-control' %>
+    <%= f.label :slug, 'Office slug', class: 'form-field' %>
+    <%= f.text_field :slug, class: 'form-control', 'data-slug-target': 'slug' %>
   </div>
 
   <div class="actions">

@@ -9,6 +9,10 @@ class TemplatesController < ApplicationController
   # GET /templates/new
   def new
     @template = data_model.templates.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /templates/1/edit
@@ -21,10 +25,10 @@ class TemplatesController < ApplicationController
     respond_to do |format|
       if @template.save
         format.html { redirect_to [current_office, data_model], notice: 'Template was successfully created.' }
-        format.json { render :show, status: :created, location: @template }
+        format.js { flash[:notice] = 'Template was successfully created' }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

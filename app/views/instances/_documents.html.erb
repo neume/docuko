@@ -4,9 +4,9 @@
     <% if @data_model.templates.count.zero? %>
       <div class="col-12">
         <div class='alert alert-warning' %>
-          This Data model does not have any templates.
+          This Data model does not have any document templates.
           <% if current_membership.admin? %>
-            <%= link_to 'Add template', [:new, current_office, instance.data_model, :template] %>
+            <%= link_to 'Add document template', [:new, current_office, instance.data_model, :template], remote: true %>
           <% end %>
         </div>
       </div>
