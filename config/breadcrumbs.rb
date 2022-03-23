@@ -20,9 +20,14 @@ crumb :office do |office|
   link office.name, office_path(office.slug)
 end
 
+crumb :entries do |data_model|
+  link 'Entries', office_data_model_instances_path(data_model.id, office_slug: data_model.office.slug)
+  parent :office, data_model.office
+end
+
 crumb :instances do |data_model|
   link data_model.name, office_data_model_instances_path(data_model.id, office_slug: data_model.office.slug)
-  parent :office, data_model.office
+  parent :entries, data_model
 end
 
 crumb :edit_instance do |instance|
@@ -44,7 +49,7 @@ end
 # Admin
 
 crumb :edit_office do |office|
-  link 'Edit'
+  link 'Office Config'
   parent :office, office
 end
 

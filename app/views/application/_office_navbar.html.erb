@@ -1,84 +1,83 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand navbar-dark bg-primary">
   <div class="container">
     <a class="navbar-brand" href="#">DocuKo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-lg-0">
     <% if current_office.data_models.count.positive? %>
       <li class='nav-item'>
         <%= link_to [current_office, current_office.data_models.first, :instances], class: "nav-link link-dark #{ params[:controller] == 'instances' ? 'active' : '' }" do %>
-          <i class="fa fa-shapes me-2"></i> Records
+          <i class="fa fa-shapes me-2"></i> <span class='d-none d-lg-inline-block'>Records</span>
         <% end %>
       </li>
     <% end %>
     <% if current_membership.admin? %>
       <li class='nav-item'>
         <%= link_to [current_office, :data_models], class: "nav-link link-dark #{ params[:controller] == 'data_models' ? 'active' : '' }" do %>
-          <i class="fa fa-shapes me-2"></i> Templates
+          <i class="fa fa-file me-2"></i>
+          <span class='d-none d-lg-inline-block'> Templates </span>
         <% end %>
       </li>
       <li class='nav-item'>
         <%= link_to [current_office, :members], class: "nav-link link-dark #{ params[:controller] == 'members' ? 'active' : '' }" do %>
           <i class="fa fa-users me-2"></i>
-          Members
+          <span class='d-none d-lg-inline-block'>Members </span>
         <% end %>
       </li>
       <li class='nav-item'>
         <%= link_to [:edit, current_office], class: "nav-link link-dark #{ params[:controller] == 'offices' && params[:action] != 'show' ? 'active' : '' }" do %>
-          <i class="fa fa-cog me-2"></i> Office Config
+          <i class="fa fa-cog me-2"></i> <span class='d-none d-lg-inline-block'>Office Config </span>
         <% end %>
       </li>
     <% end %>
       </ul>
-      <form class="d-flex">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle btn btn-primary pb-2" href="#" id="newDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-plus"></i>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="newDropdown">
-              <% if current_office %>
-                <li class='ps-3'>
-                  <small><b>This Office</b></small>
-                  <li>
-                    <%= link_to "New data model", [:new, current_office, :data_model], class: 'dropdown-item'  %>
-                  </li>
-                  <% if current_office.data_models.count.positive? %>
-                    <li>
-                      <%= link_to "New Entry", [current_office, current_office.data_models.first, :instances], class: 'dropdown-item'  %>
-                    </li>
-                  <% end %>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-              <% end %>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="newDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-plus"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="newDropdown" id='newDropdown'>
+            <% if current_office %>
               <li class='ps-3'>
-                <small><b>DocuKo</b></small>
+                <small><b>This Office</b></small>
+                <li>
+                  <%= link_to "New data model", [:new, current_office, :data_model], class: 'dropdown-item'  %>
+                </li>
+                <% if current_office.data_models.count.positive? %>
+                  <li>
+                    <%= link_to "New Entry", [current_office, current_office.data_models.first, :instances], class: 'dropdown-item'  %>
+                  </li>
+                <% end %>
               </li>
-              <li>
-                <%= link_to "New office", [:new, :office], class: 'dropdown-item'  %>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= current_user.email %>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-              <%# <li> %>
-              <%#   <%= link_to "Profile", edit_user_registration_path, class: 'dropdown-item'  %1> %>
-              <%# </li> %>
-              <li>
-                <%= link_to 'Offices', offices_path, class: 'dropdown-item' %>
-              </li>
-              <li>
-                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'dropdown-item'  %>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </form>
+              <li><hr class="dropdown-divider"></li>
+            <% end %>
+            <li class='ps-3'>
+              <small><b>DocuKo</b></small>
+            </li>
+            <li>
+              <%= link_to "New office", [:new, :office], class: 'dropdown-item'  %>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= current_user.email %>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+            <%# <li> %>
+            <%#   <%= link_to "Profile", edit_user_registration_path, class: 'dropdown-item'  %1> %>
+            <%# </li> %>
+            <li>
+              <%= link_to 'Offices', offices_path, class: 'dropdown-item' %>
+            </li>
+            <li>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'dropdown-item'  %>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
