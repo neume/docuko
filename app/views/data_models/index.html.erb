@@ -25,30 +25,24 @@
         <thead>
           <tr>
             <th>Model</th>
-            <th>Instances</th>
-            <th>Documents</th>
-            <th>Actions</th>
+            <th>Fields</th>
+            <th>Templates</th>
           </tr>
         </thead>
         <tbody>
           <% @data_models.all.each do |model| %>
-            <tr>
+            <tr data-controller='data-models'
+                data-data-models-slug-value='<%= current_office.slug %>'
+                data-data-models-data-model-id-value='<%= model.id %>'
+                data-action='click->data-models#show'>
               <td>
-                <%= link_to model.name, [current_office, model], class: '' %>
+                <%= link_to model.name, [:edit, current_office, model] %>
               </td>
               <td>
-                <%= model.instances.count %>
+                <%= model.properties.count %>
               </td>
               <td>
-                <%= model.documents.count %>
-              </td>
-              <td>
-                <%= link_to new_office_data_model_instance_path(model.id, office_slug: current_office.slug), class: 'float-end me-2' do %>
-                  <i class="fa fa-circle-plus me-1"></i>
-                <% end %>
-                <%= link_to [current_office, model], class: 'float-end me-2' do %>
-                  <i class="fa fa-cog me-1"></i>
-                <% end %>
+                <%= model.templates.count %>
               </td>
             </tr>
           <% end %>
