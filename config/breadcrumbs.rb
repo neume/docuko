@@ -49,7 +49,7 @@ crumb :edit_office do |office|
 end
 
 crumb :data_models do |office|
-  link 'Data Models', office_data_models_path(office.slug)
+  link 'Templates', office_data_models_path(office.slug)
   parent :office, office
 end
 

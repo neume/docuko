@@ -11,24 +11,17 @@
   </head>
 
   <body class='min-vh-100'>
-    <%= render 'navbar' %>
+    <%= render 'office_navbar' %>
     <div class="container mt-2">
 
       <div id='flash_wrapper'>
         <%= render 'flash' %>
       </div>
       <div class="row">
-        <div class="col-md-3">
-          <%= render 'main_sidebar' %>
+        <div class="col-12">
+          <%= render 'breadcrumbs' %>
         </div>
-        <div class="col-md-9 border-start">
-          <div class='row'>
-            <div class="col-12">
-              <%= render 'breadcrumbs' %>
-            </div>
-          </div>
-          <%= yield %>
-        </div>
+        <%= yield %>
       </div>
       <div id="app-modal" class='modal fade' tabindex="-1">
       </div>

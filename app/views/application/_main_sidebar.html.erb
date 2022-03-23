@@ -13,14 +13,14 @@
     <% if current_office.data_models.count.positive? %>
       <li class='nav-item'>
         <%= link_to [current_office, current_office.data_models.first, :instances], class: "nav-link link-dark #{ params[:controller] == 'instances' ? 'active' : '' }" do %>
-          <i class="fa fa-shapes me-2"></i> Instances
+          <i class="fa fa-shapes me-2"></i> Records
         <% end %>
       </li>
     <% end %>
     <% if current_membership.admin? %>
       <li class='nav-item'>
         <%= link_to [current_office, :data_models], class: "nav-link link-dark #{ params[:controller] == 'data_models' ? 'active' : '' }" do %>
-          <i class="fa fa-shapes me-2"></i> Data Models
+          <i class="fa fa-shapes me-2"></i> Templates
         <% end %>
       </li>
       <li class='nav-item'>

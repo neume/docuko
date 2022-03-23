@@ -17,21 +17,24 @@ class OfficesController < ApplicationController
     @office.members.build(user: current_user, member_role: :admin)
 
     if @office.save
-      redirect_to [:edit, @office], notice: 'Office was successfully created.'
+      redirect_to [@office, :data_models], notice: 'Office was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @current_office = office
-
-    @data_models = current_office.data_models.page(params[:page])
-    if @data_models.count.zero?
-      render :empty
-    end
-    @params = request.query_parameters
   end
+  # def show
+  #   @current_office = office
+  #   @instances = current_office.instances.order('instances.created_at DESC').page(params[:page])
+
+  #   @data_models = current_office.data_models.page(params[:page])
+  #   if @data_models.count.zero?
+  #     render :empty
+  #   end
+  #   @params = request.query_parameters
+  # end
 
   def edit
     @current_office = office

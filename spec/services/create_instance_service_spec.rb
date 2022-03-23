@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CreateInstanceService do
+  let(:user) { create(:user) }
   let(:data_model) do
     data_model = create(:data_model)
 
@@ -19,7 +20,7 @@ RSpec.describe CreateInstanceService do
       last_name: 'Dela Cruz'
     )
 
-    instance = described_class.create(instance_params, data_model)
+    instance = described_class.create(instance_params, data_model, user)
 
     expect(instance).to be_persisted
     expect(instance.properties.pluck(:value)).to eq(['Juan', 'Dela Cruz'])

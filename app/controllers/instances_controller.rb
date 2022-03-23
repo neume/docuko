@@ -24,7 +24,7 @@ class InstancesController < ApplicationController
       data_model_id: data_model.id
     )
 
-    @instance = CreateInstanceService.create(data, data_model)
+    @instance = CreateInstanceService.create(data, data_model, current_user)
 
     if @instance.persisted?
       redirect_to [current_office, @instance],

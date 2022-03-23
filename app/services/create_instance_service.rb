@@ -1,6 +1,6 @@
 module CreateInstanceService
-  def self.create(data, data_model)
-    instance = Instance.new data_model_name: data_model.name, data_model_id: data_model.id
+  def self.create(data, data_model, user)
+    instance = Instance.new data_model_name: data_model.name, data_model_id: data_model.id, created_by: user
 
     build_properties instance, data_model, data
     validate_properties instance

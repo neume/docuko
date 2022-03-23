@@ -32,7 +32,7 @@ data_model.properties.create(properties)
     last_name: Faker::Name.last_name,
     age: rand(18..60)
   )
-  CreateInstanceService.create(instance_props, data_model)
+  CreateInstanceService.create(instance_props, data_model, user)
 end
 
 10.times do

@@ -1,53 +1,44 @@
-<% breadcrumb :office, current_office %>
-<div class="col-md-12">
-  <div class="card">
-    <div class="card-body">
-      <div class="row mb-2">
-        <div class="col-md-7">&nbsp;</div>
-        <div class="col-md-5">
-          <% search_params = @params.merge({
-              slug: current_office.slug
-             })
-          %>
-          <%= form_tag office_path(search_params), method: :get, class: 'float-end' do %>
-            <div class='input-group'>
-              <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', aria: { label: 'Search instance' } %>
-              <%= submit_tag 'Search', class: 'btn btn-sm btn-primary' %>
+  <div class='col-12 p-1'>
+    <%= link_to 'New Entry', '', class: 'btn btn-primary float-end' %>
+  </div>
+  <% @instances.each do |instance| %>
+    <div class="col-12 p-1">
+      <div class="card pt-2 ps-3 pb-2 pe-3">
+        <div class='d-flex justify-content-between'>
+          <span class=text-dark style='font-size: .8rem;'>
+            <b>
+              <%= link_to  [current_office, instance], class: 'stretched-link text-success no-decoration' do %>
+                <%= instance.data_model.name %> #<%=instance.id %>
+              <% end %>
+
+            </b>
+            <span>
+              @<%= instance.created_by.username %>
+            </span>
+            <span>·</span>
+            <span class='text-dark'>
+              <small><%= shorten_relative_time(instance.created_at) %></small>
+            </span>
+          </span>
+          <span class='text-success'>
+            <% count = instance.documents.order('documents.position DESC').count %>
+            <span class='badge bg-info rounded-pill'>
+              <%= pluralize(count, 'document') %>
+            </span>
+          </span>
+        </div>
+        <div class='row'>
+          <% instance.properties.each do |prop| %>
+            <div class='col-6 col-md-12 text-truncate'>
+              <span>
+                <b class='text-dark'><%= prop.name %>:</b>
+              </span>
+              <span class=''>
+                <%= prop.value %>
+              </span>
             </div>
           <% end %>
         </div>
       </div>
-      <table class='table table-striped table-borderless table-hover'>
-        <thead>
-          <tr>
-            <th>Model</th>
-            <th>Instances</th>
-            <th>Documents</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @data_models.all.each do |model| %>
-            <tr>
-              <td>
-                <%= link_to model.name, office_data_model_instances_path(data_model_id: model.id, office_slug: current_office.slug), class: '' %>
-              </td>
-              <td>
-                <%= model.instances.count %>
-              </td>
-              <td>
-                <%= model.documents.count %>
-              </td>
-              <td>
-                <%= link_to new_office_data_model_instance_path(model.id, office_slug: current_office.slug), class: 'float-end me-2' do %>
-                <i class="fa fa-circle-plus me-1"></i>
-              <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= paginate @data_models %>
     </div>
-  </div>
-</div>
+  <% end %>
