@@ -1,0 +1,11 @@
+<% options = {
+  url: [current_office, :members],
+  member: @member
+} %>
+
+modal_div = document.getElementById('app-modal')
+
+modal_div.innerHTML = "<%= j render 'form_modal', options%>"
+var app_modal = new bootstrap.Modal(document.getElementById('app-modal'))
+
+app_modal.show()

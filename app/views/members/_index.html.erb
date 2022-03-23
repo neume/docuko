@@ -1,8 +1,7 @@
-<% breadcrumb :members, current_office %>
 <div class="col-12">
   <div class="card">
     <div class="card-body">
-      <%= link_to [:new, current_office, :member], class: 'btn btn-info btn-sm' do %>
+      <%= link_to [:new, current_office, :member], remote: true, class: 'btn btn-info btn-sm' do %>
         <i class="fa fa-circle-plus me-1"></i> Add
       <% end %>
       <table class='table table-striped'>
@@ -16,16 +15,16 @@
           </tr>
         </thead>
         <tbody>
-          <% @members.each do |member| %>
+          <% members.each do |member| %>
             <tr>
               <td>
                 <%= member.user.email %>
               </td>
               <td id='member-role-<%= member.id %>'>
-                <%= render 'member_role', member: member, office: current_office %>
+                <%= render 'members/member_role', member: member, office: current_office %>
               </td>
               <td>
-                <%= member.created_at.strftime('%b %D, %Y')%>
+                <%= member.created_at.strftime('%b %d, %Y')%>
               </td>
               <td>
                 <%= member.member_status.capitalize %>

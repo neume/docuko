@@ -1,0 +1,14 @@
+<div class="form-group mb-2">
+  <%= f.label :user_id, class: 'form-field' %>
+  <%= f.select :user_id, @users.collect { |user| [user.email, user.id]}, { include_blank: true }, class: 'form-control', prompt: 'Search user' %>
+</div>
+<div class="form-group mb-2">
+  <%= f.label :member_role, class: 'form-field' %>
+  <%= f.select :member_role,
+    options_for_select(
+      Member.member_roles.collect { |role| [role[0].capitalize, role[0]]},
+      @member.member_role
+    ),
+    {},
+    class: 'form-control' %>
+</div>

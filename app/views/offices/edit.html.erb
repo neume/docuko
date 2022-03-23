@@ -1,10 +1,13 @@
 <% breadcrumb :edit_office, current_office %>
 
-<div class="col-12">
+<div class="col-12 mb-2">
   <div class="card">
     <div class="card-body">
       <%= render 'form', office: @office, url: office_url(@office.slug) %>
     </div>
   </div>
 </div>
+
+<h5> Members </h5>
+<%= render 'members/index', members: @office.members %>
 

@@ -11,16 +11,23 @@ class MembersController < ApplicationController
   def new
     @member = current_office.members.new member_role: :regular
     @users = User.all.where.not(id: current_office.members.pluck(:user_id))
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
     @member = current_office.members.new member_params
 
-    if @member.save
-      redirect_to [current_office, :members], notice: 'Member added'
-    else
-      @users = User.all.where.not(id: current_office.members.pluck(:user_id))
-      render :new
+    respond_to do |format|
+      format.js do
+        if @member.save
+          redirect_to [:edit, current_office], notice: 'Member added'
+        else
+          @users = User.all.where.not(id: current_office.members.pluck(:user_id))
+          render :new
+        end
+      end
     end
   end
 

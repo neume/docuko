@@ -1,0 +1,15 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for member, url: url, remote: true do |f| %>
+      <div class="modal-header">
+        <h5 class='modal-title'> Add new member</h5>
+      </div>
+      <div class="modal-body">
+        <%= render "form_fields", f: f %>
+        <div class="actions">
+          <%= f.submit 'Add', class: 'btn btn-success btn-sm' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
