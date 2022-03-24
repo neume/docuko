@@ -1,10 +1,12 @@
 class OfficesController < ApplicationController
-  layout 'office', only: [:show, :edit]
+  layout 'office'
 
   def index
-    @offices = current_user.offices
-    if @offices.count.zero?
-      render :empty
+    @memberships = current_user.members.includes(:office).order("offices.#{sort_column} #{sort_direction}")
+    return render :empty if @memberships.count.zero?
+
+    if params[:search]
+      @memberships  = @memberships.where('lower(offices.name) LIKE ?', "%#{params[:search].downcase}%")
     end
   end
 
@@ -66,5 +68,14 @@ class OfficesController < ApplicationController
 
   def office
     @office ||= current_user.created_offices.find_by(slug: params[:slug])
+  end
+
+  def sort_column
+    return params[:sort] if ['name', 'slug'].include? params[:sort]
+    'name'
+  end
+
+  def sort_direction
+    params[:direction] == 'desc' ? 'DESC' : 'ASC'
   end
 end

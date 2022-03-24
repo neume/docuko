@@ -1,31 +1,69 @@
-<% breadcrumb :offices %>
-<div class='col-12 mb-2'>
-  <%= link_to [:new, :office], class: 'btn btn-info btn-sm' do %>
-    <i class="fa fa-circle-plus me-1"></i> New Office
-  <% end %>
+<div class='d-flex align-items-center'>
+  <h3>Offices</h3>
+  <div class='page-control ms-auto my-3'>
+    <%= link_to [:new, :office], class: 'btn btn-info btn-sm' do %>
+      <i class="fa fa-circle-plus me-1"></i> New Office
+    <% end %>
+  </div>
 </div>
-<% @offices.each do |office| %>
+<% search_params = {}  %>
+<%= form_tag offices_path(search_params), method: :get do %>
+  <div class="row">
+    <hr/>
+    <div class="col-md-3 offset-md-7 pe-md-0">
+      <div class='input-group mb-2'>
+        <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search by office name', aria: { label: 'Search instance' } %>
+      </div>
+    </div>
+    <div class="col-md-2 mb-2">
+      <div class="dropdown">
+        <div class="btn btn border bg-white form-control dropdown-toggle caret-end" href="#" role="button" id="sortOfficeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class='float-start'>
+            <%= find_sort_item_by_code(params[:sort])[:name] %>
+          </span>
+        </div>
+
+        <ul class="dropdown-menu form-control" aria-labelledby="sortOfficeDropdown">
+          <% office_sort_options.each do |item| %>
+            <% active_option = item[:code] == params[:sort] ? 'active' : '' %>
+            <% case item[:type] %>
+            <% when :label %>
+              <label class='ps-3 fw-bold'>
+                <%= item[:name] %>
+              </label>
+            <% when :option%>
+              <li>
+                <%= link_to item[:name], offices_path(search_params.merge(sort: item[:code])), class: "dropdown-item ps-5 #{active_option}" %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% @memberships.each do |membership| %>
+  <% office = membership.office %>
   <div class="col-md-6 mb-2">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">
-          <%= link_to office.name, office_path(office.slug), class: 'text-primary' %>
-        </h5>
-        <div>
-          <%= link_to [:edit, office], class: 'float-end' do %>
-            <i class="fa fa-cog me-1"></i> Config
-          <% end %>
-        </div>
+        <span class="card-title h5">
+          <%= link_to office.name, office_path(office.slug), class: 'text-primary no-decoration stretched-link' %>
+        </span>
+        <span class='badge bg-white border text-dark rounded-pill'>
+          <%= membership.member_role %>
+        </span>
         <div>
           <small class='text-secondary'><%= office.description %></small>
         </div>
         <div class='row mt-3'>
           <div class='col-12 text-muted'>
-            <span class='me-1 pr-2'>
-              <span> <i class="fa fa-file me-2"></i><b><%= office.templates.count %></b></span> Templates
+            <span class='me-2'>
+              <span> <i class="fa fa-shapes me-2"></i><b><%= office.data_models.count %></b></span> Templates
             </span>
-            <span class='ml-1'>
-              <span> <i class="fa fa-file-word me-2"></i><b>29</b></span> Documents
+            <span class='me-2'>
+              <span> <i class="fa fa-users me-2"></i><b><%= office.users.count %></b></span> Users
             </span>
           </div>
         </div>
@@ -34,3 +72,9 @@
   </div>
 <% end %>
 
+<style type="text/css" media="all">
+.caret-end:before, .caret-end:after {
+  float: right;
+  margin-top: 10px;
+}
+</style>

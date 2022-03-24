@@ -10,14 +10,8 @@ RSpec.describe MembersController, type: :controller do
     allow(controller).to receive(:current_office).and_return(office)
   end
 
-  describe '#index' do
-    before { get :index, params: slug }
-
-    it { expect(response).to render_template(:index) }
-  end
-
   describe '#new' do
-    before { get :new, params: slug }
+    before { get :new, params: slug, xhr: true, format: :js }
 
     it { expect(response).to render_template(:new) }
   end
@@ -34,7 +28,7 @@ RSpec.describe MembersController, type: :controller do
     end
 
     it 'adds new member' do
-      post :create, params: slug(valid_params)
+      post :create, params: slug(valid_params), xhr: true, format: :js
       expect(office.members.count).to eq(1) # the original user was not a member
     end
   end

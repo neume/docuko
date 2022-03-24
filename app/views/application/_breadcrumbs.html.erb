@@ -1,20 +1,22 @@
-<% breadcrumbs(display_single_fragment: true, auto_root: false).tap do |links| %>
+<% breadcrumbs(display_single_fragment: true, autoroot: false).tap do |links| %>
   <% if links.any? %>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb mb-2 ps-0">
-        <% links.each do |link| %>
-          <% next if link.key == :root %>
-          <% if link.current? %>
-            <li class="breadcrumb-item active" aria-current='page'>
-              <%= link.text %>
-            </li>
-          <% else %>
-            <li class="breadcrumb-item">
-              <%= link_to link.text, link.url, class: 'no-decoration' %>
-            </li>
+    <div class="col-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb ps-0">
+          <% links.each do |link| %>
+            <% next if link.key == :root %>
+            <% if link.current? %>
+              <li class="breadcrumb-item active" aria-current='page'>
+                <%= link.text %>
+              </li>
+            <% else %>
+              <li class="breadcrumb-item">
+                <%= link_to link.text, link.url, class: 'no-decoration' %>
+              </li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ol>
-    </nav>
+        </ol>
+      </nav>
+    </div>
   <% end %>
 <% end %>

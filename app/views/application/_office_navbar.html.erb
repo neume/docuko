@@ -6,14 +6,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-lg-0">
-    <% if current_office.data_models.count.positive? %>
+    <% if current_office && current_office.data_models.count.positive? %>
       <li class='nav-item'>
         <%= link_to [current_office, current_office.data_models.first, :instances], class: "nav-link link-dark #{ params[:controller] == 'instances' ? 'active' : '' }" do %>
           <i class="fa fa-shapes me-2"></i> <span class='d-none d-lg-inline-block'>Records</span>
         <% end %>
       </li>
     <% end %>
-    <% if current_membership.admin? %>
+    <% if current_office && current_membership.admin? %>
       <li class='nav-item'>
         <%= link_to [current_office, :data_models], class: "nav-link link-dark #{ params[:controller] == 'data_models' ? 'active' : '' }" do %>
           <i class="fa fa-file me-2"></i>

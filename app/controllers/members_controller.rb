@@ -3,10 +3,6 @@ class MembersController < ApplicationController
 
   layout 'office'
 
-  def index
-    @members = current_office.members
-  end
-
   # TODO: use proper searching on select tag
   def new
     @member = current_office.members.new member_role: :regular
