@@ -27,3 +27,5 @@ coverage
 # ignore git
 .git
 
+# ignore volumes folder
+/volumes/*

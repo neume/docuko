@@ -5,32 +5,35 @@ services:
     image: postgres:12.9
     environment:
       POSTGRES_PASSWORD: changeme
-  minio:
-    image: quay.io/minio/minio:latest
-    command: server /data --console-address ":9001"
-    environment:
-      MINIO_ROOT_USER: minio_user
-      MINIO_ROOT_PASSWORD: minio_password
-    # volumes:
-    #   - ~/deployments/minio:/data
-    ports:
-      - 9000:9000
-      - 9001:9001
+    volumes:
+      - ./volumes/pgdata:/var/lib/postgresql/data
+
+  # minio:
+  #   image: quay.io/minio/minio:latest
+  #   command: server /data --console-address ":9001"
+  #   environment:
+  #     MINIO_ROOT_USER: minio_user
+  #     MINIO_ROOT_PASSWORD: minio_password
+  #   # volumes:
+  #   #   - ~/deployments/minio:/data
+  #   ports:
+  #     - 9000:9000
+  #     - 9001:9001
   # quay.io/minio/minio server /data --console-address ":9001"
 
-  minio_mc:
-    image: minio/mc:latest
-    entrypoint: ['']
-    command: >
-      /bin/bash -c "
-      sleep 5;
-      mc alias set minio http://minio:9000 minio_user minio_password;
-      mc mb minio/docuko"
-    depends_on:
-      - minio
+  # minio_mc:
+  #   image: minio/mc:latest
+  #   entrypoint: ['']
+  #   command: >
+  #     /bin/bash -c "
+  #     sleep 5;
+  #     mc alias set minio http://minio:9000 minio_user minio_password;
+  #     mc mb minio/docuko"
+  #   depends_on:
+  #     - minio
 
   web:
-    image: docuko:latest
+    image: neume/docuko:latest
     command: rails server
     environment:
       SECRET_KEY_BASE: supersecret
@@ -38,16 +41,19 @@ services:
       DATABASE_PASSWORD: changeme
       RAILS_SERVE_STATIC_FILES: 'true'
       DATABASE_HOST: db
-      AWS_ACCESS_KEY_ID: minio_user
-      AWS_SECRET_ACCESS_KEY: minio_password
-      AWS_ENDPOINT: http://minio:9000
-      AWS_BUCKET: docuko
-
+      RAILS_STORAGE_SERVICE: 'local'
+      # AWS_ACCESS_KEY_ID: minio_user
+      # AWS_SECRET_ACCESS_KEY: minio_password
+      # AWS_ENDPOINT: http://minio:9000
+      # AWS_BUCKET: docuko
     ports:
       - '3000:3000'
     depends_on:
       - db
-      - minio
+      # - minio
+    volumes:
+      - ./volumes/docuko/storage:/app/storage
+
 
   migration:
     build: .
@@ -59,7 +65,3 @@ services:
       DATABASE_HOST: db
     depends_on:
       - db
-
-
-
-

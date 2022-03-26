@@ -19,16 +19,6 @@ local:
 #   region: us-east-1
 #   bucket: docuko
 
-minio:
-  service: S3
-  access_key_id: <%= ENV.fetch('AWS_ACCESS_KEY_ID', '') %>
-  secret_access_key: <%= ENV.fetch('AWS_SECRET_ACCESS_KEY', '') %>
-  <%# bucket: <%= ENV.fetch('AWS_BUCKET') %1> %>
-  bucket: docuko
-  endpoint: <%= ENV.fetch('AWS_ENDPOINT', '') %>
-  region: us-east-1
-  force_path_style: true
-
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
