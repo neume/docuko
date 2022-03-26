@@ -56,7 +56,7 @@ services:
 
 
   migration:
-    build: .
+    image: neume/docuko:latest
     command: rails db:prepare
     environment:
       SECRET_KEY_BASE: supersecret

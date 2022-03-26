@@ -2,13 +2,13 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
-      <div class="row mb-2">
-        <div class="col-md-7">
-          <%= link_to [:new, current_office, :data_model], class: 'btn btn-info btn-sm' do %>
+      <div class="d-flex justify-content-between">
+        <div class="">
+          <%= link_to [:new, current_office, :data_model], class: 'btn btn-info' do %>
             <i class="fa fa-circle-plus me-1"></i> Add
           <% end %>
         </div>
-        <div class="col-md-5">
+        <div class="">
           <% search_params = @params.merge({
               slug: current_office.slug
              })
@@ -36,7 +36,7 @@
                 data-data-models-data-model-id-value='<%= model.id %>'
                 data-action='click->data-models#show'>
               <td>
-                <%= link_to model.name, [:edit, current_office, model] %>
+                <%= link_to model.name, [current_office, model] %>
               </td>
               <td>
                 <%= model.properties.count %>
