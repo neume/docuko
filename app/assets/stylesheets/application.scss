@@ -64,6 +64,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/v4-shims';
 
+@import "tom-select/dist/css/tom-select.bootstrap5";
+
 body {
   background-color: #fafbfe;
 }

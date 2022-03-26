@@ -6,7 +6,7 @@ class OfficesController < ApplicationController
     return render :empty if @memberships.count.zero?
 
     if params[:search]
-      @memberships  = @memberships.where('lower(offices.name) LIKE ?', "%#{params[:search].downcase}%")
+      @memberships = @memberships.where('lower(offices.name) LIKE ?', "%#{params[:search].downcase}%")
     end
   end
 
@@ -71,7 +71,8 @@ class OfficesController < ApplicationController
   end
 
   def sort_column
-    return params[:sort] if ['name', 'slug'].include? params[:sort]
+    return params[:sort] if %w[name slug].include? params[:sort]
+
     'name'
   end
 

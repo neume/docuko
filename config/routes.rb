@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :search_users, only: [:index], defaults: { format: :json }
+
     resources :templates, only: shallow_actions
 
     resources :model_properties, only: shallow_actions
