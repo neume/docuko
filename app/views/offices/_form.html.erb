@@ -15,9 +15,15 @@
     <%= f.label :name, 'Office name', class: 'form-field' %>
     <%= f.text_field :name, class: 'form-control', 'data-slug-target': 'name', 'data-action': 'keyup->slug#updateSlug' %>
   </div>
+
   <div class="form-group mb-3">
     <%= f.label :slug, 'Office slug', class: 'form-field' %>
     <%= f.text_field :slug, class: 'form-control', 'data-slug-target': 'slug' %>
+  </div>
+
+  <div class="form-group mb-3 visually-hidden" data-controller='offices'>
+    <%= f.label :thumbnail_color, 'Thumbnail Color (#hex-value)', class: 'form-field' %>
+    <%= f.text_field :thumbnail_color, class: 'form-control', 'data-offices-target': 'thumbnailColor' %>
   </div>
 
   <div class="actions">

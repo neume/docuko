@@ -9,7 +9,7 @@
 user = User.create(email: 'admin@test', password: 'password')
 User.create(email: 'user1@test', password: 'password')
 
-office = Office.create(name: 'My Clinic', slug: 'my-clinic', created_by: user)
+office = Office.create(name: 'My Clinic', slug: 'my-clinic', created_by: user, thumbnail_color: '#3dd')
 
 member = office.members.create(user: user, member_role: :admin)
 

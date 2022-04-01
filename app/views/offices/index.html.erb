@@ -43,36 +43,45 @@
   </div>
 <% end %>
 
+<div id="offices">
 <% @memberships.each do |membership| %>
   <% office = membership.office %>
-  <div class="col-md-6 mb-2">
-    <div class="card">
+    <div class="card mb-2 col-12">
       <div class="card-body">
-        <span class="card-title h5">
-          <%= link_to office.name, office_path(office.slug), class: 'text-primary no-decoration stretched-link' %>
-        </span>
-        <span class='badge bg-white border text-dark rounded-pill'>
-          <%= membership.member_role %>
-        </span>
-        <div>
-          <small class='text-secondary'><%= office.description %></small>
-        </div>
-        <div class='row mt-3'>
-          <div class='col-12 text-muted'>
-            <span class='me-2'>
-              <span> <i class="fa fa-shapes me-2"></i><b><%= office.data_models.count %></b></span> Templates
+        <div class='d-flex'>
+          <div class='rounded squared-50 me-3' style='background-color: <%= office.thumbnail_color %>; '>
+            <div class='thumbnail-text'>
+              <%= office.name.split(' ').first(2).map { |name| name.first }.join.upcase %>
+            </div>
+          </div>
+          <div>
+            <span class="card-title h5">
+              <%= link_to office.name, office_path(office.slug), class: 'text-primary no-decoration stretched-link' %>
             </span>
-            <span class='me-2'>
-              <span> <i class="fa fa-users me-2"></i><b><%= office.users.count %></b></span> Users
+            <span class='badge bg-white border text-dark rounded-pill'>
+              <%= membership.member_role %>
             </span>
+            <div>
+              <small class='text-secondary'><%= office.description %></small>
+            </div>
+            <div class=''>
+              <div class=' text-muted'>
+                <span class='me-2'>
+                  <span> <i class="fa fa-shapes me-2"></i><b><%= office.data_models.count %></b></span> Templates
+                </span>
+                <span class='me-2'>
+                  <span> <i class="fa fa-users me-2"></i><b><%= office.users.count %></b></span> Users
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 <% end %>
+  </div>
 
-<style type="text/css" media="all">
+  <style type="text/css" media="all">
 .caret-end:before, .caret-end:after {
   float: right;
   margin-top: 10px;

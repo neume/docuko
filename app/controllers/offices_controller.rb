@@ -63,7 +63,7 @@ class OfficesController < ApplicationController
   private
 
   def office_params
-    params.require(:office).permit(:name, :slug)
+    params.require(:office).permit(:name, :slug, :thumbnail_color)
   end
 
   def office
