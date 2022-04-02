@@ -27,6 +27,7 @@ jobs:
     steps:
       - checkout
       - node/install:
+          cache-path: ~/project/node_modules
           install-yarn: true
           node-version: '16.13.2'
       - run: "gem install bundler --no-document"
