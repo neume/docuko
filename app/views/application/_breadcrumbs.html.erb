@@ -2,7 +2,7 @@
   <% if links.any? %>
     <div class="col-12">
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb ps-0">
+        <ol class="breadcrumb ps-0 mb-0">
           <% links.each do |link| %>
             <% next if link.key == :root %>
             <% if link.current? %>

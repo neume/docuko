@@ -1,54 +1,55 @@
 <% breadcrumb :data_models, current_office %>
-<div class="col-md-12">
-  <div class="card">
-    <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <div class="">
-          <%= link_to [:new, current_office, :data_model], class: 'btn btn-info' do %>
-            <i class="fa fa-circle-plus me-1"></i> Add
-          <% end %>
-        </div>
-        <div class="">
-          <% search_params = @params.merge({
-              slug: current_office.slug
-             })
-          %>
-          <%= form_tag office_data_models_path(search_params), method: :get, class: 'float-end' do %>
-            <div class='input-group'>
-              <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', aria: { label: 'Search instance' } %>
-              <%= submit_tag 'Search', class: 'btn btn-sm btn-primary' %>
+<div class='d-flex align-items-center'>
+  <h3>Templates</h3>
+  <div class='page-control ms-auto my-3'>
+    <%= link_to [:new, current_office, :data_model], class: 'btn btn-info btn-sm' do %>
+      <i class="fa fa-circle-plus me-1"></i> New Template
+    <% end %>
+  </div>
+</div>
+<hr/>
+
+<%# <div class="col-md-3 offset-md-9 pe-md-0"> %>
+<div class="col-md-3 offset-md-9">
+  <% search_params = @params.merge({ slug: current_office.slug }) %>
+
+  <%= form_tag office_data_models_path(search_params), method: :get do %>
+    <div class='input-group mb-2'>
+      <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', aria: { label: 'Search Templates' } %>
+    </div>
+  <% end %>
+</div>
+
+<div class="data_models">
+  <% @data_models.each do |data_model| %>
+    <div class="card mb-2 col-12">
+      <div class="card-body">
+        <div class='d-flex'>
+          <div class='rounded squared-50 me-3' style='background-color: #3dd<%# office.thumbnail_color %>; '>
+            <div class='thumbnail-text'>
+              <%= data_model.name.split(' ').first(2).map { |name| name.first }.join.upcase %>
             </div>
-          <% end %>
+          </div>
+          <div>
+            <span class="card-title h5">
+              <%= link_to data_model.name, [current_office, data_model], class: 'text-primary no-decoration stretched-link' %>
+            </span>
+            <div class=''>
+              <div class=' text-muted'>
+                <span class='me-2'>
+                  <span><i class='fa fa-line me-2'></i><%= data_model.properties.count %></span> Fields
+                </span>
+              <span>
+              </span>
+                <span class='me-2'>
+                  <span><i class='fa fa-file me-2'></i> <%= data_model.templates.count %></span>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <table class='table table-striped table-borderless table-hover'>
-        <thead>
-          <tr>
-            <th>Model</th>
-            <th>Fields</th>
-            <th>Templates</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @data_models.all.each do |model| %>
-            <tr data-controller='data-models'
-                data-data-models-slug-value='<%= current_office.slug %>'
-                data-data-models-data-model-id-value='<%= model.id %>'
-                data-action='click->data-models#show'>
-              <td>
-                <%= link_to model.name, [current_office, model] %>
-              </td>
-              <td>
-                <%= model.properties.count %>
-              </td>
-              <td>
-                <%= model.templates.count %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= paginate @data_models %>
     </div>
-  </div>
+  <% end %>
+  <%= paginate @data_models %>
 </div>
