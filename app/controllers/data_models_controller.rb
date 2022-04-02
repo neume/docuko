@@ -55,6 +55,6 @@ class DataModelsController < ApplicationController
   end
 
   def data_model_params
-    params.require(:data_model).permit(:name, properties_attributes: [:name, :code, :required])
+    params.require(:data_model).permit(:name, :thumbnail_color, properties_attributes: [:name, :code, :required])
   end
 end

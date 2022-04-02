@@ -25,7 +25,7 @@
     <div class="card mb-2 col-12">
       <div class="card-body">
         <div class='d-flex'>
-          <div class='rounded squared-50 me-3' style='background-color: #3dd<%# office.thumbnail_color %>; '>
+          <div class='rounded squared-50 me-3' style='background-color: <%= data_model.thumbnail_color %>; '>
             <div class='thumbnail-text'>
               <%= data_model.name.split(' ').first(2).map { |name| name.first }.join.upcase %>
             </div>
