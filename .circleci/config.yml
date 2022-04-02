@@ -9,17 +9,17 @@ jobs:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: postgres:12.9
-        environment:
-          POSTGRES_USER: 'docuko_pg'
-          POSTGRES_PASSWORD: 'document_ko_pg'
-
       - image: ruby:2.7.1
         environment:
           DB_USERNAME: 'docuko_pg'
           DB_PASSWORD: 'document_ko_pg'
           DB_HOST: 127.0.0.1
           RAILS_ENV: 'test'
+      - image: postgres:12.9
+        environment:
+          POSTGRES_USER: 'docuko_pg'
+          POSTGRES_PASSWORD: 'document_ko_pg'
+
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
