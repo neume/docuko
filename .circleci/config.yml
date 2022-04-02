@@ -5,22 +5,55 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
+  rspec:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: cimg/base:stable
+      - image: postgres:12.9
+        environment:
+          POSTGRES_USER: 'docuko_pg'
+          POSTGRES_PASSWORD: 'document_ko_pg'
+
+      - image: ruby:2.7.1
+        environment:
+          DB_USERNAME: 'docuko_pg'
+          DB_PASSWORD: 'document_ko_pg'
+          DB_HOST: 127.0.0.1
+          RAILS_ENV: 'test'
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+      - run: "gem install bundler --no-document"
+      - run: "bundle install --jobs $(nproc)"
+      - run: "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash"
+      - run: ". ~/.nvm/nvm.sh"
+      - run: "nvm install 16.13.2"
+      - run: "npm install --global yarn"
+      - run: "yarn install"
+      - run: "cp config/database.gitlab-ci.yml config/database.yml"
+      - run: "bundle exec rails db:create db:schema:load"
+      - run: "bundle exec rspec"
+
+  rubocop:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: ruby:2.7.1
+        environment:
+          RAILS_ENV: 'test'
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
+      - run: "gem install bundler --no-document"
+      - run: "bundle install --jobs $(nproc)"
+      - run: "bundle exec rspec"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  run-tests:
     jobs:
-      - say-hello
+      - rspec
+      - rubocop
