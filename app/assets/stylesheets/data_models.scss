@@ -1,0 +1,25 @@
+.field-group {
+  display: grid;
+  grid-template-columns: 50px auto 50px;
+  grid-template-rows: auto auto;
+}
+.field-group-icon {
+  grid-row-start: 2;
+  grid-column-start: 1;
+}
+.field-label {
+  grid-row-start: 1;
+  grid-column-start: 2;
+}
+.field-grid-first{
+  grid-row-start: 2;
+  grid-column-start: 2;
+}
+.field-trash {
+  grid-row-start: 2;
+  grid-column-start: 3;
+}
+.field-grid-next {
+  grid-row-start: 3;
+  grid-column-start: 2;
+}

@@ -1,0 +1,33 @@
+<div class='card-body border-top' data-data-model-fields-target='fields'>
+  <fieldset class='field-group' data-controller='slug'>
+    <div class="field-group-icon p-2 text-dark">
+      <i class='fa fa-grip-vertical'></i>
+    </div>
+
+    <%= f.label :name, 'Field Name', class: 'form-label field-label mb-1' %>
+    <%= f.text_field :name, class: 'form-control field-grid-first mb-3',
+      placeholder: 'First Name',
+      required: true,
+      'data-slug-target': 'name',
+      'data-action': 'keyup->slug#updateSlug'
+    %>
+  <div class='form-group p-2 ms-3 field-trash'>
+    <%= link_to '', class: 'text-danger' do%>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  </div>
+  <div class='field-grid-next'>
+    <div class="mb-3">
+      <%= f.label :code, 'Field code', class: 'form-label mb-1' %>
+      <%= f.text_field :code, class: 'form-control', placeholder: 'first_name', required: true,
+        'data-slug-target': 'slug' %>
+    </div>
+    <div class="d-flex">
+      <div class="form-check form-switch">
+        <%= f.check_box :required, class: 'form-check-input text-success' %>
+      </div>
+      <%= f.label :required, class: 'form-check-label' %>
+    </div>
+  </div>
+  </fieldset>
+</div>

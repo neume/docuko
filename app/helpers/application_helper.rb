@@ -32,4 +32,17 @@ module ApplicationHelper
   def diff_in_hours(start_time, end_time)
     (end_time - start_time) / 60 / 60
   end
+
+  def link_to_add_fields(form, association, template = nil, options = {}, &block)
+    new_object = form.object.send(association).klass.new
+    id = new_object.object_id
+
+    template ||= "#{association.to_s.singularize}_fields"
+
+    fields = form.fields_for(association, new_object, child_index: id) do |builder|
+      render(template, f: builder)
+    end
+
+    link_to('#', options.merge(data: { id: id, fields: fields.gsub("\n", '') }), &block)
+  end
 end

@@ -17,6 +17,7 @@ class DataModelsController < ApplicationController
 
   def new
     @data_model = current_user.created_data_models.new
+    @data_model.properties.build
   end
 
   def create
@@ -37,7 +38,7 @@ class DataModelsController < ApplicationController
     if data_model.update(data_model_params)
       redirect_to [current_office, data_model]
     else
-      render :new
+      render :edit
     end
   end
 
@@ -54,6 +55,6 @@ class DataModelsController < ApplicationController
   end
 
   def data_model_params
-    params.require(:data_model).permit(:name)
+    params.require(:data_model).permit(:name, properties_attributes: [:name, :code, :required])
   end
 end

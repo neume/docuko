@@ -1,0 +1,60 @@
+@import "data_models";
+
+body {
+  background-color: #fafbfe;
+}
+
+.tb-actions {
+  width: 40px;
+}
+
+h6, h5, h4 {
+  font-weight: 700;
+}
+
+.no-decoration:link { text-decoration: none; }
+
+
+.no-decoration:visited { text-decoration: none; }
+
+
+.no-decoration:hover { text-decoration: none; }
+
+
+.no-decoration:active { text-decoration: none; }
+
+.z-1 {
+   z-index: 1;
+   position: relative;
+}
+
+body {
+  overflow: scroll;
+}
+
+
+table > tbody > tr > td {
+  border-bottom-width: 0 !important;
+}
+
+.thumbnail-text {
+  border-radius: 50%;
+}
+
+.squared-50 {
+  width: 50px;
+  height: 50px;
+}
+
+.item-rounded {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.thumbnail-text {
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  line-height: 50px;
+}

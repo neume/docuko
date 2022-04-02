@@ -1,4 +1,26 @@
 <% breadcrumb :edit_data_model, @data_model, current_office %>
 <div class="col-12">
-  <%= render "form", data_model: @data_model, url: office_data_model_path(current_office.slug) %>
+  <%= render 'errors', object: @data_model  %>
+  <%= form_for @data_model, url: office_data_model_path(current_office.slug) do |f| %>
+    <div class='card mb-2'>
+      <div class='card-body'>
+        <div class='row'>
+          <h5>Template Info</h5>
+          <div class="form-group mb-3">
+            <%= f.label :name, class: 'form-label' %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+
+          <div class='form-group mb-3'>
+            <%= f.label :description, class: 'form-label' %>
+            <%= f.text_area :description, class: 'form-control', rows: 5 %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='form-group float-end'>
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
 </div>
