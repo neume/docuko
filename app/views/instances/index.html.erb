@@ -41,33 +41,35 @@
           <% end %>
         </div>
       </div>
-      <table class='table table-striped table-compact table-borderless'>
-        <thead>
-          <tr>
-            <th> ID </th>
-            <% @properties.each do |property| %>
-              <th><%= property.name %></th>
-            <% end %>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @instances.each do |instance| %>
-            <tr data-controller='instances'
-                data-action='click->instances#show'
-                data-instances-slug-value='<%= current_office.slug %>'
-                data-instances-instance-id-value='<%= instance.id %>'>
-              <% props = instance.hashed_properties %>
-              <td>
-                <%= link_to "##{instance.data_model.name}-#{instance.id}", [current_office, instance] %>
-              </td>
+      <div class='table-responsive'>
+        <table class='table table-hover table-striped table-compact table-borderless'>
+          <thead>
+            <tr>
+              <th> ID </th>
               <% @properties.each do |property| %>
-                <td><%= props[property.code] %></td>
+                <th style='white-space: nowrap;'><%= property.name %></th>
               <% end %>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            <% @instances.each do |instance| %>
+              <tr data-controller='instances'
+                  data-action='click->instances#show'
+                  data-instances-slug-value='<%= current_office.slug %>'
+                  data-instances-instance-id-value='<%= instance.id %>'>
+                <% props = instance.hashed_properties %>
+                <td>
+                  <%= link_to "##{instance.data_model.name}-#{instance.id}", [current_office, instance] %>
+                </td>
+                <% @properties.each do |property| %>
+                  <td><%= props[property.code] %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
       <%= paginate @instances %>
     </div>
   </div>
