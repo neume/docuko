@@ -29,15 +29,15 @@ jobs:
       - node/install:
           install-yarn: true
           node-version: '16.13.2'
-      - node/install-packages:
-          cache-path: ~/project/node_modules
+      # - node/install-packages:
+      #     cache-path: ~/project/node_modules
       - run: "gem install bundler --no-document"
       - run: "bundle install --jobs $(nproc)"
       # - run: "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash"
       # - run: ". ~/.nvm/nvm.sh"
       # - run: "nvm install 16.13.2"
       # - run: "npm install --global yarn"
-      # - run: "yarn install"
+      - run: "yarn install"
       - run: "cp config/database.gitlab-ci.yml config/database.yml"
       - run: "bundle exec rails db:create db:schema:load"
       - run: "bundle exec rspec"
