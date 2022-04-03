@@ -20,22 +20,6 @@ class InstancesController < ApplicationController
   end
 
   def create
-    data = properties_params.merge(
-      data_model_id: data_model.id
-    )
-
-    @instance = CreateInstanceService.create(data, data_model, current_user)
-
-    if @instance.persisted?
-      redirect_to [current_office, @instance],
-                  notice: "#{data_model.name} was successfully created"
-    else
-      @validated = true
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  def create
     result = Instances::CreateService.execute(properties_params, data_model, current_user)
     @instance = result.payload[:instance]
 

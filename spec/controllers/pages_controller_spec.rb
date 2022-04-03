@@ -20,7 +20,7 @@ RSpec.describe PagesController, type: :controller do
     context 'with existing office and data model' do
       it 'renders dashboard view' do
         create(:member, office: office, user: user)
-        data_model =create(:data_model, office: office)
+        data_model = create(:data_model, office: office)
 
         get :dashboard
 

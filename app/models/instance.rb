@@ -15,7 +15,6 @@ class Instance < ApplicationRecord
   end
 
   def add_custom_error(name:, code:, message:)
-
     custom_errors.push({ name: name, code: code, message: message })
 
     errors.add_to_base("#{name} #{message}")

@@ -11,9 +11,9 @@ RSpec.describe Instances::CreateService do
   describe '.execute' do
     context 'with valid paramaters' do
       let(:data) do
-        HashWithIndifferentAccess.new ({
-          username: 'cardo'
-        })
+        HashWithIndifferentAccess.new({
+                                        username: 'cardo'
+                                      })
       end
 
       it 'creates an instance' do
@@ -26,16 +26,16 @@ RSpec.describe Instances::CreateService do
 
     context 'with invalid paramteres' do
       let(:data) do
-        HashWithIndifferentAccess.new ({
-          username: nil
-        })
+        HashWithIndifferentAccess.new({
+                                        username: nil
+                                      })
       end
 
       it 'returns an error' do
         result = described_class.execute data, data_model, user
         instance = result.payload[:instance]
 
-        expect(instance.errors.first.full_message).to eq("Username is required")
+        expect(instance.errors.first.full_message).to eq('Username is required')
         expect(result).to be_error
       end
     end

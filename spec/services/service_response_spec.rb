@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ServiceResponse do
-
   describe '.success' do
     it 'returns a successful service response' do
       message = 'Service finished successfully'

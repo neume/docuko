@@ -1,11 +1,11 @@
 class ServiceResponse
   attr_reader :status, :message, :payload
 
-  def self.success(message: , payload: {})
+  def self.success(message:, payload: {})
     new status: 'success', message: message, payload: payload
   end
 
-  def self.error(message: , payload: {})
+  def self.error(message:, payload: {})
     new status: 'error', message: message, payload: payload
   end
 

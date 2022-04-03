@@ -18,7 +18,7 @@ class Instances::CreateService
     if instance.save
       ServiceResponse.success message: 'Instance created', payload: { instance: instance }
     else
-      ServiceResponse.error  message: 'An error occured creating instance', payload: { instance: instance }
+      ServiceResponse.error message: 'An error occured creating instance', payload: { instance: instance }
     end
   end
 
@@ -37,6 +37,7 @@ class Instances::CreateService
 
     data.each do |key, value|
       next unless model_properties[key]
+
       properties << InstanceProperty.new(
         name: model_properties[key].name,
         value: value,
