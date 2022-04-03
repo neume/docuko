@@ -26,4 +26,15 @@ RSpec.describe ServiceResponse do
       expect(service_response.payload).to eq({ data: 'Hello world' })
     end
   end
+
+  describe '[]' do
+    it "returns payload's hash" do
+      message = 'Something went wrong'
+      payload = { data: 'Hello world' }
+
+      service_response = described_class.error message: message, payload: payload
+
+      expect(service_response[:data]).to eq('Hello world')
+    end
+  end
 end

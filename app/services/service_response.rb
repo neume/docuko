@@ -22,4 +22,6 @@ class ServiceResponse
   def error?
     status == 'error'
   end
+
+  delegate :[], to: :payload
 end
