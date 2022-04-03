@@ -13,7 +13,7 @@ office = Office.create(name: 'My Clinic', slug: 'my-clinic', created_by: user, t
 
 member = office.members.create(user: user, member_role: :admin)
 
-data_model = user.created_data_models.create(name: 'Person', created_by: user, office: office)
+data_model = user.created_data_models.create(name: 'Person', created_by: user, office: office, thumbnail_color: '#868fc2')
 
 properties = [
   { name: 'First Name', code: 'first_name', header_visibility: true },
@@ -39,5 +39,7 @@ end
   user.created_data_models.create(
     name: Faker::IndustrySegments.sector,
     description: Faker::Lorem.paragraph,
-    office: office)
+    office: office,
+    thumbnail_color: '#3dd'
+  )
 end
