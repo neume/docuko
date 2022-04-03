@@ -1,11 +1,11 @@
 module ApplicationHelper
+  FLASH_BG_CLASS = {
+    'notice' => 'bg-success',
+    'alert' => 'bg-danger'
+  }.freeze
+
   def flash_class(key)
-    case key
-    when 'notice'
-      'bg-success'
-    when 'alert'
-      'bg-danger'
-    end
+    FLASH_BG_CLASS[key]
   end
 
   def shorten_relative_time(time, current_time: Time.current)

@@ -9,14 +9,4 @@ class Instance < ApplicationRecord
       hash[prop.code] = prop.value
     end
   end
-
-  def custom_errors
-    @custom_errors ||= []
-  end
-
-  def add_custom_error(name:, code:, message:)
-    custom_errors.push({ name: name, code: code, message: message })
-
-    errors.add_to_base("#{name} #{message}")
-  end
 end
