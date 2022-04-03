@@ -14,15 +14,33 @@ RSpec.describe CreateInstanceService do
     data_model
   end
 
-  it 'creates instance of data model' do
-    instance_params = HashWithIndifferentAccess.new(
-      first_name: 'Juan',
-      last_name: 'Dela Cruz'
-    )
+  context 'with valid data' do
+    it 'creates instance of data model' do
+      instance_params = HashWithIndifferentAccess.new(
+        first_name: 'Juan',
+        last_name: 'Dela Cruz'
+      )
 
-    instance = described_class.create(instance_params, data_model, user)
+      instance = described_class.create(instance_params, data_model, user)
 
-    expect(instance).to be_persisted
-    expect(instance.properties.pluck(:value)).to eq(['Juan', 'Dela Cruz'])
+      expect(instance).to be_persisted
+      expect(instance.properties.pluck(:value)).to eq(['Juan', 'Dela Cruz'])
+    end
+  end
+
+  context 'with invalid data' do
+    it 'creates instance of data model' do
+      instance_params = HashWithIndifferentAccess.new(
+        first_name: 'Juan',
+        last_name: 'Dela Cruz',
+        age: ''
+      )
+
+      data_model.properties.create(name: 'Age', code: 'age', required: true)
+
+      instance = described_class.create(instance_params, data_model, user)
+
+      expect(instance).not_to be_persisted
+    end
   end
 end

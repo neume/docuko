@@ -27,6 +27,7 @@ module CreateInstanceService
     end
   end
 
+  # TODO: extract to different service. A service should only do one thing
   def self.build_instance_properties_from_data_model(instance)
     data_model = instance.data_model
 
