@@ -3,7 +3,6 @@ class MembersController < ApplicationController
 
   layout 'office'
 
-  # TODO: use proper searching on select tag
   def new
     @member = current_office.members.new member_role: :regular
     @users = User.all.where.not(id: current_office.members.pluck(:user_id))

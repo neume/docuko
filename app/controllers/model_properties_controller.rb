@@ -3,10 +3,6 @@ class ModelPropertiesController < ApplicationController
 
   layout 'office'
 
-  def index
-    redirect_back fallback_location: [current_office, data_model]
-  end
-
   def new
     @model_property = data_model.properties.new
     respond_to do |format|
@@ -22,7 +18,7 @@ class ModelPropertiesController < ApplicationController
         if model_property.save
           redirect_to [current_office, data_model], notice: 'Property created'
         else
-          render :new
+          render :new, status: :unprocessable_entity
         end
       end
       format.js { model_property.save }
@@ -39,7 +35,7 @@ class ModelPropertiesController < ApplicationController
 
       redirect_to [current_office, data_model], notice: 'Property updated'
     else
-      render :new
+      render :edit, status: :unprocessable_entity
     end
   end
 

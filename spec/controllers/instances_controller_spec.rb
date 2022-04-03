@@ -4,7 +4,7 @@ RSpec.describe InstancesController, type: :controller do
   let(:user) { create(:user) }
   let(:office) { create(:office, created_by: user) }
   let(:data_model) { create(:data_model, office: office) }
-  let(:model_property) { create(:model_property, data_model: data_model) }
+  let(:model_property) { create(:model_property, data_model: data_model, required: true) }
 
   before do
     sign_in user
@@ -12,9 +12,21 @@ RSpec.describe InstancesController, type: :controller do
   end
 
   describe '#index' do
-    before { get :index, params: slug({ data_model_id: data_model.id }) }
+    context 'with search params' do
+      before do
+        instance = create(:instance, data_model: data_model)
+        create(:instance_property, instance: instance, model_property: model_property, value: 'Cardo')
+        get :index, params: slug({ data_model_id: data_model.id, search: 'Cardo' })
+      end
 
-    it { expect(response).to render_template(:index) }
+      it { expect(assigns(:instances).count).to eq(1) }
+    end
+
+    context 'without search params' do
+      before { get :index, params: slug({ data_model_id: data_model.id }) }
+
+      it { expect(response).to render_template(:index) }
+    end
   end
 
   describe '#new' do
@@ -24,19 +36,35 @@ RSpec.describe InstancesController, type: :controller do
   end
 
   describe '#create' do
-    let(:params) do
-      {
-        data_model_id: data_model.id,
-        properties: {
-          name: 'Person'
-        }
-      }
+    before do
+      create(:model_property, name: 'Full name', code: 'name', required: true, data_model: data_model)
+      post :create, params: slug(params)
     end
 
-    before { post :create, params: slug(params) }
+    context 'with valid params' do
+      let(:params) do
+        {
+          data_model_id: data_model.id,
+          properties: {
+            name: 'Person'
+          }
+        }
+      end
 
-    context 'with passing params' do
       it { expect(response).to redirect_to([office, assigns(:instance)]) }
+    end
+
+    context 'with invalid params' do
+      let(:params) do
+        {
+          data_model_id: data_model.id,
+          properties: {
+            name: ''
+          }
+        }
+      end
+
+      it { expect(response).to render_template(:new) }
     end
   end
 
@@ -46,5 +74,13 @@ RSpec.describe InstancesController, type: :controller do
     before { get :edit, params: slug({ id: instance.id }) }
 
     it { expect(response).to render_template(:edit) }
+  end
+
+  describe '#show' do
+    let(:instance) { create(:instance, data_model: data_model) }
+
+    before { get :show, params: slug({ id: instance.id }) }
+
+    it { expect(response).to render_template(:show) }
   end
 end

@@ -27,9 +27,27 @@ RSpec.describe MembersController, type: :controller do
       }
     end
 
-    it 'adds new member' do
-      post :create, params: slug(valid_params), xhr: true, format: :js
-      expect(office.members.count).to eq(1) # the original user was not a member
+    context 'with valid params' do
+      it 'adds new member' do
+        post :create, params: slug(valid_params), xhr: true, format: :js
+        expect(office.members.count).to eq(1) # the original user was not a member
+      end
+    end
+
+    context 'with invalid params' do
+      let(:invalid_params) do
+        {
+          member: {
+            user_id: nil,
+            member_role: :admin
+          }
+        }
+      end
+
+      it 'adds new member' do
+        post :create, params: slug(invalid_params), xhr: true, format: :js
+        expect(office.members.count).to eq(0)
+      end
     end
   end
 

@@ -35,15 +35,11 @@ class TemplatesController < ApplicationController
 
   # PATCH/PUT /templates/1 or /templates/1.json
   def update
-    respond_to do |format|
-      @data_model = @template.data_model
-      if @template.update(template_params)
-        format.html { redirect_to [current_office, data_model], notice: 'Template was successfully updated.' }
-        format.json { render :show, status: :ok, location: @template }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
-      end
+    @data_model = @template.data_model
+    if @template.update(template_params)
+      redirect_to [current_office, data_model], notice: 'Template was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

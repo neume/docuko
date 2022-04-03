@@ -12,12 +12,25 @@ RSpec.describe DataModelsController, type: :controller do
   end
 
   describe '#index' do
-    before do
-      data_model
-      get :index, params: slug
+    context 'with search parameter' do
+      it 'returns filtered data models' do
+        create(:data_model, name: 'Doggo', office: office)
+        get :index, params: slug({ search: 'Dog' })
+
+        expect(assigns(:data_models).count).to eq(1)
+        expect(response).to render_template(:index)
+      end
     end
 
-    it { expect(response).to render_template(:index) }
+    context 'without data models' do
+      before do
+        get :index, params: slug
+      end
+
+      it 'returns filtered data models' do
+        expect(response).to redirect_to([:new, office, :data_model])
+      end
+    end
   end
 
   describe '#new' do
@@ -38,7 +51,22 @@ RSpec.describe DataModelsController, type: :controller do
 
     before { post :create, params: params }
 
-    it { expect(response).to redirect_to(office_data_model_path(assigns(:data_model).id, office_slug: office.slug)) }
+    context 'with valid params' do
+      it { expect(response).to redirect_to(office_data_model_path(assigns(:data_model).id, office_slug: office.slug)) }
+    end
+
+    context 'with invalid params' do
+      let(:params) do
+        {
+          office_slug: office.slug,
+          data_model: {
+            name: ''
+          }
+        }
+      end
+
+      it { expect(response).to render_template(:new) }
+    end
   end
 
   describe '#edit' do
@@ -59,9 +87,30 @@ RSpec.describe DataModelsController, type: :controller do
 
     before { patch :update, params: slug(params) }
 
-    it 'updates DataModel' do
-      expect(response).to redirect_to([office, assigns(:data_model)])
-      expect(data_model.reload.name).to eq('Cat')
+    context 'with valid params' do
+      it 'updates DataModel' do
+        expect(response).to redirect_to([office, assigns(:data_model)])
+        expect(data_model.reload.name).to eq('Cat')
+      end
     end
+
+    context 'with invalid params' do
+      let(:params) do
+        {
+          id: data_model.id,
+          data_model: {
+            name: ''
+          }
+        }
+      end
+
+      it { expect(response).to render_template(:edit) }
+    end
+  end
+
+  describe '#show' do
+    before { get :show, params: slug({ id: data_model.id }) }
+
+    it { expect(response).to render_template(:show) }
   end
 end

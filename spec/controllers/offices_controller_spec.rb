@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe OfficesController, type: :controller do
   let(:user) { create(:user) }
   let(:office) do
-    create(:office, created_by: user).tap do |office|
+    create(:office, name: 'Gameshop', created_by: user).tap do |office|
       create(:member, office: office, user: user, member_role: :admin)
     end
   end
@@ -25,12 +25,17 @@ RSpec.describe OfficesController, type: :controller do
   before { sign_in user }
 
   describe '#index' do
-    before do
-      office
-      get :index
-    end
+    context 'with search key' do
+      before do
+        office
+        get :index, params: { search: 'Game' }
+      end
 
-    it { expect(response).to render_template(:index) }
+      it do
+        expect(assigns(:memberships).count).to eq(1)
+        expect(response).to render_template(:index)
+      end
+    end
   end
 
   describe '#new' do
@@ -67,6 +72,14 @@ RSpec.describe OfficesController, type: :controller do
 
         expect(office.data_models.count).to eq(1)
         expect(response).to redirect_to([office, data_model, :instances])
+      end
+    end
+
+    context 'with no data model' do
+      it 'redirects to new data model form' do
+        get :show, params: { slug: office.slug }
+
+        expect(response).to redirect_to([:new, office, :data_model])
       end
     end
   end

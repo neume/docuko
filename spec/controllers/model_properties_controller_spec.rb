@@ -31,8 +31,22 @@ RSpec.describe ModelPropertiesController, type: :controller do
 
     before { post :create, params: slug(params) }
 
-    context 'with passing params' do
+    context 'with valid params' do
       it { expect(response).to redirect_to([office, data_model]) }
+    end
+
+    context 'with invalid params' do
+      let(:params) do
+        {
+          data_model_id: data_model.id,
+          model_property: {
+            name: 'Person',
+            code: ''
+          }
+        }
+      end
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
     end
   end
 
@@ -54,9 +68,27 @@ RSpec.describe ModelPropertiesController, type: :controller do
 
     before { patch :update, params: slug(params) }
 
-    it 'updates DataModel' do
-      expect(response).to redirect_to([office, data_model])
-      expect(model_property.reload.name).to eq('Full Name')
+    context 'with valid params' do
+      it 'updates DataModel' do
+        expect(response).to redirect_to([office, data_model])
+        expect(model_property.reload.name).to eq('Full Name')
+      end
+    end
+
+    context 'with invalid params' do
+      let(:params) do
+        {
+          id: model_property.id,
+          model_property: {
+            name: 'Full Name',
+            code: ''
+          }
+        }
+      end
+
+      it 'returns unprocessable_entity' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 end
