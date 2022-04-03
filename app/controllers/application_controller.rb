@@ -7,10 +7,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # def current_user
-  #   @current_user ||= User.first
-  # end
-
   def current_office
     @current_office ||= current_user.offices.find_by(slug: (params[:office_slug] || params[:slug]))
   end
