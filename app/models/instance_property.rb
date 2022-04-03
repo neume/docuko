@@ -8,6 +8,6 @@ class InstanceProperty < ApplicationRecord
   def presence_of_value
     return true unless required
 
-    errors.add(:base, "#{name} is required") if value.empty?
+    errors.add(:base, "#{name} is required") if value.nil? || value.empty?
   end
 end

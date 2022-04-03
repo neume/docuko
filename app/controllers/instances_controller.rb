@@ -35,6 +35,19 @@ class InstancesController < ApplicationController
     end
   end
 
+  def create
+    result = Instances::CreateService.execute(properties_params, data_model, current_user)
+    @instance = result.payload[:instance]
+
+    if result.success?
+      redirect_to [current_office, @instance],
+                  notice: "#{data_model.name} was successfully created"
+    else
+      @validated = true
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def show
     @instance = current_office.instances.find(params[:id])
     @data_model = @instance.data_model

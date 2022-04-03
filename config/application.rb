@@ -19,6 +19,8 @@ module Docuko
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.active_model.i18n_customize_full_message = true
+
     config.to_prepare do
       Devise::SessionsController.layout 'external'
       Devise::RegistrationsController.layout 'external'
