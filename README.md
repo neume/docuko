@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/neume/docuko/tree/master.svg?style=svg)](https://circleci.com/gh/neume/docuko/tree/master)
 
-gitlab-ci: [![pipeline status](https://gitlab.com/valerosjoseph/docuko/badges/master/pipeline.svg)](https://gitlab.com/valerosjoseph/docuko/-/commits/master)
+[![pipeline status](https://gitlab.com/valerosjoseph/docuko/badges/master/pipeline.svg)](https://gitlab.com/valerosjoseph/docuko/-/commits/master)
 [![coverage report](https://gitlab.com/valerosjoseph/docuko/badges/master/coverage.svg)](https://gitlab.com/valerosjoseph/docuko/-/commits/master)
 [![Latest Release](https://gitlab.com/valerosjoseph/docuko/-/badges/release.svg)](https://gitlab.com/valerosjoseph/docuko/-/releases)
 
