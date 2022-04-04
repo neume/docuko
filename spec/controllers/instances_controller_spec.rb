@@ -5,6 +5,7 @@ RSpec.describe InstancesController, type: :controller do
   let(:office) { create(:office, created_by: user) }
   let(:data_model) { create(:data_model, office: office) }
   let(:model_property) { create(:model_property, data_model: data_model, required: true) }
+  let(:instance) { create(:instance, data_model: data_model) }
 
   before do
     sign_in user
@@ -82,5 +83,22 @@ RSpec.describe InstancesController, type: :controller do
     before { get :show, params: slug({ id: instance.id }) }
 
     it { expect(response).to render_template(:show) }
+  end
+
+  describe '#destroy_modal' do
+    it 'renders destroy modal' do
+      get :destroy_modal, params: slug(id: instance.id), xhr: true, format: :js
+
+      expect(response).to render_template(:destroy_modal)
+    end
+  end
+
+  describe '#destroy' do
+    it 'deletes document' do
+      delete :destroy, params: slug(id: instance.id)
+
+      expect(response).to redirect_to([office, data_model, :instances])
+      expect(data_model.instances.count).to eq(0)
+    end
   end
 end

@@ -49,15 +49,14 @@
               <% @properties.each do |property| %>
                 <th style='white-space: nowrap;'><%= property.name %></th>
               <% end %>
+              <th class='text-center' s>Docs<th>
+              <th></th>
             </tr>
           </thead>
 
           <tbody>
             <% @instances.each do |instance| %>
-              <tr data-controller='instances'
-                  data-action='click->instances#show'
-                  data-instances-slug-value='<%= current_office.slug %>'
-                  data-instances-instance-id-value='<%= instance.id %>'>
+              <tr>
                 <% props = instance.hashed_properties %>
                 <td>
                   <%= link_to "##{instance.data_model.name}-#{instance.id}", [current_office, instance] %>
@@ -65,6 +64,16 @@
                 <% @properties.each do |property| %>
                   <td><%= props[property.code] %></td>
                 <% end %>
+                <td class='text-center'><%= instance.documents.count %></td>
+                <td class='text-end pe-3'>
+                  <%= link_to [current_office, instance], class: 'z-1 no-decoration me-2' do%>
+                    <i class="fa fa-expand text-secondary"></i>
+                  <% end %>
+
+                  <%= link_to [:destroy_modal, current_office, instance], remote: true, class: 'z-1' do%>
+                    <i class="fa fa-trash text-danger"></i>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>

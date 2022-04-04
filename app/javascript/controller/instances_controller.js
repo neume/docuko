@@ -6,7 +6,9 @@ export default class extends Controller {
     slug: String
   }
 
-  show(event) {
-    window.location.href = "/offices/" + this.slugValue +"/instances/" + this.instanceIdValue;
-  }
+  // show(event) {
+  //   if (event.target.nodeName != 'I') {
+  //     window.location.href = "/offices/" + this.slugValue +"/instances/" + this.instanceIdValue;
+  //   }
+  // }
 }

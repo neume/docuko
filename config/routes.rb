@@ -27,8 +27,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :instances, only: shallow_actions.push(:destroy_modal) do
-      resources :documents do
+    resources :instances, only: shallow_actions.push(:destroy) do
+      resources :documents
+
+      member do
+        get :destroy_modal
       end
     end
 

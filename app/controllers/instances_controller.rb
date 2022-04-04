@@ -33,7 +33,7 @@ class InstancesController < ApplicationController
   end
 
   def show
-    @instance = current_office.instances.find(params[:id])
+    @instance = fetch_instance
     @data_model = @instance.data_model
     @properties = @instance.properties.joins(:model_property).order('model_properties.position DESC')
     @documents = @instance.documents.order('documents.created_at DESC')
@@ -44,7 +44,25 @@ class InstancesController < ApplicationController
     @data_model = @instance.data_model
   end
 
+  def destroy_modal
+    @instance = fetch_instance
+    @data_model = @instance.data_model
+  end
+
+  def destroy
+    @instance = fetch_instance
+    data_model = @instance.data_model
+
+    @instance.destroy
+
+    redirect_to [current_office, data_model, :instances], notice: 'Entry deleted'
+  end
+
   private
+
+  def fetch_instance
+    current_office.instances.find(params[:id])
+  end
 
   def data_model
     @data_model ||= current_office.data_models.find(params[:data_model_id])
