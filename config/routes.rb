@@ -17,7 +17,11 @@ Rails.application.routes.draw do
 
     resources :search_users, only: [:index], defaults: { format: :json }
 
-    resources :templates, only: shallow_actions
+    resources :templates, only: shallow_actions.push(:destroy) do
+      member do
+        get :destroy_modal
+      end
+    end
 
     resources :model_properties, only: shallow_actions.push(:destroy) do
       member do

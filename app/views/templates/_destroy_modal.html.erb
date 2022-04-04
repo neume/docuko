@@ -1,0 +1,22 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Delete <%= template.name %> Field</h5>
+    </div>
+    <div class="modal-body">
+        This <b>template</b> is being used by:
+        <ul>
+          <li>
+            <span class='text-warning'>
+              <%= pluralize(template.documents.count, 'document') %>
+            </span>
+          </li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      <%= link_to 'Delete', [office, template], method: :delete, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>

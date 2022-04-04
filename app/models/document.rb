@@ -6,4 +6,8 @@ class Document < ApplicationRecord
   belongs_to :instance
 
   has_one_attached :file
+
+  def template_name
+    template&.name || 'Deleted'
+  end
 end

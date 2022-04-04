@@ -24,9 +24,12 @@
                 </span>
             </td>
 
-            <td class='tb-actions'>
-              <%= link_to [:edit, office, template], class: 'text-muted' do %>
-                <i class="fa fa-pen-to-square"></i>
+            <td class='pe-1 text-end'>
+              <%= link_to [:edit, office, template], class: 'no-decoration me-1' do %>
+                <i class="fa fa-pen-to-square text-warning"></i>
+              <% end %>
+              <%= link_to [:destroy_modal, office, template], remote: true, class: 'no-decoration me-1' do %>
+                <i class="fa fa-trash text-danger"></i>
               <% end %>
             </td>
           </tr>

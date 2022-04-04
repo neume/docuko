@@ -30,23 +30,22 @@
 
 <div class='row px-2'>
   <% documents.each do |document| %>
-    <% template = document.template %>
     <div class="mb-2 px-1 col-md-6">
       <div class='card'>
         <div class="card-body">
           <div class='d-flex justify-content-start'>
             <div>
-              <% if template.file.signed_id %>
-                <% if template.file.representable? %>
+              <% if document.file.signed_id %>
+                <% if document.file.representable? %>
                     <div class='border float-start' width=100%>
-                      <%= image_tag template.file.representation(resize_to_limit: [128, 128]) %>
+                      <%= image_tag document.file.representation(resize_to_limit: [128, 128]) %>
                     </div>
                 <% end %>
               <% end %>
             </div>
             <div class='ms-3'>
               <h5 class='mb-0 text-truncate'> <%= document.name.first(20)  %></h5>
-              <small class='text-secondary'><%= document.template.name  %> Template</small>
+              <small class='text-secondary'><%= document.template&.name || 'Deleted'  %> Template</small>
               <div class='text-dark mt-2'>
                 <%= document.created_at.strftime('%B %d %Y %r') %>
               </div>

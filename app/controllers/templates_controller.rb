@@ -43,6 +43,19 @@ class TemplatesController < ApplicationController
     end
   end
 
+  def destroy_modal
+    set_template
+  end
+
+  def destroy
+    set_template
+
+    data_model = @template.data_model
+
+    @template.destroy
+    redirect_to [current_office, data_model], notice: 'Field deleted'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
