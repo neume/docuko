@@ -12,6 +12,78 @@ RSpec.describe TemplatesController, type: :controller do
     allow(controller).to receive(:current_office).and_return(office)
   end
 
+  describe '#create' do
+    context 'with valid params' do
+      let(:valid_params) do
+        {
+          data_model_id: data_model.id,
+          template: {
+            name: 'Project'
+          }
+        }
+      end
+
+      it 'redirects to data_model path' do
+        post :create, params: slug(valid_params)
+
+        expect(response).to redirect_to([office, data_model])
+      end
+    end
+
+    context 'with invalid params' do
+      let(:invalid_params) do
+        {
+          data_model_id: data_model.id,
+          template: {
+            name: ''
+          }
+        }
+      end
+
+      it 'redirects to data_model path' do
+        post :create, params: slug(invalid_params)
+
+        expect(response).to render_template(:new)
+      end
+    end
+  end
+
+  describe '#update' do
+    context 'with valid params' do
+      let(:valid_params) do
+        {
+          id: template.id,
+          template: {
+            name: 'Project'
+          }
+        }
+      end
+
+      it 'redirects to data_model path' do
+        patch :update, params: slug(valid_params)
+
+        expect(response).to redirect_to([office, data_model])
+      end
+    end
+
+    context 'with invalid params' do
+      let(:invalid_params) do
+        {
+          id: template.id,
+          template: {
+            name: ''
+          }
+        }
+      end
+
+      it 'redirects to data_model path' do
+        patch :update, params: slug(invalid_params)
+
+        expect(response).to render_template(:edit)
+      end
+    end
+  end
+
   describe '#destroy_modal' do
     it 'renders destroy modal' do
       get :destroy_modal, params: slug(id: template.id), xhr: true, format: :js
