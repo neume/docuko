@@ -1,0 +1,28 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Delete <%= data_model.name %> template</h5>
+    </div>
+    <div class="modal-body">
+        This <b>template</b> contains:
+
+        <ul>
+          <li>
+            <span class='text-warning'>
+              <%= pluralize(data_model.instances.count, 'entry') %>
+            </span>
+          </li>
+          <li>
+            <span class='text-warning'>
+              <%= pluralize(data_model.documents.count, 'document') %>
+            </span>
+          </li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      <%= link_to 'Delete', [office, data_model], method: :delete, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>

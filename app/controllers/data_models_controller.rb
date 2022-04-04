@@ -48,6 +48,15 @@ class DataModelsController < ApplicationController
     @templates = data_model.templates.order('templates.name ASC')
   end
 
+  def destroy_modal
+    data_model
+  end
+
+  def destroy
+    data_model.destroy
+    redirect_to [current_office, :data_models], notice: 'Template deleted'
+  end
+
   private
 
   def data_model

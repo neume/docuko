@@ -37,6 +37,9 @@ Rails.application.routes.draw do
 
     resources :instance_properties, only: shallow_actions
     resources :data_models do
+      member do
+        get :destroy_modal
+      end
       resources :model_properties, except: shallow_actions
       resources :instances, except: shallow_actions
       resources :templates, except: shallow_actions

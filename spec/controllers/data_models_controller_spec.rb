@@ -113,4 +113,21 @@ RSpec.describe DataModelsController, type: :controller do
 
     it { expect(response).to render_template(:show) }
   end
+
+  describe '#destroy_modal' do
+    it 'renders destroy modal' do
+      get :destroy_modal, params: slug(id: data_model.id), xhr: true, format: :js
+
+      expect(response).to render_template(:destroy_modal)
+    end
+  end
+
+  describe '#destroy' do
+    it 'deletes document' do
+      delete :destroy, params: slug(id: data_model.id)
+
+      expect(response).to redirect_to([office, :data_models])
+      expect(office.data_models.count).to eq(0)
+    end
+  end
 end
