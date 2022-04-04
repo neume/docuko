@@ -1,0 +1,22 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Delete <%= model_property.name %> Field</h5>
+    </div>
+    <div class="modal-body">
+        This <b>field</b> is used in:
+        <ul>
+          <li>
+            <span class='text-warning'>
+              <%= pluralize(model_property.instance_properties.count, 'entry') %>
+            </span>
+          </li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      <%= link_to 'Delete', [office, model_property], method: :delete, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>

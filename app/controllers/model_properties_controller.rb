@@ -39,6 +39,16 @@ class ModelPropertiesController < ApplicationController
     end
   end
 
+  def destroy_modal
+    model_property
+  end
+
+  def destroy
+    data_model = model_property.data_model
+    model_property.destroy
+    redirect_to [current_office, data_model], notice: 'Field deleted'
+  end
+
   private
 
   def data_model

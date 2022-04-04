@@ -19,7 +19,11 @@ Rails.application.routes.draw do
 
     resources :templates, only: shallow_actions
 
-    resources :model_properties, only: shallow_actions
+    resources :model_properties, only: shallow_actions.push(:destroy) do
+      member do
+        get :destroy_modal
+      end
+    end
 
     resources :documents, only: [:destroy] do
       member do

@@ -91,4 +91,21 @@ RSpec.describe ModelPropertiesController, type: :controller do
       end
     end
   end
+
+  describe '#destroy_modal' do
+    it 'renders destroy modal' do
+      get :destroy_modal, params: slug(id: model_property.id), xhr: true, format: :js
+
+      expect(response).to render_template(:destroy_modal)
+    end
+  end
+
+  describe '#destroy' do
+    it 'deletes document' do
+      delete :destroy, params: slug(id: model_property.id)
+
+      expect(response).to redirect_to([office, data_model])
+      expect(data_model.properties.count).to eq(0)
+    end
+  end
 end

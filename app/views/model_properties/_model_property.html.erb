@@ -28,9 +28,12 @@
   <td>
     <%= model_property.position %>
   </td>
-  <td class='tb-actions'>
-    <%= link_to edit_office_model_property_path(model_property.id, office_slug: current_office.slug), class: 'text-muted' do %>
+  <td class='pe-2'>
+    <%= link_to edit_office_model_property_path(model_property.id, office_slug: current_office.slug), class: 'text-warning no-decoration me-1' do %>
       <i class="fa fa-pen-to-square"></i>
+    <% end %>
+    <%= link_to [:destroy_modal, current_office, model_property], remote: true, class: 'no-decoration' do %>
+      <i class="fa fa-trash text-danger "></i>
     <% end %>
   </td>
 </tr>
