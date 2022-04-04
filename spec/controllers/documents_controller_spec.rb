@@ -37,4 +37,25 @@ RSpec.describe DocumentsController, type: :controller do
       end.to change(instance.documents, :count).by(1)
     end
   end
+
+  describe '#destroy_modal' do
+    it 'renders destroy modal' do
+      document = create(:document, instance: instance)
+
+      get :destroy_modal, params: slug(id: document.id), xhr: true, format: :js
+
+      expect(response).to render_template(:destroy_modal)
+    end
+  end
+
+  describe '#destroy' do
+    it 'deletes document' do
+      document = create(:document, instance: instance)
+
+      delete :destroy, params: slug(id: document.id)
+
+      expect(response).to redirect_to([office, instance])
+      expect(office.documents.count).to eq(0)
+    end
+  end
 end

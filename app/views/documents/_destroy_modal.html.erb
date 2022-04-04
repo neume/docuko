@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Delete document</h5>
+    </div>
+    <div class="modal-body">
+      <% template = document.template %>
+      <% if template.file.signed_id %>
+        <% if template.file.representable? %>
+            <div class="d-flex justify-content-center">
+              <div class='card-image border' width=100%>
+                <%= image_tag template.file.representation(resize_to_limit: [256, 256]) %>
+              </div>
+            </div>
+          <br/>
+        <% end %>
+      <% end %>
+      <div class='d-flex justify-content-between'
+        <h3> <%= document.name %> </h3>
+        <span class='badge rounded-pill bg-info'> <%= template.name %> Template</span>
+      </div>
+      <p> <%= template.description%></p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      <%= link_to 'Delete', [office, document], method: :delete, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>

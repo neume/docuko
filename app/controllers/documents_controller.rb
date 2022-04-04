@@ -19,7 +19,21 @@ class DocumentsController < ApplicationController
     redirect_to [current_office, @instance]
   end
 
+  def destroy_modal
+    document
+  end
+
+  def destroy
+    instance = document.instance
+    document.destroy
+    redirect_to [current_office, instance], notice: 'Document deleted'
+  end
+
   private
+
+  def document
+    @document ||= current_office.documents.find(params[:id])
+  end
 
   def document_params
     params.require(:document).permit(:name, :template_id, :notes)

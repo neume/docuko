@@ -1,0 +1,14 @@
+<% options = {
+  instance: @instance,
+  document: @document,
+  office: current_office
+}%>
+
+modal_div = document.getElementById('app-modal')
+
+modal_div.innerHTML = "<%= j render 'destroy_modal', options %>"
+
+var app_modal = new bootstrap.Modal(document.getElementById('app-modal'))
+
+app_modal.show()
+
