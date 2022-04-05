@@ -6,46 +6,47 @@
     <% end %>
   </div>
 </div>
-<% search_params = {}  %>
-<%= form_tag offices_path(search_params), method: :get do %>
-  <div class="row">
-    <hr/>
-    <div class="col-md-3 offset-md-7 pe-md-0">
-      <div class='input-group mb-2'>
-        <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search by office name', aria: { label: 'Search instance' } %>
-      </div>
-    </div>
-    <div class="col-md-2 mb-2">
-      <div class="dropdown">
-        <div class="btn btn border bg-white form-control dropdown-toggle caret-end" href="#" role="button" id="sortOfficeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class='float-start'>
-            <%= find_sort_item_by_code(params[:sort])[:name] %>
-          </span>
+<% if @memberships.count.positive? %>
+  <% search_params = {}  %>
+  <%= form_tag offices_path(search_params), method: :get do %>
+    <div class="row">
+      <hr/>
+      <div class="col-md-3 offset-md-7 pe-md-0">
+        <div class='input-group mb-2'>
+          <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search by office name', aria: { label: 'Search instance' } %>
         </div>
+      </div>
+      <div class="col-md-2 mb-2">
+        <div class="dropdown">
+          <div class="btn btn border bg-white form-control dropdown-toggle caret-end" href="#" role="button" id="sortOfficeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class='float-start'>
+              <%= find_sort_item_by_code(params[:sort])[:name] %>
+            </span>
+          </div>
 
-        <ul class="dropdown-menu form-control" aria-labelledby="sortOfficeDropdown">
-          <% office_sort_options.each do |item| %>
-            <% active_option = item[:code] == params[:sort] ? 'active' : '' %>
-            <% case item[:type] %>
-            <% when :label %>
-              <label class='ps-3 fw-bold'>
-                <%= item[:name] %>
-              </label>
-            <% when :option%>
-              <li>
-                <%= link_to item[:name], offices_path(search_params.merge(sort: item[:code])), class: "dropdown-item ps-5 #{active_option}" %>
-              </li>
+          <ul class="dropdown-menu form-control" aria-labelledby="sortOfficeDropdown">
+            <% office_sort_options.each do |item| %>
+              <% active_option = item[:code] == params[:sort] ? 'active' : '' %>
+              <% case item[:type] %>
+              <% when :label %>
+                <label class='ps-3 fw-bold'>
+                  <%= item[:name] %>
+                </label>
+              <% when :option%>
+                <li>
+                  <%= link_to item[:name], offices_path(search_params.merge(sort: item[:code])), class: "dropdown-item ps-5 #{active_option}" %>
+                </li>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 
-<div id="offices">
-<% @memberships.each do |membership| %>
-  <% office = membership.office %>
+  <div id="offices">
+  <% @memberships.each do |membership| %>
+    <% office = membership.office %>
     <div class="card mb-2 col-12">
       <div class="card-body">
         <div class='d-flex'>
@@ -78,8 +79,11 @@
         </div>
       </div>
     </div>
-<% end %>
+  <% end %>
   </div>
+<% else %>
+  <%= render 'empty' %>
+<% end %>
 
   <style type="text/css" media="all">
 .caret-end:before, .caret-end:after {

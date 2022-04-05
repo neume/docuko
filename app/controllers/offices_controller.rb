@@ -3,7 +3,6 @@ class OfficesController < ApplicationController
 
   def index
     @memberships = current_user.members.includes(:office).order("offices.#{sort_column} #{sort_direction}")
-    return render :empty if @memberships.count.zero?
 
     if params[:search]
       @memberships = @memberships.where('lower(offices.name) LIKE ?', "%#{params[:search].downcase}%")
@@ -58,6 +57,15 @@ class OfficesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy_modal
+    current_office
+  end
+
+  def destroy
+    current_office.destroy
+    redirect_to [:offices], notice: 'Office deleted'
   end
 
   private

@@ -115,4 +115,21 @@ RSpec.describe OfficesController, type: :controller do
       end
     end
   end
+
+  describe '#destroy_modal' do
+    it 'renders destroy modal' do
+      get :destroy_modal, params: { slug: office.slug }, xhr: true, format: :js
+
+      expect(response).to render_template(:destroy_modal)
+    end
+  end
+
+  describe '#destroy' do
+    it 'deletes document' do
+      delete :destroy, params: { slug: office.slug }
+
+      expect(response).to redirect_to([:offices])
+      expect(user.offices.count).to eq(0)
+    end
+  end
 end

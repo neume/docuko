@@ -11,3 +11,17 @@
 <h5> Members </h5>
 <%= render 'members/index', members: @office.members %>
 
+<div class="row">
+  <div class="col-lg-12 mb-2">
+    <h5> Settings </h5>
+    <div class="card">
+      <div class="card-body">
+        <h5>Delete Office</h5>
+        <p>Delete this office and all of its entries. This action is irreversible. </p>
+        <%= link_to [:destroy_modal, current_office], class: 'btn btn-danger', remote: true do %>
+          <i class="fa fa-trash me-1"></i> Delete Office
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

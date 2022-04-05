@@ -1,0 +1,38 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Delete <%= office.name %></h5>
+    </div>
+    <div class="modal-body">
+        This <b>Office</b> contains:
+
+        <ul>
+          <li>
+            <span class='text-warning'>
+              <%= pluralize(office.instances.count, 'entry') %>
+            </span>
+          </li>
+          <li>
+            <span class='text-warning'>
+              <%= pluralize(office.documents.count, 'document') %>
+            </span>
+          </li>
+          <li>
+            <span class='text-warning'>
+              <%= pluralize(office.data_models.count, 'template') %>
+            </span>
+          </li>
+          <li>
+            <span class='text-warning'>
+              <%= pluralize(office.members.count, 'member') %>
+            </span>
+          </li>
+        </ul>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      <%= link_to 'Delete', [office], method: :delete, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>

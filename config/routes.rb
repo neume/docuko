@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   resources :offices, param: :slug do
     shallow_actions = %i[edit update show]
 
+    member do
+      get :destroy_modal
+    end
+
     resources :members, only: %i[index new create] do
       member do
         patch :change_role
