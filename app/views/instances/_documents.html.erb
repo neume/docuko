@@ -1,30 +1,25 @@
-<div class="row mb-2">
-  <% disabled_class = ''%>
-  <% if @data_model.templates.count.zero? %>
-    <% disabled_class = 'disabled' %>
-    <div class="col-12">
-      <div class='alert alert-warning' %>
-        This Data model does not have any document templates.
-        <% if current_membership.admin? %>
-          <%= link_to 'Add document template', [:new, current_office, instance.data_model, :template], remote: true %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-<div class="row ">
-  <div class="d-flex justify-content-between mb-2">
-    <h5>Documents</h5>
-    <div>
-      <%= link_to [:new, current_office, instance, :document],
-        class: "btn btn-info btn-sm #{disabled_class}",
-        remote: true do %>
-        <i class="fa fa-circle-plus me-1"></i> Generate
+<% disabled_class = ''%>
+<% if @data_model.templates.count.zero? %>
+  <% disabled_class = 'disabled' %>
+  <div class="col-12">
+    <div class='alert alert-warning' %>
+      This Data model does not have any document templates.
+      <% if current_membership.admin? %>
+        <%= link_to 'Add document template', [:new, current_office, instance.data_model, :template], remote: true %>
       <% end %>
     </div>
-
   </div>
+<% end %>
+<div class="d-flex justify-content-between mb-2 mt-0">
+  <h5 class='mb-0 pt-1'>Documents</h5>
+  <div>
+    <%= link_to [:new, current_office, instance, :document],
+      class: "btn btn-info btn-sm #{disabled_class}",
+      remote: true do %>
+      <i class="fa fa-circle-plus me-1"></i> Generate
+    <% end %>
+  </div>
+
 </div>
 
 
