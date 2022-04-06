@@ -9,17 +9,17 @@
 user = User.create(email: 'admin@test', password: 'password')
 User.create(email: 'user1@test', password: 'password')
 
-office = Office.create(name: 'My Clinic', slug: 'my-clinic', created_by: user, thumbnail_color: '#3dd')
+office = Office.create(name: 'IT Services', slug: 'it-services', created_by: user, thumbnail_color: '#3dd')
 
 member = office.members.create(user: user, member_role: :admin)
 
-data_model = user.created_data_models.create(name: 'Person', created_by: user, office: office, thumbnail_color: '#868fc2')
+data_model = user.created_data_models.create(name: 'Project', created_by: user, office: office, thumbnail_color: '#868fc2')
 
 properties = [
-  { name: 'First Name', code: 'first_name', header_visibility: true },
-  { name: 'Middle Name', code: 'middle_name', header_visibility: true },
-  { name: 'Last Name', code: 'last_name', header_visibility: true },
-  { name: 'Age', code: 'age', header_visibility: true }
+  { name: 'Project Name', code: 'project_name', header_visibility: true, required: true },
+  { name: 'Date', code: 'date', header_visibility: true, required: true },
+  { name: 'Description', code: 'description' },
+  { name: 'Footnote', code: 'footnote' }
 ]
 
 data_model.properties.create(properties)
@@ -27,13 +27,25 @@ data_model.properties.create(properties)
 
 400.times do
   instance_props = HashWithIndifferentAccess.new(
-    first_name: Faker::Name.first_name,
-    middle_name: Faker::Name.middle_name,
-    last_name: Faker::Name.last_name,
-    age: rand(18..60)
+    project_name: Faker::Game.title,
+    date: Faker::Date.between(from: '2018-01-01', to: '2022-05-04') ,
+    description: Faker::Game.genre,
+    footer: Faker::Lorem.paragraph
   )
-  CreateInstanceService.create(instance_props, data_model, user)
+
+  Instances::CreateService.execute(instance_props, data_model, user)
 end
+
+template = data_model.templates.new(name: 'Project Template')
+file_path = File.open(Rails.root.join('spec/fixtures/files/project.docx'))
+
+template.file.attach(
+  io: file_path,
+  filename: 'project.docx',
+  content_type: 'file/docx'
+)
+
+template.save!
 
 10.times do
   user.created_data_models.create(
