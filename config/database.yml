@@ -20,3 +20,4 @@ production:
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
   database: <%= ENV['DATABASE_NAME'] || 'docuko_production' %>
+  port: <%= ENV['DATABASE_PORT'] || 5432%>
